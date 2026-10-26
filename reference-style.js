@@ -65,7 +65,7 @@ export function deckDoors(d,p){
  const base=[[61,92,'right',1],[61,185,'right',1],[230,45,'right',-1],[230,141,'right',-1],[230,240,'right',-1],[88,248,'right',-1],[214,246,'right',1],[359,208,'right',-1]];
  if(d.id==='upper'){base[5]=[88,270,'right',-1];base[6]=[214,268,'right',1];}
  const extra=d.id==='main'?[[420,278,'up',1],[466,278,'up',1]]:[[335,278,'up',1],[376,278,'up',1],[449,278,'up',1],[497,278,'up',1],[413,278,'up',-1]];
- return [...base,...extra,[210,37,'up',-1],[67,312,'up',-1],[484,100,'right',-1],[638,278,'up',1],...stallEntries(d).map(e=>[e.x,e.y,'up',e.swing])].map(([x,y,direction,swing])=>{const start=planPoint(x,y,p),end={x:start.x+(direction==='right'?STANDARD_DOOR:0),y:start.y-(direction==='up'?STANDARD_DOOR:0)};return doorGeometry(start,end,swing);});
+ return [...base,...extra,[210,37,'up',1],[67,312,'up',-1],[484,100,'right',-1],[638,278,'up',1],...stallEntries(d).map(e=>[e.x,e.y,'up',e.swing])].map(([x,y,direction,swing])=>{const start=planPoint(x,y,p),end={x:start.x+(direction==='right'?STANDARD_DOOR:0),y:start.y-(direction==='up'?STANDARD_DOOR:0)};return doorGeometry(start,end,swing);});
 }
 function doorBounds(door){return {left:Math.min(door.start.x,door.end.x,door.open.x),right:Math.max(door.start.x,door.end.x,door.open.x),top:Math.min(door.start.y,door.end.y,door.open.y),bottom:Math.max(door.start.y,door.end.y,door.open.y)};}
 export function labelCollidesWithDoor(a,p,door){const q=planPoint(a.x,a.y,p),w=a.text.length*a.size*.68,left=q.x-(a.align==='end'?w:a.align==='middle'?w/2:0),box=doorBounds(door),gap=3;return left<box.right+gap&&left+w>box.left-gap&&q.y-a.size*.85<box.bottom+gap&&q.y>box.top-gap;}
