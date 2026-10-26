@@ -73,7 +73,7 @@ Choose Feedback, then click either floorplan or dock to drop a numbered pin. Wri
 
 Copy feedback for chat produces a report to paste into the Codex conversation. Download feedback + drawing includes the note data and current editable project, useful when the local drawing has also been edited. Notes can be reopened, resolved or deleted. The static site has no chat credentials or automatic link into a Codex conversation.
 
-The Studio checks for published changes every 45 seconds and on returning to the tab. When not typing or dragging it reloads an available release automatically. A three-way merge applies published changes while keeping independent local edits; local edits win if both changed the same field. A backup is kept under the local storage key ending in `.before-published-update`. Notes are stored separately and survive updates. The Feedback panel also provides a manual update check. New releases are packaged by the Publish Studio workflow, which versions all module and stylesheet URLs so stale cached code cannot override an updated drawing.
+The Studio checks for published changes every 45 seconds and on returning to the tab. When not typing or dragging it reloads an available release automatically. Saved snapshots are upgraded as complete layouts before a three-way merge applies published changes. Independent text, colour and annotation edits remain local; layout migrations replace incompatible older accommodation walls together with their connected geometry. Within the same layout revision, local edits win field conflicts. A backup is kept under the local storage key ending in `.before-published-update`. Notes are stored separately and survive updates. The Feedback panel also provides a manual update check. New releases are packaged by the Publish Studio workflow, which versions all module and stylesheet URLs so stale cached code cannot override an updated drawing.
 
 The shower-only main stall is narrower than the adjoining toilet/shower stalls; its shower is the same size as all other showers. Dividers provide equal clearance at both ends.
 
@@ -84,3 +84,5 @@ The two long upstairs exterior stair runs use a consistent 24-unit width and a 3
 Fixture orientation follows the backing wall: the main sink bank’s faucets face left, while the upstairs sink bank and laundry sink faucets face right. Counter and appliance backs share an alignment. Both dry-room stairs have the same clear top-landing treatment as the long exterior stairs, covering the doorway without treads beneath it.
 
 The approved drawing conventions and layout exceptions are recorded in [DESIGN.md](DESIGN.md). Dock proportions now match the supplied dock artwork and AMIX precedent, with equal muster padding and balanced page margins.
+
+Matching bedroom rows share one baseline when any member needs lower placement. Legacy rendering and export normalize the complete layout so current fixtures cannot be combined with older partitions.

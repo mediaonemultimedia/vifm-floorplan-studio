@@ -3,7 +3,7 @@ import {stallEntries,bathroomPaths,fixtureLayout,fixtureBounds} from './fixtures
 import {accommodationRooms,ACCOMMODATION_PATHS,isAccommodationPath} from './accommodation.js';
 import {planPoint,sourcePoint} from './model.js';
 // The live-text reference has a 327-unit deck width. Scale its type and strokes together.
-export const STYLE_REVISION=16;
+export const STYLE_REVISION=17;
 export const REFERENCE_SCALE=264/327;
 export const REFERENCE={room:30*REFERENCE_SCALE,label:11*REFERENCE_SCALE,caption:16*REFERENCE_SCALE,wall:3*REFERENCE_SCALE,detail:2*REFERENCE_SCALE,dash:4*REFERENCE_SCALE,inset:11.5*REFERENCE_SCALE};
 const rooms={main:accommodationRooms('main'),upper:{...accommodationRooms('upper'),4:[320,278,37,75],3:[357,278,37,75],2:[458,278,38,75],1:[496,278,48,75]}};
@@ -13,8 +13,13 @@ const utilities={
 };
 function bounds(box,p){const [x,y,w,h]=box,a=planPoint(x+w,y,p),b=planPoint(x,y+h,p);return {left:a.x,top:a.y,right:b.x,bottom:b.y};}
 function position(a,x,y,p,align){const q=sourcePoint(x,y,p);Object.assign(a,q,{align});}
+export function needsReferenceStyle(p){
+ // Recognize the two original pre-cut wall patterns even if an older updater
+ // already copied the new revision stamp onto that incomplete wall set.
+ return (p.styleRevision||0)<STYLE_REVISION||p.decks.some(d=>d.paths.some(path=>path.includes('M230 76V133H294')||path.includes('M61 37V101')));
+}
 export function applyReferenceStyle(p){
- if(p.styleRevision>=STYLE_REVISION)return p;
+ if(!needsReferenceStyle(p))return p;
  p.wallWidth=REFERENCE.wall;
  for(const d of p.decks){
   // Replace only the accommodation structure; fore-deck and exterior details stay separate.
@@ -58,22 +63,38 @@ export function deckDoors(d,p){
 }
 function doorBounds(door){return {left:Math.min(door.start.x,door.end.x,door.open.x),right:Math.max(door.start.x,door.end.x,door.open.x),top:Math.min(door.start.y,door.end.y,door.open.y),bottom:Math.max(door.start.y,door.end.y,door.open.y)};}
 export function labelCollidesWithDoor(a,p,door){const q=planPoint(a.x,a.y,p),lines=a.text.split('\n'),w=Math.max(...lines.map(line=>textWidth(line,a.size))),left=q.x-(a.align==='end'?w:a.align==='middle'?w/2:0),box=doorBounds(door),gap=3;return left<box.right+gap&&left+w>box.left-gap&&q.y-a.size*.8<box.bottom+gap&&q.y+(lines.length-1)*a.size+a.size*.1>box.top-gap;}
-function clearDoorLabels(p){for(const d of p.decks){const obstacles=[...deckDoors(d,p).map(doorBounds),...fixtureLayout(d,p).map(fixtureBounds)];for(const a of d.labels.filter(a=>a.kind==='room')){
- const room=rooms[d.id][a.text];if(!room)continue;const b=bounds(room,p),number=Number(a.text),base=number>=15?number-10:number;
- // Counterpart labels reserve the same space on both floors, even for one digit.
- const width=base>=5&&base<=14?Math.max(textWidth(String(base),a.size),textWidth(String(base+10),a.size)):textWidth(a.text,a.size);
- const inset=Math.max(p.wallWidth/2+3,Math.min(REFERENCE.inset,(b.right-b.left-width)/2));
- const preferred=room[1]+room[3]/2<176.5||base===7?'start':'end',other=preferred==='start'?'end':'start';
- const candidates=[['top',preferred],['top',other],['bottom',preferred],['bottom',other]];
- const overlap=(left,top,right,bottom,o)=>left<o.right+3&&right>o.left-3&&top<o.bottom+3&&bottom>o.top-3;
- let chosen=null;
- for(const [edge,align]of candidates){const x=align==='start'?b.left+inset:b.right-inset,y=edge==='top'?b.top+REFERENCE.inset+a.size*.76:b.bottom-REFERENCE.inset,left=align==='start'?x:x-width;
-  if(left<b.left+p.wallWidth/2+2||left+width>b.right-p.wallWidth/2-2)continue;
-  if(obstacles.some(o=>overlap(left,y-a.size*.8,left+width,y+a.size*.1,o)))continue;
-  chosen={x,y,align,edge};break;
+function clearDoorLabels(p){for(const d of p.decks){
+ const obstacles=[...deckDoors(d,p).map(doorBounds),...fixtureLayout(d,p).map(fixtureBounds)];
+ const entries=d.labels.filter(a=>a.kind==='room'&&rooms[d.id][a.text]).map(a=>{
+  const room=rooms[d.id][a.text],b=bounds(room,p),number=Number(a.text),base=number>=15?number-10:number;
+  // Paired labels reserve the longer number's width on both floors.
+  const width=base>=5&&base<=14?Math.max(textWidth(String(base),a.size),textWidth(String(base+10),a.size)):textWidth(a.text,a.size);
+  const inset=Math.max(p.wallWidth/2+3,Math.min(REFERENCE.inset,(b.right-b.left-width)/2));
+  return {a,b,width,inset,preferred:room[1]+room[3]/2<176.5||base===7?'start':'end'};
+ });
+ const choose=({a,b,width,inset,preferred},edges=['top','bottom'])=>{
+  for(const edge of edges)for(const align of [preferred,preferred==='start'?'end':'start']){
+   const x=align==='start'?b.left+inset:b.right-inset,y=edge==='top'?b.top+REFERENCE.inset+a.size*.76:b.bottom-REFERENCE.inset,left=align==='start'?x:x-width;
+   if(left<b.left+p.wallWidth/2+2||left+width>b.right-p.wallWidth/2-2)continue;
+   if(obstacles.some(o=>left<o.right+3&&left+width>o.left-3&&y-a.size*.8<o.bottom+3&&y+a.size*.1>o.top-3))continue;
+   return {x,y,align,edge};
+  }
+  return null;
+ };
+ for(const entry of entries)entry.chosen=choose(entry);
+ // Rooms with the same front and back form one visual row. Resolve its baseline
+ // together, rather than leaving the middle bedroom stranded at the top.
+ const rows=new Map();
+ for(const entry of entries){const key=`${entry.b.top}:${entry.b.bottom}`;if(!rows.has(key))rows.set(key,[]);rows.get(key).push(entry);}
+ for(const row of rows.values())if(row.length>1&&row.some(entry=>entry.chosen?.edge==='bottom')){
+  const lower=row.map(entry=>choose(entry,['bottom']));
+  if(lower.every(Boolean))row.forEach((entry,i)=>{entry.chosen=lower[i];entry.rowAligned=true;});
  }
- if(chosen){position(a,chosen.x,chosen.y,p,chosen.align);a.placementRule=chosen.edge==='top'&&chosen.align===preferred?'upper-exterior':`${chosen.edge}-${chosen.align==='start'?'left':'right'}-clearance`;}
-}}}
+ for(const {a,preferred,chosen,rowAligned}of entries)if(chosen){
+  position(a,chosen.x,chosen.y,p,chosen.align);
+  a.placementRule=chosen.edge==='top'&&chosen.align===preferred?'upper-exterior':`${chosen.edge}-${chosen.align==='start'?'left':'right'}-${rowAligned?'row':'clearance'}`;
+ }
+}}
 // Repair the old hand-drawn openings, then cut every wall against the same door width.
 // Final-page coordinates keep the openings and circular swings independent of envelope stretching.
 export function builtWallPaths(d,p){

@@ -43,7 +43,7 @@
           "kind": "room",
           "size": 24.220183486238533,
           "align": "start",
-          "placementRule": "bottom-left-clearance"
+          "placementRule": "bottom-left-row"
         },
         {
           "id": "fe0d4cf6-f823-42ea-ae9a-29c6e8a9bee0",
@@ -123,17 +123,17 @@
           "kind": "room",
           "size": 24.220183486238533,
           "align": "end",
-          "placementRule": "bottom-right-clearance"
+          "placementRule": "bottom-right-row"
         },
         {
           "id": "26d1720a-e647-4cf9-9c8b-d1a0e3730b02",
           "text": "7",
-          "x": 45.34351446718424,
+          "x": 5.2492589978828255,
           "y": 144.414373088685,
           "kind": "room",
           "size": 24.220183486238533,
           "align": "start",
-          "placementRule": "upper-exterior"
+          "placementRule": "bottom-left-row"
         },
         {
           "id": "2b96f51d-80d5-4bf5-a2ce-16feb44fff9e",
@@ -228,7 +228,7 @@
           "kind": "room",
           "size": 24.220183486238533,
           "align": "start",
-          "placementRule": "bottom-left-clearance"
+          "placementRule": "bottom-left-row"
         },
         {
           "id": "4cfdd2cd-4144-473f-be54-00d9b60cb128",
@@ -308,17 +308,17 @@
           "kind": "room",
           "size": 24.220183486238533,
           "align": "end",
-          "placementRule": "bottom-right-clearance"
+          "placementRule": "bottom-right-row"
         },
         {
           "id": "4fa25bce-a63b-4201-9cd2-dcedc1bea95e",
           "text": "17",
-          "x": 45.34351446718424,
+          "x": 5.2492589978828255,
           "y": 144.414373088685,
           "kind": "room",
           "size": 24.220183486238533,
           "align": "start",
-          "placementRule": "upper-exterior"
+          "placementRule": "bottom-left-row"
         },
         {
           "id": "662ea9c6-0f37-47e1-b57a-6c8c8840e211",
@@ -392,5 +392,5 @@
       "rects": []
     }
   ],
-  "styleRevision": 16
+  "styleRevision": 17
 }

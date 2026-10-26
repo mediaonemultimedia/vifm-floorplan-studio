@@ -1,6 +1,6 @@
 import {dockLayout} from './fixtures.js';
 import {createNote,feedbackReport,feedbackPins,validateNotes} from './feedback.js';
-import {mergePublishedProject} from './updates.js';
+import {mergeProjectUpdate} from './project-updates.js';
 import {applyReferenceStyle,STYLE_REVISION} from './reference-style.js';
 import {PALETTE,createProject,validateProject,resizeHull,sourcePoint,planPoint,translateWall,escapeXML as e} from './model.js';
 import {drawing,loadLogo,deckOrigins} from './render.js';
@@ -13,7 +13,7 @@ try{const response=await fetch('./release.json',{cache:'no-store'});if(response.
 let notes=[],activeNote=null,feedbackOpen=false;
 try{notes=validateNotes(JSON.parse(localStorage.getItem(KEY+'.feedback')||'[]'));}catch{}
 let project=structuredClone(startingProject),selected=null,tool='select',view='both',zoom=.75,history=[],drag=null,toastTimer;
-try{const data=localStorage.getItem(KEY);if(data){const local=validateProject(JSON.parse(data)),base=JSON.parse(localStorage.getItem(KEY+'.published-base')||'null');project=validateProject(mergePublishedProject(base||startingProject,local,startingProject));}}catch{setTimeout(()=>toast('Saved project could not be read. Starting with the supplied layout.'),200);}
+try{const data=localStorage.getItem(KEY);if(data){const local=validateProject(JSON.parse(data));if((local.styleRevision||0)<STYLE_REVISION){try{localStorage.setItem(KEY+'.before-reference-style',JSON.stringify(local));}catch{}}const base=JSON.parse(localStorage.getItem(KEY+'.published-base')||'null');project=validateProject(mergeProjectUpdate(base,local,startingProject));}}catch{setTimeout(()=>toast('Saved project could not be read. Starting with the supplied layout.'),200);}
 if(project.styleRevision!==STYLE_REVISION){try{localStorage.setItem(KEY+'.before-reference-style',JSON.stringify(project));}catch{}applyReferenceStyle(project);persist();}
 try{localStorage.setItem(KEY+'.published-base',JSON.stringify(startingProject));}catch{}
 persist();
@@ -92,7 +92,7 @@ async function checkPublishedUpdate(manual=false){
 }
 async function applyPublishedUpdate(){
  if(!pendingRelease)return;
- try{const response=await fetch('./assets/barco99.json',{cache:'no-store'});if(!response.ok)throw Error('The updated drawing is not ready yet.');const remote=validateProject(await response.json()),merged=validateProject(mergePublishedProject(startingProject,project,remote));localStorage.setItem(KEY+'.before-published-update',JSON.stringify(project));localStorage.setItem(KEY,JSON.stringify(merged));localStorage.setItem(KEY+'.published-base',JSON.stringify(remote));saveNotes();const url=new URL(location.href);url.searchParams.set('v',pendingRelease.version);location.replace(url.href);}catch(err){toast('Update could not be applied: '+err.message);}
+ try{const response=await fetch('./assets/barco99.json',{cache:'no-store'});if(!response.ok)throw Error('The updated drawing is not ready yet.');const remote=validateProject(await response.json()),merged=validateProject(mergeProjectUpdate(startingProject,project,remote));localStorage.setItem(KEY+'.before-published-update',JSON.stringify(project));localStorage.setItem(KEY,JSON.stringify(merged));localStorage.setItem(KEY+'.published-base',JSON.stringify(remote));saveNotes();const url=new URL(location.href);url.searchParams.set('v',pendingRelease.version);location.replace(url.href);}catch(err){toast('Update could not be applied: '+err.message);}
 }
 $('#apply-update').onclick=applyPublishedUpdate;
 saveNotes();setInterval(()=>checkPublishedUpdate(),45000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkPublishedUpdate();});

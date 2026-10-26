@@ -4,7 +4,7 @@ The four original plans establish the visual language; style reference.svg suppl
 
 ## Type and placement
 
-Use supplied Libre Franklin fonts and original style sizes. Utility names belong at the lower left; communal names centre within the logical room boundary, ignoring doorway gaps. Bedroom numbers normally occupy the upper exterior corner. Reserve clearance for the longer number in paired rooms on the two decks. Try the opposite upper corner, then lower corners when a door or fixture conflicts. Preserve type size. Lower-corner placement is an approved extension of the original system, whose examples predominantly use upper corners. Use the normal inset where possible; reduce it only while preserving visible wall clearance. Never put text on a wall or door swing.
+Use supplied Libre Franklin fonts and original style sizes. Utility names belong at the lower left; communal names centre within the logical room boundary, ignoring doorway gaps. Bedroom numbers normally occupy the upper exterior corner. Reserve clearance for the longer number in paired rooms on the two decks. Try the opposite upper corner, then lower corners when a door or fixture conflicts. Preserve type size. Lower-corner placement is an approved extension of the original system, whose examples predominantly use upper corners. Use the normal inset where possible; reduce it only while preserving visible wall clearance. Never put text on a wall or door swing. Matching bedrooms sharing a front and back boundary form a row: if one needs lower placement, align the whole row to the lower baseline, provided all labels clear their doors and fixtures. This includes 8/7/5 and 18/17/15.
 
 ## Doors, corridors and stairs
 
@@ -23,3 +23,9 @@ Use the supplied secondary dock artwork proportions: dock width 90.22 and length
 ## Output
 
 Only the original presentation elements belong in PDF/SVG artwork. Editor guidance and feedback pins stay outside exports. Text remains text, fonts are embedded, and geometry stays vector. Preserve user colours and label edits during published updates.
+
+## Connected layout review and release checks
+
+Treat rooms, backing walls, fixtures, doors and circulation as connected assemblies. A clear door arc alone is insufficient: its threshold must sit in the room boundary, its swing must enter that room, and the remaining wall must reach both jambs. Check that sink faucets have a real continuous backing wall, not merely the correct orientation. Check complete bedroom fronts with only the intended openings. Review the row of labels together, then both floors together.
+
+Upgrade each whole saved snapshot before merging a published release. Do not merge its revision number separately from its geometry. Rendering and exporting legacy projects also upgrades a copy first. Keep the original saved project in the existing migration/update backup and preserve notes, text and colours. A layout migration replaces the accommodation structure with the approved common layout; it does not preserve incompatible older accommodation-wall edits. Verify a previously saved drawing as well as a new visitor's starting drawing, then review the actual exported PDF. Passing isolated geometry tests does not establish visual or spatial correctness.

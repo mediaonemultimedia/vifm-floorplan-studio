@@ -1,7 +1,7 @@
 import {stairMarkup} from './stairs.js';
 import {fixtureLayout,fixtureMarkup,dockMarkup,dockLayout} from './fixtures.js';
 import {COLORS,planPoint,planPath,doorPath,escapeXML as e} from './model.js';
-import {REFERENCE,deckDoors,builtWallPaths,fitLabel} from './reference-style.js';
+import {applyReferenceStyle,needsReferenceStyle,REFERENCE,deckDoors,builtWallPaths,fitLabel} from './reference-style.js';
 export const deckOrigins=p=>[206,582].map(center=>({x:center-dockLayout(p).left/2-450*p.width/p.length,y:222}));
 let logo='';let logoViewBox='0 0 128.42 74.14';
 export async function loadLogo(){const r=await fetch('./assets/logo.svg');if(!r.ok)throw Error('Logo could not be loaded');const doc=new DOMParser().parseFromString(await r.text(),'image/svg+xml');logo=doc.documentElement.innerHTML;logoViewBox=doc.documentElement.getAttribute('viewBox');}
@@ -18,6 +18,8 @@ function element(a,p,selected,interactive){const q=planPoint(a.x,a.y,p);const at
  return `<g ${attrs}>${interactive?`<rect x="${bounds.x-3}" y="${bounds.y-3}" width="${bounds.w+6}" height="${bounds.h+6}" fill="transparent" stroke="${selected===a.id?'#f05024':'none'}" stroke-width="1"/>`:''}${s}</g>`;
 }
 export function drawing(p,{selected=null,interactive=false,visible='both',grid=false}={}){
+ // Imported and older saved drawings must never mix old partitions with new fittings.
+ if(needsReferenceStyle(p))p=applyReferenceStyle(structuredClone(p));
  const dw=900*p.width/p.length;
  const defs=`<defs><style>@font-face{font-family:LibreFranklin;src:url('assets/LibreFranklin-Medium.ttf')}@font-face{font-family:LibreFranklin;src:url('assets/LibreFranklin-Bold.ttf');font-weight:bold}</style><pattern id="grid" width="12" height="12" patternUnits="userSpaceOnUse"><path d="M12 0H0V12" fill="none" stroke="${p.ink}" stroke-opacity=".1" stroke-width=".5"/></pattern></defs>`;
  let s=`<svg xmlns="http://www.w3.org/2000/svg" id="drawing" viewBox="0 0 792 1224" width="792" height="1224" aria-label="${e(p.name)} editable floorplans">${defs}<rect width="792" height="1224" fill="${p.paper}"/><rect width="792" height="124.59" fill="${p.header}"/><text x="758" y="60" text-anchor="end" font-family="LibreFranklin" font-size="${Math.min(30.91,500/Math.max(1,p.name.length)*1.5)}" font-weight="bold" fill="${p.paper}">${e(p.name)}</text><text x="758" y="88" text-anchor="end" font-family="LibreFranklin" font-size="24" fill="${p.paper}">CAMP LAYOUT</text><svg x="31" y="25" width="128.42" height="74.14" viewBox="${logoViewBox}">${logo}</svg>`;
