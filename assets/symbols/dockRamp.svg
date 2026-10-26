@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 93.22 386.64">
+  <defs>
+    <style>
+      .cls-1 {
+        font-size: 11px;
+      }
+
+      .cls-1, .cls-2 {
+        font-family: LibreFranklin-Bold, 'Libre Franklin';
+        font-weight: 700;
+      }
+
+      .cls-1, .cls-2, .cls-3 {
+        fill: #25585b;
+      }
+
+      .cls-2 {
+        font-size: 9.04px;
+      }
+
+      .cls-4 {
+        fill: none;
+        stroke: #25585b;
+        stroke-linejoin: round;
+        stroke-width: 3px;
+      }
+
+      .cls-5 {
+        fill: #fff;
+      }
+
+      .cls-6 {
+        letter-spacing: -.05em;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g>
+      <rect class="cls-4" x="1.5" y="15.1" width="32.02" height="212.67"/>
+      <text class="cls-2" transform="translate(20.99 7.87)"><tspan x="0" y="0">D</tspan><tspan class="cls-6" x="6.79" y="0">O</tspan><tspan x="13.36" y="0">WN</tspan></text>
+      <text class="cls-1" transform="translate(28.41 255.1)"><tspan x="0" y="0">DOCK</tspan></text>
+      <polygon class="cls-4" points="91.72 145.99 91.72 385.14 1.5 385.14 1.5 227.77 33.52 227.77 33.52 145.99 91.72 145.99"/>
+      <g>
+        <path class="cls-3" d="M16.68,54.19c-.2,0-.39-.08-.53-.22l-6.27-6.27c-.29-.29-.29-.77,0-1.06l2.17-2.17c.15-.15.34-.22.53-.22s.38.07.53.22l1.29,1.29V7.87c0-.41.34-.75.75-.75h3.06c.41,0,.75.34.75.75v37.89l1.29-1.29c.14-.14.33-.22.53-.22s.39.08.53.22l2.17,2.17c.29.29.29.77,0,1.06l-6.27,6.27c-.14.14-.33.22-.53.22Z"/>
+        <path class="cls-5" d="M18.21,7.87v39.7s2.57-2.57,2.57-2.57l2.17,2.17-6.27,6.27-6.27-6.27,2.17-2.17,2.57,2.57V7.87s3.06,0,3.06,0h0ZM18.21,6.37h-3.06c-.4,0-.78.16-1.06.44-.28.28-.44.66-.44,1.06v36.08s0,0,0,0c-.29-.29-.68-.44-1.06-.44s-.77.15-1.06.44l-2.17,2.17c-.28.28-.44.66-.44,1.06s.16.78.44,1.06l6.27,6.27c.28.28.66.44,1.06.44h0c.4,0,.78-.16,1.06-.44l6.27-6.27c.59-.59.59-1.54,0-2.12l-2.17-2.17c-.28-.28-.66-.44-1.06-.44h0c-.4,0-.78.16-1.06.44h0s0-36.07,0-36.07c0-.83-.67-1.5-1.5-1.5h0Z"/>
+      </g>
+    </g>
+  </g>
+</svg>
