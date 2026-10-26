@@ -80,3 +80,5 @@ The shower-only main stall is narrower than the adjoining toilet/shower stalls; 
 The staff bathroom entry opens into a clear landing; its full-size shower is beyond the doorway at the outside corner. The two cook-house side-wall sections share one alignment and the staff cabin/bathroom front wall is continuous between standardized openings.
 
 The two long upstairs exterior stair runs use a consistent 24-unit width and a 36-unit clear landing at the doorway. Treads stop before each landing, with the landing extending beyond both door jambs. These are drawing conventions rather than measured site dimensions.
+
+Fixture orientation follows the backing wall: the main sink bank’s faucets face left, while the upstairs sink bank and laundry sink faucets face right. Counter and appliance backs share an alignment. Both dry-room stairs have the same clear top-landing treatment as the long exterior stairs, covering the doorway without treads beneath it.

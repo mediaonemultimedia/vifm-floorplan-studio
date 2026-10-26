@@ -17,6 +17,11 @@ export function stairLayout(d,p){const specs=d.id==='main'?[
   const bottom=forward?run.top+run.height:doorY+6;run.top=forward?doorY-30:run.top;run.height=bottom-run.top;
   run.landing={left:run.left,top:forward?run.top:bottom-36,width:run.width,height:36};
  }
+ if(s.id==='dry-room-flight'){
+  const doorY=planPoint(638,278,p).y,bottom=run.top+run.height;
+  run.width=24;run.left=planPoint(0,278,p).x-run.width;run.top=doorY-30;run.height=bottom-run.top;
+  run.landing={left:run.left,top:run.top,width:run.width,height:36};
+ }
  return run;});}
 export function stairTreads(s){
  const length=s.vertical?s.height:s.width,start=s.landing&&s.landing.top===s.top?s.landing.height:0,end=s.landing&&s.landing.top!==s.top?length-s.landing.height:length;

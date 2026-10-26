@@ -17,10 +17,10 @@ export function fixtureLayout(d,p){
  // Both banks share basin spacing and the same top and bottom datums.
  const bankBottom=point(88,0).y-10,bankTop=bankBottom-bankHeight;
  const bankX=d.id==='main'?point(0,93).x+p.wallWidth/2+24.24*FIXTURE_SCALE/2+1:point(0,247.5).x;
- out.push({...item('sinkBank',bankX,(bankTop+bankBottom)/2),basinCount:5});
+ out.push({...item('sinkBank',bankX,(bankTop+bankBottom)/2,d.id==='main'?0:180),basinCount:5});
  const types=d.id==='main'?['dryer','washer']:['largeSink','washerDryer'];
  let bottom=bankTop-2;
- for(const type of [...types].reverse()){const symbol=SYMBOLS[type],height=symbol.width*FIXTURE_SCALE,x=bankX-24.24*FIXTURE_SCALE/2+symbol.height*FIXTURE_SCALE/2;out.push(item(type,x,bottom-height/2,90));bottom-=height+2;}
+ for(const type of [...types].reverse()){const symbol=SYMBOLS[type],height=symbol.width*FIXTURE_SCALE,x=bankX+(d.id==='main'?-1:1)*(24.24-symbol.height)*FIXTURE_SCALE/2;out.push(item(type,x,bottom-height/2,type==='largeSink'?270:90));bottom-=height+2;}
  if(d.id==='main'){
   const front=point(0,180).x,back=point(0,238).x;
   for(let i=0;i<4;i++){
@@ -53,3 +53,7 @@ export function stallEntries(d){return d.id==='main'?MAIN_STALLS.map(([start,end
 export function bathroomPaths(d){if(d.id==='main')return ['M88 180V238H202V180','M88 180H202','M116.5 180V238 M151 180V238 M167.5 180V238'];return ['M88 125V169H152V125 M120 125V169'];}
 export function dockLayout(p){const top=planPoint(430,0,p).y,bottom=planPoint(320,0,p).y,rampTop=planPoint(568,0,p).y;return {left:-48,right:0,top,bottom,rampLeft:-24,rampTop,rampBottom:top+30,label:{x:-24,y:top+48},muster:{x:-24,y:bottom-21}};}
 export function dockMarkup(p){const g=dockLayout(p),s=p.wallWidth;return `<g data-dock-area="true" fill="none" stroke="${p.ink}" stroke-width="${s}" stroke-linejoin="round"><path d="M${g.rampLeft} ${g.rampTop}H0V${g.rampBottom}H${g.rampLeft}Z"/><path d="M${g.left} ${g.top}H${g.rampLeft}V${g.rampBottom}H0V${g.bottom}H${g.left}Z"/><path d="M-12 ${g.rampTop+9}V${g.rampTop+35}m-4-4 4 4 4-4" stroke-width="2"/><text x="-15" y="${g.rampTop-8}" font-family="LibreFranklin" font-weight="bold" font-size="7.3" text-anchor="middle" fill="${p.ink}" stroke="none">DOWN</text><text x="${g.label.x}" y="${g.label.y}" font-family="LibreFranklin" font-weight="bold" font-size="8.88" text-anchor="middle" fill="${p.ink}" stroke="none">DOCK</text></g>${fixtureMarkup({type:'muster',x:g.muster.x,y:g.muster.y,rotation:0,scale:.5},p.ink)}`;}
+
+// Faucet vectors in native symbol space: the counter faucet starts at its left
+// edge; the laundry sink faucet starts at its bottom edge. Rotate with the symbol.
+export function faucetDirection(f){const native=f.type==='sinkBank'?{x:-1,y:0}:{x:0,y:1},angle=f.rotation*Math.PI/180;return {x:native.x*Math.cos(angle)-native.y*Math.sin(angle),y:native.x*Math.sin(angle)+native.y*Math.cos(angle)};}
