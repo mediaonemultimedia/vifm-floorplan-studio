@@ -20,30 +20,30 @@
       "name": "MAIN DECK (LEVEL 1)",
       "paths": [
         "M0 37H294V312H0 M0 132H61 M0 230H61",
-        "M61 37V101 M61 132V211 M61 230V312",
-        "M140 37V93 M202 37V93",
-        "M88 145V93H202V145",
-        "M88 252V312 M154 238V312 M214 252V312",
-        "M230 76V133H294 M230 169V229H294 M230 261V312",
+        "M61 37V312",
+        "M140 37V125 M202 37V125",
+        "M88 125H202 M88 125V155 M202 125V155",
+        "M88 256H214 M88 256V312 M154 256V312 M214 256V312",
+        "M230 37V312 M230 133H294 M230 229H294",
         "M320 0V249H353M359 0V204M359 241V249H410V140M410 0V84M484 0V249H429M484 86H520V278",
         "M320 312V353 M320 278H420 M436 278H466 M482 278H544 M359 293V353 M402 293V353 M448 293V353 M502 293V353",
         "M544 278V353 M544 278H666",
-        "M0 312H72 M96 312H294",
         "M88 312V353",
-        "M88 180H202",
         "M666 278V353",
-        "M116.5 180V238 M151 180V238 M167.5 180V238",
-        "M88 180V238H202V180"
+        "M88 190V256H202V190",
+        "M88 190H202",
+        "M116.5 190V256 M151 190V256 M167.5 190V256"
       ],
       "labels": [
         {
           "id": "43b02ca7-c799-4c7a-8e04-079d99ec8a9a",
           "text": "8",
-          "x": 45.34351446718424,
+          "x": 5.2492589978828255,
           "y": 49.41437308868501,
           "kind": "room",
           "size": 24.220183486238533,
-          "align": "start"
+          "align": "start",
+          "placementRule": "bottom-left-clearance"
         },
         {
           "id": "fe0d4cf6-f823-42ea-ae9a-29c6e8a9bee0",
@@ -52,16 +52,18 @@
           "y": 49.41437308868501,
           "kind": "room",
           "size": 24.220183486238533,
-          "align": "start"
+          "align": "start",
+          "placementRule": "upper-exterior"
         },
         {
           "id": "72f413da-5cd7-48f7-b67f-2e21e71f294b",
           "text": "10",
-          "x": 186.3435144671842,
-          "y": 43.62568807339451,
+          "x": 145.2492589978828,
+          "y": 49.41437308868501,
           "kind": "room",
           "size": 24.220183486238533,
-          "align": "start"
+          "align": "start",
+          "placementRule": "bottom-left-clearance"
         },
         {
           "id": "421e5728-fd7a-4a4c-8679-1a3baaf3bc45",
@@ -70,7 +72,8 @@
           "y": 49.41437308868501,
           "kind": "room",
           "size": 24.220183486238533,
-          "align": "start"
+          "align": "start",
+          "placementRule": "upper-exterior"
         },
         {
           "id": "144aa181-fb71-4a6c-896f-913585a1660a",
@@ -79,7 +82,8 @@
           "y": 216.58562691131496,
           "kind": "room",
           "size": 24.220183486238533,
-          "align": "end"
+          "align": "end",
+          "placementRule": "upper-exterior"
         },
         {
           "id": "2b148ab9-8a00-4dd2-b7fb-fd08430572ba",
@@ -88,34 +92,38 @@
           "y": 299.58562691131493,
           "kind": "room",
           "size": 24.220183486238533,
-          "align": "end"
+          "align": "end",
+          "placementRule": "upper-exterior"
         },
         {
           "id": "b6932f8f-b070-4fdd-869b-7d12326cef96",
           "text": "14",
-          "x": 183.5418489767114,
-          "y": 250.41437308868504,
+          "x": 159.24925899788283,
+          "y": 305.5848165137615,
           "kind": "room",
           "size": 24.220183486238533,
-          "align": "start"
+          "align": "end",
+          "placementRule": "bottom-right-clearance"
         },
         {
           "id": "66ed7415-d8da-4b8e-924e-095e90a2e41c",
           "text": "6",
           "x": 138.34351446718424,
-          "y": 299.58562691131493,
+          "y": 303.3340366972477,
           "kind": "room",
           "size": 24.220183486238533,
-          "align": "end"
+          "align": "end",
+          "placementRule": "upper-exterior"
         },
         {
           "id": "32d63520-7cf3-448b-bc43-4ade8a448cbf",
           "text": "5",
-          "x": 45.34351446718424,
+          "x": 5.2492589978828255,
           "y": 299.58562691131493,
           "kind": "room",
           "size": 24.220183486238533,
-          "align": "end"
+          "align": "end",
+          "placementRule": "bottom-right-clearance"
         },
         {
           "id": "26d1720a-e647-4cf9-9c8b-d1a0e3730b02",
@@ -124,7 +132,8 @@
           "y": 144.414373088685,
           "kind": "room",
           "size": 24.220183486238533,
-          "align": "start"
+          "align": "start",
+          "placementRule": "upper-exterior"
         },
         {
           "id": "2b96f51d-80d5-4bf5-a2ce-16feb44fff9e",
@@ -184,7 +193,7 @@
           "id": "596608c1-0c38-4fb3-a2f9-433c35650f1b",
           "text": "WASH\nROOMS",
           "x": 209.52013408609733,
-          "y": 184.01136363636363,
+          "y": 194.01136363636363,
           "kind": "label",
           "size": 7.2660550458715605,
           "align": "start"
@@ -198,30 +207,28 @@
       "name": "SECOND FLOOR (LEVEL 2)",
       "paths": [
         "M0 37H294V312H0 M0 132H61 M0 230H61",
-        "M61 37V101 M61 132V211 M61 230V312",
+        "M61 37V312",
         "M140 37V125 M202 37V125",
-        "M61 125H202V185 M88 169V125",
-        "M88 169V180 M88 230V260 M202 260V217",
-        "M88 260H214",
-        "M88 260V312 M154 260V312 M214 238V312",
-        "M230 76V133H294 M230 169V229H294 M230 261V312",
+        "M88 125H202 M88 125V155 M202 125V155",
+        "M88 256H214 M88 256V312 M154 256V312 M214 256V312",
+        "M230 37V312 M230 133H294 M230 229H294",
         "M320 0V249H353 M359 0V204 M359 241V249H410V140 M410 0V84 M484 0V249H429 M484 86H520V278",
         "M544 278V353 M544 278H666",
-        "M0 312H72 M96 312H294",
-        "M88 125V169H152V125 M120 125V169",
         "M666 278V353",
         "M320 278H544",
-        "M320 278V353 M357 278V353 M394 278V353 M458 278V353 M496 278V353 M544 278V353"
+        "M320 278V353 M357 278V353 M394 278V353 M458 278V353 M496 278V353 M544 278V353",
+        "M88 125V169H152V125 M120 125V169"
       ],
       "labels": [
         {
           "id": "dd1dc923-0304-4bfc-b720-8c0d9afa8568",
           "text": "18",
-          "x": 30.54184897671141,
+          "x": 5.2492589978828255,
           "y": 49.41437308868501,
           "kind": "room",
           "size": 24.220183486238533,
-          "align": "start"
+          "align": "start",
+          "placementRule": "bottom-left-clearance"
         },
         {
           "id": "4cfdd2cd-4144-473f-be54-00d9b60cb128",
@@ -230,16 +237,18 @@
           "y": 49.41437308868501,
           "kind": "room",
           "size": 24.220183486238533,
-          "align": "start"
+          "align": "start",
+          "placementRule": "upper-exterior"
         },
         {
           "id": "8156f87c-52ab-4e0a-9fb7-6a3a735bf547",
           "text": "20",
-          "x": 186.3435144671842,
+          "x": 145.2492589978828,
           "y": 49.41437308868501,
           "kind": "room",
           "size": 24.220183486238533,
-          "align": "start"
+          "align": "start",
+          "placementRule": "bottom-left-clearance"
         },
         {
           "id": "056645ac-49a4-4762-8fae-68df90b8046e",
@@ -248,7 +257,8 @@
           "y": 49.41437308868501,
           "kind": "room",
           "size": 24.220183486238533,
-          "align": "start"
+          "align": "start",
+          "placementRule": "upper-exterior"
         },
         {
           "id": "3bcaa933-abfd-4712-98c6-fc34886dbef3",
@@ -257,7 +267,8 @@
           "y": 216.58562691131496,
           "kind": "room",
           "size": 24.220183486238533,
-          "align": "end"
+          "align": "end",
+          "placementRule": "upper-exterior"
         },
         {
           "id": "f0cdab97-7dfe-47f3-aa01-aef60c466335",
@@ -266,43 +277,48 @@
           "y": 299.58562691131493,
           "kind": "room",
           "size": 24.220183486238533,
-          "align": "end"
+          "align": "end",
+          "placementRule": "upper-exterior"
         },
         {
           "id": "8386c1e2-d0ae-4e31-a773-46c8aa26e95e",
           "text": "24",
-          "x": 183.5418489767114,
-          "y": 264.6256880733945,
+          "x": 159.24925899788283,
+          "y": 305.5848165137615,
           "kind": "room",
           "size": 24.220183486238533,
-          "align": "start"
+          "align": "end",
+          "placementRule": "bottom-right-clearance"
         },
         {
           "id": "1354d199-8db6-4088-852f-ce1e0cac561a",
           "text": "16",
           "x": 138.34351446718424,
-          "y": 307.37431192660546,
+          "y": 303.3340366972477,
           "kind": "room",
           "size": 24.220183486238533,
-          "align": "end"
+          "align": "end",
+          "placementRule": "upper-exterior"
         },
         {
           "id": "7245db7b-bdf1-4933-aaeb-a059e1a84ad5",
           "text": "15",
-          "x": 45.34351446718424,
+          "x": 5.2492589978828255,
           "y": 299.58562691131493,
           "kind": "room",
           "size": 24.220183486238533,
-          "align": "end"
+          "align": "end",
+          "placementRule": "bottom-right-clearance"
         },
         {
           "id": "4fa25bce-a63b-4201-9cd2-dcedc1bea95e",
           "text": "17",
-          "x": 30.54184897671141,
+          "x": 45.34351446718424,
           "y": 144.414373088685,
           "kind": "room",
           "size": 24.220183486238533,
-          "align": "start"
+          "align": "start",
+          "placementRule": "upper-exterior"
         },
         {
           "id": "662ea9c6-0f37-47e1-b57a-6c8c8840e211",
@@ -311,16 +327,18 @@
           "y": 340.58562691131493,
           "kind": "room",
           "size": 24.220183486238533,
-          "align": "end"
+          "align": "end",
+          "placementRule": "upper-exterior"
         },
         {
           "id": "62aff29f-81df-4b28-bd4d-362ae4bd7b9f",
           "text": "3",
-          "x": 365.69000482858524,
+          "x": 364.12206663447614,
           "y": 340.58562691131493,
           "kind": "room",
           "size": 24.220183486238533,
-          "align": "end"
+          "align": "end",
+          "placementRule": "upper-exterior"
         },
         {
           "id": "70956056-481d-4afe-9148-809bf7dd5b3f",
@@ -329,7 +347,8 @@
           "y": 340.58562691131493,
           "kind": "room",
           "size": 24.220183486238533,
-          "align": "end"
+          "align": "end",
+          "placementRule": "upper-exterior"
         },
         {
           "id": "d270ee59-1df7-4e1e-b0f3-e401a2131f4b",
@@ -338,7 +357,8 @@
           "y": 340.58562691131493,
           "kind": "room",
           "size": 24.220183486238533,
-          "align": "end"
+          "align": "end",
+          "placementRule": "upper-exterior"
         },
         {
           "id": "3e727ef0-a05d-4202-8281-93f6e3313ce5",
@@ -372,5 +392,5 @@
       "rects": []
     }
   ],
-  "styleRevision": 15
+  "styleRevision": 16
 }

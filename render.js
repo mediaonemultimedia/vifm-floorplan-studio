@@ -1,8 +1,8 @@
 import {stairMarkup} from './stairs.js';
-import {fixtureLayout,fixtureMarkup,dockMarkup} from './fixtures.js';
+import {fixtureLayout,fixtureMarkup,dockMarkup,dockLayout} from './fixtures.js';
 import {COLORS,planPoint,planPath,doorPath,escapeXML as e} from './model.js';
 import {REFERENCE,deckDoors,builtWallPaths,fitLabel} from './reference-style.js';
-export const deckOrigins=p=>[206,582].map(center=>({x:center-450*p.width/p.length,y:222}));
+export const deckOrigins=p=>[206,582].map(center=>({x:center-dockLayout(p).left/2-450*p.width/p.length,y:222}));
 let logo='';let logoViewBox='0 0 128.42 74.14';
 export async function loadLogo(){const r=await fetch('./assets/logo.svg');if(!r.ok)throw Error('Logo could not be loaded');const doc=new DOMParser().parseFromString(await r.text(),'image/svg+xml');logo=doc.documentElement.innerHTML;logoViewBox=doc.documentElement.getAttribute('viewBox');}
 function fixtures(d,p){return `${stairMarkup(d,p)}<g>${fixtureLayout(d,p).map(f=>fixtureMarkup(f,p.ink)).join('')}</g>`;}

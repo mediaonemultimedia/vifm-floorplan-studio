@@ -1,3 +1,4 @@
+import {dockLayout} from './fixtures.js';
 import {createNote,feedbackReport,feedbackPins,validateNotes} from './feedback.js';
 import {mergePublishedProject} from './updates.js';
 import {applyReferenceStyle,STYLE_REVISION} from './reference-style.js';
@@ -70,7 +71,7 @@ $('#ink').onchange=()=>customColour($('#ink').value);$('#ink-hex').onchange=()=>
 
 // Feedback is editor-only state: never part of drawing(), PDF, or SVG exports.
 function saveNotes(){try{localStorage.setItem(KEY+'.feedback',JSON.stringify(notes));}catch{toast('Notes could not be saved on this device. Download feedback to keep a copy.');}$('#feedback-toggle').textContent=notes.filter(n=>!n.resolved).length?`Feedback (${notes.filter(n=>!n.resolved).length})`:'Feedback';}
-function locateFeedback(q){return project.decks.map((d,i)=>({d,o:deckOrigins(project)[i]})).find(({d,o})=>(view==='both'||view===d.id)&&q.x>=o.x-56&&q.x<=o.x+900*project.width/project.length+8&&q.y>=o.y&&q.y<=o.y+900);}
+function locateFeedback(q){return project.decks.map((d,i)=>({d,o:deckOrigins(project)[i]})).find(({d,o})=>(view==='both'||view===d.id)&&q.x>=o.x+dockLayout(project).left-8&&q.x<=o.x+900*project.width/project.length+8&&q.y>=o.y&&q.y<=o.y+900);}
 function openFeedback(id=null){feedbackOpen=true;activeNote=id;selected=null;$('#feedback-toggle').setAttribute('aria-pressed','true');$('#inspector-title').textContent='FEEDBACK';setTool('feedback');feedbackInspector();}
 $('#feedback-toggle').onclick=()=>{if(feedbackOpen){feedbackOpen=false;$('#feedback-toggle').setAttribute('aria-pressed','false');$('#inspector-title').textContent='PROPERTIES';setTool('select');inspector();}else openFeedback();};
 function feedbackInspector(){
