@@ -10,5 +10,21 @@ export function stairLayout(d,p){const specs=d.id==='main'?[
  {id:'connecting-flight',x:484,y:205,w:18,h:51,axis:'y'},
  {id:'short-connector',x:520,y:248,w:12,h:30,axis:'x'},
  {id:'dry-room-flight',x:584,y:259,w:56,h:19,axis:'x'}
-];return specs.map(s=>{const a=planPoint(s.x+s.w,s.y,p),b=planPoint(s.x,s.y+s.h,p);return {id:s.id,left:a.x,top:a.y,width:b.x-a.x,height:b.y-a.y,vertical:s.axis==='x'};});}
-export function stairMarkup(d,p){return `<g fill="none" stroke="${p.ink}" stroke-width="${p.wallWidth*2/3}" stroke-linejoin="round">${stairLayout(d,p).map(s=>{const length=s.vertical?s.height:s.width,count=Math.max(3,Math.min(30,Math.round(length/5)));let path='';for(let i=1;i<count;i++){const t=length*i/count;path+=s.vertical?`M${s.left} ${s.top+t}h${s.width}`:`M${s.left+t} ${s.top}v${s.height}`;}return `<g data-stair="${s.id}"><rect x="${s.left}" y="${s.top}" width="${s.width}" height="${s.height}"/><path d="${path}"/></g>`;}).join('')}</g>`;}
+];return specs.map(s=>{const a=planPoint(s.x+s.w,s.y,p),b=planPoint(s.x,s.y+s.h,p);const run={id:s.id,left:a.x,top:a.y,width:b.x-a.x,height:b.y-a.y,vertical:s.axis==='x'};
+ if(d.id==='upper'&&['sleeping-forward','sleeping-aft'].includes(s.id)){
+  const forward=s.id==='sleeping-forward',doorY=planPoint(forward?210:67,0,p).y;
+  run.width=24;run.left=forward?planPoint(0,37,p).x-run.width:planPoint(0,312,p).x;
+  const bottom=forward?run.top+run.height:doorY+6;run.top=forward?doorY-30:run.top;run.height=bottom-run.top;
+  run.landing={left:run.left,top:forward?run.top:bottom-36,width:run.width,height:36};
+ }
+ return run;});}
+export function stairTreads(s){
+ const length=s.vertical?s.height:s.width,start=s.landing&&s.landing.top===s.top?s.landing.height:0,end=s.landing&&s.landing.top!==s.top?length-s.landing.height:length;
+ const count=Math.max(3,Math.min(30,Math.round((end-start)/5)));
+ return Array.from({length:count-1},(_,i)=>{const t=start+(end-start)*(i+1)/count;return s.vertical?{x:s.left,y:s.top+t,dx:s.width,dy:0}:{x:s.left+t,y:s.top,dx:0,dy:s.height};});
+}
+export function stairMarkup(d,p){return `<g fill="none" stroke="${p.ink}" stroke-width="${p.wallWidth*2/3}" stroke-linejoin="round">${stairLayout(d,p).map(s=>{
+ const path=stairTreads(s).map(t=>`M${t.x} ${t.y}l${t.dx} ${t.dy}`).join('');
+ const landing=s.landing?`<rect data-stair-landing="${s.id}" x="${s.landing.left}" y="${s.landing.top}" width="${s.landing.width}" height="${s.landing.height}"/>`:'';
+ return `<g data-stair="${s.id}"><rect x="${s.left}" y="${s.top}" width="${s.width}" height="${s.height}"/>${landing}<path d="${path}"/></g>`;
+ }).join('')}</g>`;}
