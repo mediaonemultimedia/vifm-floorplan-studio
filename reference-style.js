@@ -1,9 +1,10 @@
+import {COOK_HOUSE_PATHS,COOK_HOUSE_DOORS} from './cook-house.js';
 import {textWidth} from './font-metrics.js';
 import {stallEntries,bathroomPaths,fixtureLayout,fixtureBounds} from './fixtures.js';
 import {accommodationRooms,ACCOMMODATION_PATHS,isAccommodationPath} from './accommodation.js';
 import {planPoint,sourcePoint} from './model.js';
 // The live-text reference has a 327-unit deck width. Scale its type and strokes together.
-export const STYLE_REVISION=17;
+export const STYLE_REVISION=18;
 export const REFERENCE_SCALE=264/327;
 export const REFERENCE={room:30*REFERENCE_SCALE,label:11*REFERENCE_SCALE,caption:16*REFERENCE_SCALE,wall:3*REFERENCE_SCALE,detail:2*REFERENCE_SCALE,dash:4*REFERENCE_SCALE,inset:11.5*REFERENCE_SCALE};
 const rooms={main:accommodationRooms('main'),upper:{...accommodationRooms('upper'),4:[320,278,37,75],3:[357,278,37,75],2:[458,278,38,75],1:[496,278,48,75]}};
@@ -22,8 +23,8 @@ export function applyReferenceStyle(p){
  if(!needsReferenceStyle(p))return p;
  p.wallWidth=REFERENCE.wall;
  for(const d of p.decks){
-  // Replace only the accommodation structure; fore-deck and exterior details stay separate.
-  let outside=d.paths.filter(path=>!isAccommodationPath(path)).map(path=>path
+  // Replace the approved shared assemblies; preserve the other deck and exterior details.
+  let outside=d.paths.filter(path=>!isAccommodationPath(path)&&!path.startsWith('M320 0V249')&&!COOK_HOUSE_PATHS.includes(path)).map(path=>path
    .replace('M320 278H411 M437 278H499 M525 278H544','M320 278H420 M436 278H466 M482 278H544')
    .replace('M359 241V253H410V140','M359 241V249H410V140')
    .replace('M404 0V84','M410 0V84').replace('M484 86H529V278','M484 86H520V278')
@@ -33,7 +34,7 @@ export function applyReferenceStyle(p){
    outside.push('M320 278H544','M320 278V353 M357 278V353 M394 278V353 M458 278V353 M496 278V353 M544 278V353');
   }
   if(!outside.includes('M666 278V353'))outside.push('M666 278V353');
-  d.paths=[...ACCOMMODATION_PATHS,...outside,...bathroomPaths(d)];
+  d.paths=[...ACCOMMODATION_PATHS,...outside,...COOK_HOUSE_PATHS,...bathroomPaths(d)];
   d.labels=d.labels.filter(a=>!(a.kind==='label'&&['LAUNDRY','W/D'].includes(a.text.trim())));
  }
  for(const d of p.decks)for(const a of d.labels){
@@ -55,11 +56,11 @@ export function doorGeometry(start,end,swing){
  return {start,end,open,radius:r,threshold:`M${n(start.x)} ${n(start.y)}L${n(end.x)} ${n(end.y)}`,swing:`M${n(start.x)} ${n(start.y)}L${n(open.x)} ${n(open.y)} M${n(open.x)} ${n(open.y)}A${n(r)} ${n(r)} 0 0 ${swing===-1?1:0} ${n(end.x)} ${n(end.y)}`};
 }
 export const STANDARD_DOOR=24;
-function oldDoorEntries(d){return [[359,204,359,241],...(d.id==='main'?[[420,278,436,278],[466,278,482,278]]:[])];}
+function oldDoorEntries(d){return d.id==='main'?[[420,278,436,278],[466,278,482,278]]:[];}
 export function deckDoors(d,p){
- const base=[[61,92,'right',1],[61,185,'right',1],[61,240,'right',1],[230,45,'right',-1],[230,141,'right',-1],[230,240,'right',-1],[88,268,'right',-1],[214,268,'right',1],[202,86,'right',1],[359,208,'right',-1]];
+ const base=[[61,92,'right',1],[61,185,'right',1],[61,240,'right',1],[230,45,'right',-1],[230,141,'right',-1],[230,240,'right',-1],[88,268,'right',-1],[214,268,'right',1],[202,86,'right',1]];
  const extra=d.id==='main'?[[420,278,'up',1],[466,278,'up',1]]:[[326,278,'up',1],[363,278,'up',1],[463,278,'up',1],[501,278,'up',1],[399,278,'up',1]];
- return [...base,...extra,[210,37,'up',1],[67,312,'up',-1],[484,100,'right',-1],[638,278,'up',1],...stallEntries(d).map(e=>[e.x,e.y,'up',e.swing])].map(([x,y,direction,swing])=>{const start=planPoint(x,y,p),end={x:start.x+(direction==='right'?STANDARD_DOOR:0),y:start.y-(direction==='up'?STANDARD_DOOR:0)};return doorGeometry(start,end,swing);});
+ return [...base,...extra,...COOK_HOUSE_DOORS,[210,37,'up',1],[67,312,'up',-1],[484,100,'right',-1],[638,278,'up',1],...stallEntries(d).map(e=>[e.x,e.y,'up',e.swing])].map(([x,y,direction,swing])=>{const start=planPoint(x,y,p),end={x:start.x+(direction==='right'?STANDARD_DOOR:0),y:start.y+(direction==='down'?STANDARD_DOOR:direction==='up'?-STANDARD_DOOR:0)};return doorGeometry(start,end,swing);});
 }
 function doorBounds(door){return {left:Math.min(door.start.x,door.end.x,door.open.x),right:Math.max(door.start.x,door.end.x,door.open.x),top:Math.min(door.start.y,door.end.y,door.open.y),bottom:Math.max(door.start.y,door.end.y,door.open.y)};}
 export function labelCollidesWithDoor(a,p,door){const q=planPoint(a.x,a.y,p),lines=a.text.split('\n'),w=Math.max(...lines.map(line=>textWidth(line,a.size))),left=q.x-(a.align==='end'?w:a.align==='middle'?w/2:0),box=doorBounds(door),gap=3;return left<box.right+gap&&left+w>box.left-gap&&q.y-a.size*.8<box.bottom+gap&&q.y+(lines.length-1)*a.size+a.size*.1>box.top-gap;}
