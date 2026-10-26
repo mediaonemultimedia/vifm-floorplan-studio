@@ -2,6 +2,7 @@ import {SYMBOLS} from './symbols.js';
 import {planPoint} from './model.js';
 export const FIXTURE_SCALE=.6;
 const BASIN_PITCH=33.55;
+export const MAIN_STALLS=[[88,116.5],[116.5,151],[151,167.5],[167.5,202]];
 const item=(type,x,y,rotation=0)=>({type,x,y,rotation,scale:FIXTURE_SCALE});
 export function sinkBankMarkup(count,ink){
  const height=count*BASIN_PITCH+2;
@@ -9,7 +10,7 @@ export function sinkBankMarkup(count,ink){
  for(let i=0;i<count;i++){const y=1+BASIN_PITCH*(i+.5);body+=`<ellipse cx="12.12" cy="${y}" rx="5.84" ry="8.78"/><line x1="12.81" y1="${y}" x2="6.28" y2="${y}"/>`;}
  return `<g fill="none" stroke="${ink}" stroke-width="2" stroke-linejoin="round">${body}</g>`;
 }
-export function fixtureSize(f){if(f.type==='shower'&&f.narrow)return {width:41.77,height:27,body:`<g fill="none" stroke="__INK__" stroke-width="3" stroke-linejoin="round"><rect x="1.5" y="1.5" width="38.77" height="24"/><circle cx="20.89" cy="13.5" r=".68"/></g>`};return f.type==='sinkBank'?{width:24.24,height:f.basinCount*BASIN_PITCH+2}:SYMBOLS[f.type];}
+export function fixtureSize(f){return f.type==='sinkBank'?{width:24.24,height:f.basinCount*BASIN_PITCH+2}:SYMBOLS[f.type];}
 export function fixtureBounds(f){const s=fixtureSize(f),turned=Math.abs(f.rotation)%180===90,w=(turned?s.height:s.width)*f.scale,h=(turned?s.width:s.height)*f.scale;return {left:f.x-w/2,right:f.x+w/2,top:f.y-h/2,bottom:f.y+h/2};}
 export function fixtureLayout(d,p){
  const out=[],point=(x,y)=>planPoint(x,y,p),bankHeight=(5*BASIN_PITCH+2)*FIXTURE_SCALE;
@@ -23,10 +24,10 @@ export function fixtureLayout(d,p){
  if(d.id==='main'){
   const front=point(0,180).x,back=point(0,238).x;
   for(let i=0;i<4;i++){
-   const top=point(88+(i+1)*28.5,0).y,bottom=point(88+i*28.5,0).y;
+   const [start,end]=MAIN_STALLS[i],top=point(end,0).y,bottom=point(start,0).y;
    const showerX=back-2.1-41.77*FIXTURE_SCALE/2;
    const showerY=i===0?top+2.1+41.77*FIXTURE_SCALE/2:i===2?(top+bottom)/2:bottom-2.1-41.77*FIXTURE_SCALE/2;
-   out.push({...item('shower',showerX,showerY),narrow:i===2,stallIndex:i});
+   out.push({...item('shower',showerX,showerY),stallIndex:i});
    if(i!==2){const toiletX=i===1?front+2.1+23.66*FIXTURE_SCALE/2:back-2.1-27.89*FIXTURE_SCALE/2;
     const toiletY=i===0?bottom-2.1-23.66*FIXTURE_SCALE/2:top+2.1+(i===1?27.89:23.66)*FIXTURE_SCALE/2;
     out.push({...item('toilet',toiletX,toiletY,i===1?0:90),stallIndex:i});}
@@ -40,15 +41,15 @@ export function fixtureLayout(d,p){
   const urinalY=point(202,0).y+p.wallWidth/2+SYMBOLS.urinal.height*FIXTURE_SCALE/2;
   for(const y of [146,172])out.push(item('urinal',point(0,y).x,urinalY));
   // Separate sanitary bay between staff rooms 3 and 2, as shown in the source.
-  const bayY=(point(410,0).y+point(444,0).y)/2;
-  out.push({...item('shower',point(0,278).x+2.1+41.77*FIXTURE_SCALE/2,bayY),area:'staff-bathroom'});
-  out.push({...item('toilet',point(0,353).x-2.1-27.89*FIXTURE_SCALE/2,bayY,90),area:'staff-bathroom'});
+  const bayTop=point(458,0).y,bayBottom=point(394,0).y,right=point(0,353).x;
+  out.push({...item('shower',right-2.1-41.77*FIXTURE_SCALE/2,bayTop+2.1+41.77*FIXTURE_SCALE/2),area:'staff-bathroom'});
+  out.push({...item('toilet',right-2.1-27.89*FIXTURE_SCALE/2,bayBottom-2.1-23.66*FIXTURE_SCALE/2,90),area:'staff-bathroom'});
 
  }
  return out;
 }
 export function fixtureMarkup(f,ink){const s=fixtureSize(f);let body=f.type==='sinkBank'?sinkBankMarkup(f.basinCount,ink):s.body.replaceAll('__INK__',ink);if(['washer','dryer','washerDryer'].includes(f.type)&&f.rotation)body=body.replace(/<text\b[\s\S]*?<\/text>/g,text=>`<g transform="rotate(${-f.rotation} ${s.width/2} ${s.height/2})">${text}</g>`);return `<g data-fixture="${f.type}" transform="translate(${f.x} ${f.y}) rotate(${f.rotation}) scale(${f.scale}) translate(${-s.width/2} ${-s.height/2})">${body}</g>`;}
-export function stallEntries(d){return d.id==='main'?Array.from({length:4},(_,i)=>({x:88+i*28.5+(28.5-24*294/520)/2,y:180,swing:-1})):Array.from({length:2},(_,i)=>({x:88+i*32+(32-24*294/520)/2,y:169,swing:1}));}
-export function bathroomPaths(d){if(d.id==='main')return ['M88 180V238H202V180','M88 180H202','M116.5 180V238 M145 180V238 M173.5 180V238'];return ['M88 125V169H152V125 M120 125V169'];}
+export function stallEntries(d){return d.id==='main'?MAIN_STALLS.map(([start,end])=>({x:start+(end-start-24*294/520)/2,y:180,swing:-1})):Array.from({length:2},(_,i)=>({x:88+i*32+(32-24*294/520)/2,y:169,swing:1}));}
+export function bathroomPaths(d){if(d.id==='main')return ['M88 180V238H202V180','M88 180H202','M116.5 180V238 M151 180V238 M167.5 180V238'];return ['M88 125V169H152V125 M120 125V169'];}
 export function dockLayout(p){const top=planPoint(430,0,p).y,bottom=planPoint(320,0,p).y,rampTop=planPoint(568,0,p).y;return {left:-48,right:0,top,bottom,rampLeft:-24,rampTop,rampBottom:top+30,label:{x:-24,y:top+48},muster:{x:-24,y:bottom-21}};}
 export function dockMarkup(p){const g=dockLayout(p),s=p.wallWidth;return `<g data-dock-area="true" fill="none" stroke="${p.ink}" stroke-width="${s}" stroke-linejoin="round"><path d="M${g.rampLeft} ${g.rampTop}H0V${g.rampBottom}H${g.rampLeft}Z"/><path d="M${g.left} ${g.top}H${g.rampLeft}V${g.rampBottom}H0V${g.bottom}H${g.left}Z"/><path d="M-12 ${g.rampTop+9}V${g.rampTop+35}m-4-4 4 4 4-4" stroke-width="2"/><text x="-15" y="${g.rampTop-8}" font-family="LibreFranklin" font-weight="bold" font-size="7.3" text-anchor="middle" fill="${p.ink}" stroke="none">DOWN</text><text x="${g.label.x}" y="${g.label.y}" font-family="LibreFranklin" font-weight="bold" font-size="8.88" text-anchor="middle" fill="${p.ink}" stroke="none">DOCK</text></g>${fixtureMarkup({type:'muster',x:g.muster.x,y:g.muster.y,rotation:0,scale:.5},p.ink)}`;}

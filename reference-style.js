@@ -2,12 +2,12 @@ import {textWidth} from './font-metrics.js';
 import {stallEntries,bathroomPaths} from './fixtures.js';
 import {planPoint,sourcePoint} from './model.js';
 // The live-text reference has a 327-unit deck width. Scale its type and strokes together.
-export const STYLE_REVISION=13;
+export const STYLE_REVISION=15;
 export const REFERENCE_SCALE=264/327;
 export const REFERENCE={room:30*REFERENCE_SCALE,label:11*REFERENCE_SCALE,caption:16*REFERENCE_SCALE,wall:3*REFERENCE_SCALE,detail:2*REFERENCE_SCALE,dash:4*REFERENCE_SCALE,inset:11.5*REFERENCE_SCALE};
 const rooms={
  main:{8:[0,37,61,95],9:[61,37,79,56],10:[140,37,62,56],11:[230,37,64,96],12:[230,133,64,96],13:[214,238,80,74],14:[154,238,60,74],6:[88,238,66,74],5:[0,230,61,82],7:[0,132,61,98]},
- upper:{18:[0,37,61,95],19:[61,37,79,88],20:[140,37,62,88],21:[230,37,64,96],22:[230,133,64,96],23:[214,238,80,74],24:[154,260,60,52],16:[88,260,66,52],15:[0,230,61,82],17:[0,132,61,98],4:[320,278,45,75],3:[365,278,45,75],2:[444,278,38,75],1:[482,278,47,75]}
+ upper:{18:[0,37,61,95],19:[61,37,79,88],20:[140,37,62,88],21:[230,37,64,96],22:[230,133,64,96],23:[214,238,80,74],24:[154,260,60,52],16:[88,260,66,52],15:[0,230,61,82],17:[0,132,61,98],4:[320,278,37,75],3:[357,278,37,75],2:[458,278,38,75],1:[496,278,48,75]}
 };
 const utilities={
  main:{'LAUNDRY / STORAGE':[320,278,39,75],'BATHROOM':[359,278,43,75],'OFFICE':[402,278,46,75],'FIRST AID':[448,278,54,75],'DRY ROOM ABOVE GENERATOR BELOW':[544,278,122,75],'WASHROOMS':[202,180,28,58],'LAUNDRY':[88,93,114,72]},
@@ -22,7 +22,7 @@ export function applyReferenceStyle(p){
  for(const d of p.decks){
   d.labels=d.labels.filter(a=>!(a.kind==='label'&&['LAUNDRY','W/D'].includes(a.text.trim())));
   if(d.id==='main'){
-   d.paths=d.paths.filter(path=>!['M88 200V238H202V200','M88 180V238H202V180','M88 195H101 M126 195H136 M151 195H163 M180 195H189 M201 195H202','M112 195V238 M140 195V238 M164 195V238 M190 195V238'].includes(path)).map(path=>path.replace('M88 165V93H202V165','M88 145V93H202V145'));
+   d.paths=d.paths.filter(path=>!['M116.5 180V238 M145 180V238 M173.5 180V238','M88 200V238H202V200','M88 180V238H202V180','M88 195H101 M126 195H136 M151 195H163 M180 195H189 M201 195H202','M112 195V238 M140 195V238 M164 195V238 M190 195V238'].includes(path)).map(path=>path.replace('M88 165V93H202V165','M88 145V93H202V145'));
   }else{
    d.paths=d.paths.filter(path=>!['M112 93V137H152V93 M88 137H152 M164 93V137H202'].includes(path)).map(path=>path.replace('M88 120V93H202V120','M88 137V93H202V137'));
   }
@@ -37,7 +37,8 @@ export function applyReferenceStyle(p){
     .replace('M320 278V353 M371 278V353 M422 278V353 M473 278V353 M520 278V353','M320 278V353 M365 278V353 M435 278V353 M473 278V353 M520 278V353'));
   }
   if(d.id==='upper')d.paths=d.paths.map(path=>path.replace('M365 278V353 M435 278V353 M473 278V353 M520 278V353','M365 278V353 M410 278V353 M444 278V353 M482 278V353 M529 278V353').replace('M504 278H520','M504 278H529').replace('M484 86H529V278','M484 86H520V278'));
-  d.paths=d.paths.map(path=>path.replace('M404 0V84','M410 0V84').replace('M544 278H704','M544 278H666'));
+  if(d.id==='upper'){d.paths=d.paths.filter(path=>!path.startsWith('M320 278H')&&!path.startsWith('M320 278V353'));d.paths.push('M320 278H544','M320 278V353 M357 278V353 M394 278V353 M458 278V353 M496 278V353 M544 278V353');}
+  d.paths=d.paths.map(path=>path.replace('M359 241V253H410V140','M359 241V249H410V140').replace('M404 0V84','M410 0V84').replace('M544 278H704','M544 278H666'));
   if(!d.paths.includes('M666 278V353'))d.paths.push('M666 278V353');
   for(const path of bathroomPaths(d))if(!d.paths.includes(path))d.paths.push(path);
  }
@@ -64,7 +65,7 @@ function oldDoorEntries(d){const base=[[61,101,61,132],[61,211,61,230],[230,37,2
 export function deckDoors(d,p){
  const base=[[61,92,'right',1],[61,185,'right',1],[230,45,'right',-1],[230,141,'right',-1],[230,240,'right',-1],[88,248,'right',-1],[214,246,'right',1],[359,208,'right',-1]];
  if(d.id==='upper'){base[5]=[88,270,'right',-1];base[6]=[214,268,'right',1];}
- const extra=d.id==='main'?[[420,278,'up',1],[466,278,'up',1]]:[[335,278,'up',1],[376,278,'up',1],[449,278,'up',1],[497,278,'up',1],[413,278,'up',-1]];
+ const extra=d.id==='main'?[[420,278,'up',1],[466,278,'up',1]]:[[326,278,'up',1],[363,278,'up',1],[463,278,'up',1],[501,278,'up',1],[399,278,'up',1]];
  return [...base,...extra,[210,37,'up',1],[67,312,'up',-1],[484,100,'right',-1],[638,278,'up',1],...stallEntries(d).map(e=>[e.x,e.y,'up',e.swing])].map(([x,y,direction,swing])=>{const start=planPoint(x,y,p),end={x:start.x+(direction==='right'?STANDARD_DOOR:0),y:start.y-(direction==='up'?STANDARD_DOOR:0)};return doorGeometry(start,end,swing);});
 }
 function doorBounds(door){return {left:Math.min(door.start.x,door.end.x,door.open.x),right:Math.max(door.start.x,door.end.x,door.open.x),top:Math.min(door.start.y,door.end.y,door.open.y),bottom:Math.max(door.start.y,door.end.y,door.open.y)};}
