@@ -16,6 +16,7 @@ const utilities={
 function bounds(box,p){const [x,y,w,h]=box,a=planPoint(x+w,y,p),b=planPoint(x,y+h,p);return {left:a.x,top:a.y,right:b.x,bottom:b.y};}
 function position(a,x,y,p,align){const q=sourcePoint(x,y,p);Object.assign(a,q,{align});}
 export function needsReferenceStyle(p){
+ if(p.editorRevision===1||p.coordinates==='drawing')return false;
  // Recognize the two original pre-cut wall patterns even if an older updater
  // already copied the new revision stamp onto that incomplete wall set.
  return (p.styleRevision||0)<STYLE_REVISION||p.decks.some(d=>d.paths.some(path=>path.includes('M230 76V133H294')||path.includes('M61 37V101')));
@@ -131,3 +132,5 @@ export function fitLabel(a,d,p){
  x=Math.max(left+gap+offset,Math.min(right-gap-w+offset,x));
  return {...a,...sourcePoint(x,q.y,p),size};
 }
+
+export function referenceLabelArea(a,d,p){const key=a.text.replace(/\s+/g,' ').trim(),box=key==='COOK HOUSE'?[410,0,74,249]:utilities[d.id]?.[key];if(!box)return undefined;const b=bounds(box,p);return {x:b.left,y:b.top,w:b.right-b.left,h:b.bottom-b.top};}

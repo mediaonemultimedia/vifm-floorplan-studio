@@ -1,6 +1,6 @@
 # VIFM Floorplan Studio
 
-A static, motion-free editor for VIFM accommodation floorplans. The initial drawing set is BARCO 99. There is no server-side data processing or account requirement.
+A static, motion-free editor for VIFM accommodation floorplans. Includes BARCO 99 and the sketch-based ODYSSEY 102 draft. There is no server-side data processing or account requirement.
 
 ## Run locally
 
@@ -14,12 +14,15 @@ Open http://127.0.0.1:4173. Use an HTTP server; opening index.html directly as a
 
 ## Edit and export
 
-- Select a room number or label to edit its text, size and position in Properties. Drag to move; arrow keys nudge; Shift increases the nudge. Enter selects a focused label.
-- Choose an annotation tool and click a deck to place text, arrows, first-aid symbols, muster markers or room/wall rectangles. Duplicate or delete selected elements in Properties.
-- Click a partition to adjust its offset or delete it. Existing partition groups may contain several connected segments. Fixtures and doors remain separate from partition movement.
-- Edit vessel dimensions to adjust the overall drawing envelope. Interior coordinates are drawing units, **not measurements in feet**.
+- Choose a boat in the sidebar. Each boat has its own saved drawing, colours, shared styles and feedback.
+- Select text to edit its content, position and style role. Text hierarchy changes every matching role on both floors together. Drag to move; arrow keys nudge; Shift increases the nudge.
+- Use Centre in an area for intentionally centred labels. Editable area bounds keep multiline text centred horizontally and vertically as its shared size changes. Edge and corner labels keep their established alignment.
+- Choose an annotation tool and click a deck to place text, arrows, first-aid symbols, muster markers, a wall line or four independent walls. Duplicate or delete selected elements in Properties.
+- Every structural wall is an independent line. Select one to drag it, drag either endpoint, edit endpoint coordinates or delete it. Square caps extend beyond endpoints for clean corners. Fixtures, doors and adjacent walls remain separate; review the whole room after moving a wall.
+- Line styles separately control main walls, secondary lines, fixture/stair/door details, dotted thresholds and dot/gap length. Each setting applies throughout both floors.
+- Interior coordinates are drawing units, **not measurements in feet**. BARCO envelope dimensions can adjust its width; Odyssey dimensions are metadata because its reviewed sketch geometry has its own proportions.
 - Undo is available in the header and with Command/Ctrl+Z outside text fields. Text fields retain normal text undo.
-- Both/Main/Upstairs tabs control the preview. PDF and SVG exports always include the complete two-deck drawing set.
+- Both/Lower/Upper tabs control the preview. PDF and SVG exports always include the complete two-deck drawing set.
 - Download PDF produces one portrait page with vector artwork and embedded Libre Franklin Medium/Bold text. Text is retained, not outlined. A PDF editor is required to edit the resulting PDF; use project JSON for ongoing edits in this app.
 - Download editable SVG embeds the two fonts and retains text elements and vector geometry.
 - Save project downloads JSON. Open saved project restores it. The browser also automatically saves to local storage; use JSON backups when changing browser, device or hosting address.
@@ -86,3 +89,11 @@ Fixture orientation follows the backing wall: the main sink bank’s faucets fac
 The approved drawing conventions and layout exceptions are recorded in [DESIGN.md](DESIGN.md). Dock proportions now match the supplied dock artwork and AMIX precedent, with equal muster padding and balanced page margins.
 
 Matching bedroom rows share one baseline when any member needs lower placement. Legacy rendering and export normalize the complete layout so current fixtures cannot be combined with older partitions.
+
+## Odyssey working draft and shared editing system
+
+Odyssey uses the reviewed hand-sketch interpretation. The first two photos join at the bench area to form the lower level; the shorter upper level contains the helipad, office and weight room. The 43 × 35 ft pad anchors its proportions. Only the ten bedrooms visible in the sketches are drawn, with provisional L1–L5/R1–R5 identifiers. The written twenty-room count, floor naming and other uncertain connections remain unresolved. Nine pinned review notes appear in Feedback and stay outside exports. All four original sketch photos are available in Source drawings.
+
+Boat navigation, typography roles, line controls, wall editing, area centring, feedback and export use the same editor for both boats. Values are saved per boat, so changing one drawing does not silently restyle another. The existing BARCO save is migrated to independent lines while preserving its text, colour and feedback coordinates; the original v1 browser save remains as a backup. Save project downloads the complete editable state. No media-intake wizard or automatic sketch generation is included.
+
+Release validation includes geometry/import/storage tests, browser checks of both boats, live shared-size and endpoint edits, responsive layout, and real PDF-button exports. Both exported faces retain their supplied Libre Franklin identities, embedded fonts, live text, vectors and square caps.

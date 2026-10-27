@@ -1,8 +1,9 @@
+import {editorDrawing,editorDeckOrigins} from './editor-render.js';
 import {stairMarkup} from './stairs.js';
 import {fixtureLayout,fixtureMarkup,dockMarkup,dockLayout} from './fixtures.js';
 import {COLORS,planPoint,planPath,doorPath,escapeXML as e} from './model.js';
 import {applyReferenceStyle,needsReferenceStyle,REFERENCE,deckDoors,builtWallPaths,fitLabel} from './reference-style.js';
-export const deckOrigins=p=>[206,582].map(center=>({x:center-dockLayout(p).left/2-450*p.width/p.length,y:222}));
+export const deckOrigins=p=>p.editorRevision===1?editorDeckOrigins(p):[206,582].map(center=>({x:center-dockLayout(p).left/2-450*p.width/p.length,y:222}));
 let logo='';let logoViewBox='0 0 128.42 74.14';
 export async function loadLogo(){const r=await fetch('./assets/logo.svg');if(!r.ok)throw Error('Logo could not be loaded');const doc=new DOMParser().parseFromString(await r.text(),'image/svg+xml');logo=doc.documentElement.innerHTML;logoViewBox=doc.documentElement.getAttribute('viewBox');}
 function fixtures(d,p){return `${stairMarkup(d,p)}<g>${fixtureLayout(d,p).map(f=>fixtureMarkup(f,p.ink)).join('')}</g>`;}
@@ -18,6 +19,7 @@ function element(a,p,selected,interactive){const q=planPoint(a.x,a.y,p);const at
  return `<g ${attrs}>${interactive?`<rect x="${bounds.x-3}" y="${bounds.y-3}" width="${bounds.w+6}" height="${bounds.h+6}" fill="transparent" stroke="${selected===a.id?'#f05024':'none'}" stroke-width="1"/>`:''}${s}</g>`;
 }
 export function drawing(p,{selected=null,interactive=false,visible='both',grid=false}={}){
+ if(p.editorRevision===1)return editorDrawing(p,{selected,interactive,visible,grid},logo,logoViewBox);
  // Imported and older saved drawings must never mix old partitions with new fittings.
  if(needsReferenceStyle(p))p=applyReferenceStyle(structuredClone(p));
  const dw=900*p.width/p.length;

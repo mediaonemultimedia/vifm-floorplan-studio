@@ -37,3 +37,17 @@ The cook-house assembly is shared across both floors: a side door in the long pa
 Adjoining walls, room boundaries and landing edges share an alignment by default. Derive a landing and its doorway from the room wall, rather than positioning them independently. Keep the complete doorway inside a clear landing with clearance beyond both jambs. Apply the dry-room landing alignment to both decks.
 
 The upstairs horizontal connecting stair beside rooms 1 and 2 is an explicit source exception: it projects beyond the cook-house wall corner. Keep that overhang and extend the supporting wall to the stair's outer edge. Do not shorten the stair to enforce the default alignment, or generalize this exception to other joints.
+
+## Shared typography and area centring
+
+All boats use one editor and the same semantic roles: room numbers, room/area labels, equipment labels, floor captions, boat title, header subtitle, added text and helipad marker. A size adjustment applies to every item in that role across the drawing. Do not shrink an individual number to hide a layout conflict: move its placement, change the room, or reduce the shared role size.
+
+A centred label has an explicit logical area. Place its visual text block at that area's horizontal and vertical midpoint, using the supplied font's cap-height/descender metrics and multiline height. Ignore a doorway gap when establishing a room's full extent. Rotated centred labels use the same rule. Keep established edge/corner label rules for labels whose intent is not central. Editing walls does not infer or silently change a label's bounds; update the explicit area when its room changes.
+
+## Shared line system and independent walls
+
+Structural walls are separate line segments with independent endpoints. Use SVG square caps, extending half the stroke width beyond the anchor, to close corners cleanly. Moving a segment never moves neighbouring walls, fixtures or doors implicitly. Main walls, secondary outlines, fixture/stair/door details, threshold stroke and dot/gap spacing have separate universal controls. Door leaves and arc radii retain the same geometric relationship as weights change.
+
+## Odyssey evidence and unresolved assumptions
+
+The supplied sketches establish Odyssey geometry ahead of the prose. Treat the repeated bench area in the first two photos as their shared join, rather than drawing it twice. Place the shorter upper level by matching stair connections; retain the helipad's 43 × 35 proportion. Draw the ten sketched bedrooms only, with provisional location identifiers. Do not invent an upper accommodation block, first-aid location, extra laundry or additional bedrooms to reconcile the prose. Carry all nine draft uncertainties as editor feedback, never printed artwork. Subsequent source clarification can revise these assumptions without changing the universal editing controls.
