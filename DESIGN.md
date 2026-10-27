@@ -31,3 +31,9 @@ Treat rooms, backing walls, fixtures, doors and circulation as connected assembl
 Upgrade each whole saved snapshot before merging a published release. Do not merge its revision number separately from its geometry. Rendering and exporting legacy projects also upgrades a copy first. Keep the original saved project in the existing migration/update backup and preserve notes, text and colours. A layout migration replaces the accommodation structure with the approved common layout; it does not preserve incompatible older accommodation-wall edits. Verify a previously saved drawing as well as a new visitor's starting drawing, then review the actual exported PDF. Passing isolated geometry tests does not establish visual or spatial correctness.
 
 The cook-house assembly is shared across both floors: a side door in the long partition, an inward-opening end exit, and the small enclosed end compartment with its own inward door. Retain its closing partition from the source, with solid wall returns at the door jambs. Keep that compartment unlabelled because the source gives no name.
+
+## Alignment and explicit source exceptions
+
+Adjoining walls, room boundaries and landing edges share an alignment by default. Derive a landing and its doorway from the room wall, rather than positioning them independently. Keep the complete doorway inside a clear landing with clearance beyond both jambs. Apply the dry-room landing alignment to both decks.
+
+The upstairs horizontal connecting stair beside rooms 1 and 2 is an explicit source exception: it projects beyond the cook-house wall corner. Keep that overhang and extend the supporting wall to the stair's outer edge. Do not shorten the stair to enforce the default alignment, or generalize this exception to other joints.

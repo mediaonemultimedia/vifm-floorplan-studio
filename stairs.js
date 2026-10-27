@@ -1,4 +1,9 @@
 import {planPoint} from './model.js';
+const DRY_ROOM_WALL=666,DRY_ROOM_FRONT=278,LANDING_DEPTH=36;
+export function dryRoomDoorPoint(p){const wall=planPoint(DRY_ROOM_WALL,DRY_ROOM_FRONT,p);return {x:wall.x,y:wall.y+30};}
+// This source-specific connector projects past the cook-house corner. Its
+// supporting wall follows the stair edge instead of shortening the stair.
+export function stairWallPaths(d){return d.id==='upper'?['M484 249V256']:[];}
 export function stairLayout(d,p){const specs=d.id==='main'?[
  {id:'sleeping-forward',x:242,y:0,w:14,h:37,axis:'x'},
  {id:'sleeping-aft',x:96,y:312,w:12,h:41,axis:'x'},
@@ -18,9 +23,9 @@ export function stairLayout(d,p){const specs=d.id==='main'?[
   run.landing={left:run.left,top:forward?run.top:bottom-36,width:run.width,height:36};
  }
  if(s.id==='dry-room-flight'){
-  const doorY=planPoint(638,278,p).y,bottom=run.top+run.height;
-  run.width=24;run.left=planPoint(0,278,p).x-run.width;run.top=doorY-30;run.height=bottom-run.top;
-  run.landing={left:run.left,top:run.top,width:run.width,height:36};
+  const bottom=run.top+run.height;
+  run.width=24;run.left=planPoint(0,278,p).x-run.width;run.top=planPoint(DRY_ROOM_WALL,DRY_ROOM_FRONT,p).y;run.height=bottom-run.top;
+  run.landing={left:run.left,top:run.top,width:run.width,height:LANDING_DEPTH};
  }
  return run;});}
 export function stairTreads(s){
