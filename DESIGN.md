@@ -51,3 +51,7 @@ Structural walls are separate line segments with independent endpoints. Use SVG 
 ## Odyssey evidence and unresolved assumptions
 
 The supplied sketches establish Odyssey geometry ahead of the prose. Treat the repeated bench area in the first two photos as their shared join, rather than drawing it twice. Place the shorter upper level by matching stair connections; retain the helipad's 43 × 35 proportion. Draw the ten sketched bedrooms only, with provisional location identifiers. Do not invent an upper accommodation block, first-aid location, extra laundry or additional bedrooms to reconcile the prose. Carry all nine draft uncertainties as editor feedback, never printed artwork. Subsequent source clarification can revise these assumptions without changing the universal editing controls.
+
+## BARCO cook-house level confirmation · 27 October 2026
+
+The owner confirmed that the cook house exists downstairs only and explicitly selected omission of its footprint upstairs. This overrides its duplication in the supplied upstairs evacuation sheet. Remove the upstairs copy's partitions, external footprint lines, doors and label together. Keep the barge perimeter, staff cabins and separately documented stair connections. Do not draw or label a roof in its place. Existing editor saves receive this correction once, preserving the main floor and unrelated edits. The earlier shared cook-house assembly rules describe the original source interpretation; they now apply to the main floor only.

@@ -3,9 +3,10 @@ import {applyReferenceStyle,deckDoors,builtWallPaths,fitLabel,referenceLabelArea
 import {lineSegments,cutWall} from './wall-lines.js';
 import {DEFAULT_THEME,validateTheme} from './theme.js';
 import {SYMBOLS} from './symbols.js';
+import {COOK_HOUSE_PATHS} from './cook-house.js';
 export function prepareEditorProject(input){
  const p=structuredClone(input);
- if(p.editorRevision===1)return validateEditorProject(p);
+ if(p.editorRevision===1)return validateEditorProject(correctBarcoLevels(p));
  if(p.coordinates!=='drawing')applyReferenceStyle(p);
  p.id??='barco99';p.editorRevision=1;p.bounds??={width:900*p.width/p.length,height:900};
  p.theme??=structuredClone(DEFAULT_THEME);p.wallWidth=Math.round(p.wallWidth*100)/100;p.theme.lines.wall=p.wallWidth;
@@ -22,7 +23,7 @@ export function prepareEditorProject(input){
  p.reviewFlags??=[];
  p.sources??=[{id:'main',title:'Main deck source',src:'assets/main-source.png'},{id:'upper',title:'Upstairs source',src:'assets/upper-source.png'}];
  p.sourceSummary??='The drawings number spaces 1–24; the written specification lists 23 rooms. The drawing labels take precedence.';
- return validateEditorProject(p);
+ return validateEditorProject(correctBarcoLevels(p));
 }
 export function validateEditorProject(p){
  if(!p?.editorRevision)return validateProject(p);
@@ -73,4 +74,23 @@ export function moveElement(a,p,dx,dy){
  if(a.centerArea){a.centerArea.x=limit(a.centerArea.x+dx);a.centerArea.y=limit(a.centerArea.y+dy);}
  else {const q=planPoint(a.x,a.y,p),next=sourcePoint(q.x+dx,q.y+dy,p);a.x=limit(next.x);a.y=limit(next.y);}
  return a;
+}
+
+// The owner confirmed the cook house is single-storey and asked that its
+// footprint be omitted upstairs. Identify its original independent segment IDs
+// before changing door generation, so prior saved wall edits upgrade together.
+function correctBarcoLevels(p){
+ if(p.id!=='barco99'||p.coordinates==='drawing'||p.barcoCookHouseRevision>=1)return p;
+ const d=p.decks.find(d=>d.id==='upper'),remove=new Set();let index=0;
+ const top=planPoint(484,0,p).y,bottom=planPoint(320,0,p).y,right=planPoint(0,249,p).x;
+ const inside=(x,y)=>x>=-.001&&x<=right+.001&&y>=top-.001&&y<=bottom+.001;
+ for(const entry of builtWallPaths(d,p)){
+  const assembly=COOK_HOUSE_PATHS.includes(d.paths[entry.index]);
+  for(const segment of lineSegments(entry.path)){if(assembly&&inside(segment.x1,segment.y1)&&inside(segment.x2,segment.y2))remove.add(`upper-wall-${index}`);index++;}
+ }
+ d.walls=d.walls.filter(w=>!remove.has(w.id));
+ d.labels=d.labels.filter(a=>{const q=planPoint(a.x,a.y,p);return !(q.x>=0&&q.x<=right&&q.y>=top&&q.y<=bottom);});
+ p.barcoCookHouseRevision=1;
+ p.sourceSummary=(p.sourceSummary||'Supplied drawing plans guide the layout.')+' Cook house confirmed downstairs only; its footprint is omitted upstairs.';
+ return p;
 }

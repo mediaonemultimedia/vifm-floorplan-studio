@@ -62,8 +62,9 @@ function oldDoorEntries(d){return d.id==='main'?[[420,278,436,278],[466,278,482,
 export function deckDoors(d,p){
  const dryEntry=dryRoomDoorPoint(p);
  const base=[[61,92,'right',1],[61,185,'right',1],[61,240,'right',1],[230,45,'right',-1],[230,141,'right',-1],[230,240,'right',-1],[88,268,'right',-1],[214,268,'right',1],[202,86,'right',1]];
+ const cookHouse=d.id==='main'||!(p.barcoCookHouseRevision>=1);
  const extra=d.id==='main'?[[420,278,'up',1],[466,278,'up',1]]:[[326,278,'up',1],[363,278,'up',1],[463,278,'up',1],[501,278,'up',1],[399,278,'up',1]];
- return [...base,...extra,...COOK_HOUSE_DOORS,[210,37,'up',1],[67,312,'up',-1],[484,100,'right',-1],...stallEntries(d).map(e=>[e.x,e.y,'up',e.swing])].map(([x,y,direction,swing])=>{const start=planPoint(x,y,p),end={x:start.x+(direction==='right'?STANDARD_DOOR:0),y:start.y+(direction==='down'?STANDARD_DOOR:direction==='up'?-STANDARD_DOOR:0)};return doorGeometry(start,end,swing);}).concat(doorGeometry(dryEntry,{x:dryEntry.x,y:dryEntry.y-STANDARD_DOOR},1));
+ return [...base,...extra,...(cookHouse?COOK_HOUSE_DOORS:[]),[210,37,'up',1],[67,312,'up',-1],...(cookHouse?[[484,100,'right',-1]]:[]),...stallEntries(d).map(e=>[e.x,e.y,'up',e.swing])].map(([x,y,direction,swing])=>{const start=planPoint(x,y,p),end={x:start.x+(direction==='right'?STANDARD_DOOR:0),y:start.y+(direction==='down'?STANDARD_DOOR:direction==='up'?-STANDARD_DOOR:0)};return doorGeometry(start,end,swing);}).concat(doorGeometry(dryEntry,{x:dryEntry.x,y:dryEntry.y-STANDARD_DOOR},1));
 }
 function doorBounds(door){return {left:Math.min(door.start.x,door.end.x,door.open.x),right:Math.max(door.start.x,door.end.x,door.open.x),top:Math.min(door.start.y,door.end.y,door.open.y),bottom:Math.max(door.start.y,door.end.y,door.open.y)};}
 export function labelCollidesWithDoor(a,p,door){const q=planPoint(a.x,a.y,p),lines=a.text.split('\n'),w=Math.max(...lines.map(line=>textWidth(line,a.size))),left=q.x-(a.align==='end'?w:a.align==='middle'?w/2:0),box=doorBounds(door),gap=3;return left<box.right+gap&&left+w>box.left-gap&&q.y-a.size*.8<box.bottom+gap&&q.y+(lines.length-1)*a.size+a.size*.1>box.top-gap;}

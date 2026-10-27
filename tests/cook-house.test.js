@@ -4,7 +4,7 @@ import {createProject,planPoint} from '../model.js';
 import {applyReferenceStyle,deckDoors,builtWallPaths} from '../reference-style.js';
 
 const near=(a,b)=>Math.abs(a-b)<.001;
-test('both cook-house assemblies include the side door, closet door and end exit',()=>{
+test('legacy source cook-house copies retain the original entrances before the confirmed level correction',()=>{
  const p=applyReferenceStyle(createProject());
  for(const d of p.decks){
   const doors=deckDoors(d,p);
