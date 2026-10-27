@@ -50,7 +50,7 @@ The supplied VIFM Camps Logo.svg is used as vector paths. Font files were suppli
 
 ## Applied live-text style reference
 
-The supplied style reference.svg controls the print type hierarchy and stroke relationships: bedroom numbers 30, room labels 11, deck captions 16, main strokes 3 and detail strokes 2 in its 327-unit deck width. They are scaled together to the 264-unit BARCO deck width. Utility labels use left alignment at the lower left, large communal labels are centred and bedroom labels align to the upper exterior-side corner. Narrow washroom labels use the reference’s compact 9-unit label size. Door thresholds are dashed at the original 4-unit proportion, with solid leaves and circular quarter swings. No extra notes or keys are printed.
+The supplied style reference.svg controls the print type hierarchy and stroke relationships: bedroom numbers 30, room labels 11, deck captions 16, main strokes 3 and detail strokes 2 in its 327-unit deck width. They are scaled together to the 264-unit BARCO deck width. The original utility labels use lower-left alignment; the later owner-edited BARCO proof establishes lower-right alignment for its service strips. Large communal labels are centred and bedroom labels align to the upper exterior-side corner unless the documented door-clearance rules apply. Narrow washroom labels use the reference’s compact 9-unit label size. Door thresholds are dashed at the original 4-unit proportion, with solid leaves and circular quarter swings. No extra notes or keys are printed.
 
 ### Door and partition cleanup
 
@@ -107,3 +107,8 @@ Use Drawing revision beneath the boat picker to switch versions. BARCO defaults 
 Before creating a visitor's first V2, the Studio freezes a copy of that browser's existing V1, including local edits. V2 begins from that copy with the review corrections applied. V2 drawings, notes and published bases use separate browser keys. V1 is never replaced by V2 edits or automatic updates. New visitors use the frozen published V1 baseline in assets/revisions/barco99-v1.json. Its rendered SVG is regression-checked against commit ab870fa. The original unversioned browser keys remain available as backups.
 
 View change log records all twelve PDF comments with their original wording and a disposition: ten corrections, one confirmation already carried out in V1, and one downstairs cook-house arrangement awaiting more source information. That pending item is also pinned in Feedback. V2 aligns matching bedroom labels, balances 14/6 and 24/16 padding, right-aligns OFFICE, uses lighter fixture strokes, gives every shower the same 90% size with visible clearance, and clips stair/landing outlines at actual door thresholds. Flight and landing positions remain intact.
+
+
+## Owner-edited V2 evidence review
+
+The owner subsequently supplied a manually revised V2 proof. [The comparison record](docs/reviews/2026-10-27-barco-manual-v2.md) distinguishes the changed layout, unchanged typography and unresolved staff-area details. Its reusable rules are incorporated into DESIGN.md. This evidence review does not replace either published drawing revision.

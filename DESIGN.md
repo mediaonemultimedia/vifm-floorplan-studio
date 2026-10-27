@@ -4,7 +4,7 @@ The four original plans establish the visual language; style reference.svg suppl
 
 ## Type and placement
 
-Use supplied Libre Franklin fonts and original style sizes. Utility names belong at the lower left; communal names centre within the logical room boundary, ignoring doorway gaps. Bedroom numbers normally occupy the upper exterior corner. Reserve clearance for the longer number in paired rooms on the two decks. Try the opposite upper corner, then lower corners when a door or fixture conflicts. Preserve type size. Lower-corner placement is an approved extension of the original system, whose examples predominantly use upper corners. Use the normal inset where possible; reduce it only while preserving visible wall clearance. Never put text on a wall or door swing. Matching bedrooms sharing a front and back boundary form a row: if one needs lower placement, align the whole row to the lower baseline, provided all labels clear their doors and fixtures. This includes 8/7/5 and 18/17/15.
+Use supplied Libre Franklin fonts and original style sizes. Utility names use a consistent lower corner for their service strip: original references often use lower-left; the later owner-edited BARCO proof establishes lower-right for its service strip. Communal names centre within the logical room boundary, ignoring doorway gaps. Bedroom numbers normally occupy the upper exterior corner. Reserve clearance for the longer number in paired rooms on the two decks. Try the opposite upper corner, then lower corners when a door or fixture conflicts. Preserve type size. Lower-corner placement is an approved extension of the original system, whose examples predominantly use upper corners. Use the normal inset where possible; reduce it only while preserving visible wall clearance. Never put text on a wall or door swing. Matching bedrooms sharing a front and back boundary form a row: if one needs lower placement, align the whole row to the lower baseline, provided all labels clear their doors and fixtures. This includes 8/7/5 and 18/17/15.
 
 ## Doors, corridors and stairs
 
@@ -65,3 +65,18 @@ Matching forward bedroom rows use top-right numbers; matching aft rows use botto
 Fixtures, stairs and door details use thinner strokes than main walls. All seven BARCO showers are scaled uniformly to 90% to leave visible ink clearance without changing their relative placements or faucet orientations. Stair outlines and landing borders must stop at exact door jambs, just as structural walls do. Do not draw a solid rectangle edge across a dotted doorway. Keep a clear landing and retain the flight/tread geometry.
 
 The reviewer’s downstairs cook-house information request remains unresolved; do not invent an arrangement to mark the note complete. Record the upper cook-house removal as a V1 confirmation carried into V2, since the original PDF note's floor wording conflicts with its pin and the owner separately clarified the instruction.
+
+
+## Owner-edited BARCO V2 proof · 27 October 2026
+
+The detailed evidence comparison is in [the manual V2 review](docs/reviews/2026-10-27-barco-manual-v2.md). The owner’s later corrections supersede earlier schematic assumptions where the intent is clear; they do not establish measured site dimensions. Keep observed changes separate from unresolved interpretations.
+
+Widening a service strip is an assembly change: reconsider the room partitions, wall returns, openings, stairs, landings and label areas together. Review the matching strip on the other floor. Independent editable wall lines must still describe a connected, plausible layout. Select one lower-corner alignment for a service strip and apply it consistently, including every line of multiline labels. The manual proof uses lower-right labels throughout BARCO’s service strips, superseding the earlier blanket lower-left rule there.
+
+Assign each dock, ramp and stair to its actual level or connection. The later BARCO proof shows one dock/ramp/muster assembly on the main deck only; a shared renderer must not create an upstairs duplicate. Rebalance the page around the actual visible extents of both floor groups. Compare geometry relative to its hull before mistaking page translation for a room-layout change.
+
+Read the two ends of a stair connection together, including clear landings and wall returns. A stair touching a wall does not prove a usable entrance. Retain evidence-based overhang exceptions. Normalize minor manual endpoint drift into aligned datums and exact circular door openings rather than preserving accidental offsets.
+
+Keep symbol typography coherent when its size changes: original absolute tspan offsets cannot be retained with a replacement font size. Verify MUSTER / STATION and W/D in the actual PDF. Compare effective PDF line widths after transforms; flattening alone is not a style change.
+
+The new staff passage/door arrangement and the compressed rectangular staff-bathroom fixture need owner clarification before reconstruction. The rectangle conflicts with the previously explicit equal-square-shower convention. Do not silently resolve that conflict or invent room connectivity. This review records learning; it has not changed the published V1/V2 artwork.
