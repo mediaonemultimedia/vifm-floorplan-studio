@@ -29,10 +29,10 @@ Both are one 792 × 1224 page. Compare geometry relative to each hull before int
 - The six square showers in the accommodation washrooms across both floors retain their dimensions. The staff-bathroom fixture is the exception below.
 - Structural strokes remain 2.42, door/fixture detail strokes about 0.95 in final page coordinates. Raw PDF widths cannot be compared without the active transform: the old shower's 1.759259 width under a 0.54 scale is already 0.95. Do not misreport flattening as a new line-weight decision.
 
-## Two questions before reconstructing this topology
+## Clarifications before reconstructing this topology
 
 - Are the two entrances and recessed passage serving rooms 1–2 / 3–4 intentional? Best reading: preserve the edited arrangement and keep the bathroom accessible from the shared passage. Confirm before inventing private-room door connections.
-- The staff-bathroom fixture now measures about 20.94 × 13.73, whereas other shower outlines remain square at about 20.94. Is this deliberately different, or compressed to fit the bay? The earlier instruction required equal, square showers. Do not silently copy distortion or resize every other shower to resolve this conflict.
+- **Confirmed by the owner, 27 October 2026:** the rectangular staff-bathroom fixture is intentional. Preserve the edited footprint of about 20.94 × 13.73. The other six shower outlines stay square at their existing common size. This is a confirmed fixture-specific exception, not permission to distort equivalent symbols to fit.
 
 The cook-house internal-use question from the preceding review remains open.
 
@@ -56,7 +56,7 @@ Review the run, clear landing, doorway and corresponding flight on the other flo
 
 ### Separate intentional topology from editing noise
 
-The proof contains small endpoint discrepancies and leaf/threshold offsets of roughly 1–2 units. Learn aligned walls and coherent openings, not every decimal. Normalize jambs and shared datums deliberately. A non-square shower conflicts with an explicit rule and needs a question.
+The proof contains small endpoint discrepancies and leaf/threshold offsets of roughly 1–2 units. Learn aligned walls and coherent openings, not every decimal. Normalize jambs and shared datums deliberately. An apparent fixture exception needs a question before normalization. Here the owner confirmed that the staff-bathroom rectangle is intentional; preserve it.
 
 ### Inspect the exported artwork
 
@@ -64,4 +64,4 @@ Check readability, font identity and effective line weights in the PDF. SVG valu
 
 ## Next implementation boundary
 
-Preserve published V1 and V2. Use the owner's proof as the next geometric reference after the two questions are resolved. A reconstructed revision needs a separate save key, an explicit change log, preservation of unrelated edits and visual comparison against this PDF before publication. The drawing rules apply to all boats; these particular BARCO room changes do not imply equivalent changes on Odyssey.
+Preserve published V1 and V2. Use the owner's proof as the next geometric reference after the remaining staff-access question is resolved. A reconstructed revision needs a separate save key, an explicit change log, preservation of unrelated edits and visual comparison against this PDF before publication. The drawing rules apply to all boats; these particular BARCO room changes do not imply equivalent changes on Odyssey.

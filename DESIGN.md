@@ -14,7 +14,7 @@ Every door opening and leaf is 24 drawing units. Draw a true circular quarter ar
 
 Rooms 5–14 and 15–24 share one structural footprint. Rooms 9/19 remain open extensions of circulation as shown; 10/20 receive inward doors at the source wall gaps and lower labels for clearance. The bathroom between upstairs rooms 3 and 2 is shared from the hallway.
 
-Keep every shower symbol the same size; adjust stall dimensions and circulation before shrinking fixtures. Retain the source's toilet/shower relationships, including reversed compartments. Sink faucets face their backing wall. Extend the double-sink counter rectangle to make a bank with evenly spaced basins. Align appliance and counter backs. Upstairs urinals share the shower-block backing wall beside room 20, stacked vertically in portrait orientation and facing the washroom.
+Keep equivalent shower symbols the same size; adjust stall dimensions and circulation before shrinking fixtures. Confirmed different fixture types may retain their own proportions: the owner explicitly confirmed BARCO’s rectangular upstairs staff-bathroom fixture on 27 October 2026. Keep its rectangular footprint from the edited proof; do not square it or change the other six square showers to match. Retain the source's toilet/shower relationships, including reversed compartments. Sink faucets face their backing wall. Extend the double-sink counter rectangle to make a bank with evenly spaced basins. Align appliance and counter backs. Upstairs urinals share the shower-block backing wall beside room 20, stacked vertically in portrait orientation and facing the washroom.
 
 ## Dock and page composition
 
@@ -79,4 +79,4 @@ Read the two ends of a stair connection together, including clear landings and w
 
 Keep symbol typography coherent when its size changes: original absolute tspan offsets cannot be retained with a replacement font size. Verify MUSTER / STATION and W/D in the actual PDF. Compare effective PDF line widths after transforms; flattening alone is not a style change.
 
-The new staff passage/door arrangement and the compressed rectangular staff-bathroom fixture need owner clarification before reconstruction. The rectangle conflicts with the previously explicit equal-square-shower convention. Do not silently resolve that conflict or invent room connectivity. This review records learning; it has not changed the published V1/V2 artwork.
+The owner confirmed that the rectangular staff-bathroom fixture is intentional. Preserve its edited proportions as a specific fixture exception; the equal-size rule still applies to the six equivalent square showers. The new staff passage/door arrangement still needs clarification before reconstructing its connectivity. This review records learning; it has not changed the published V1/V2 artwork.
