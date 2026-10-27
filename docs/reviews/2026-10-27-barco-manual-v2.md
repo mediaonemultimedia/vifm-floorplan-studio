@@ -32,7 +32,7 @@ Both are one 792 × 1224 page. Compare geometry relative to each hull before int
 ## Clarifications before reconstructing this topology
 
 - Are the two entrances and recessed passage serving rooms 1–2 / 3–4 intentional? Best reading: preserve the edited arrangement and keep the bathroom accessible from the shared passage. Confirm before inventing private-room door connections.
-- **Confirmed by the owner, 27 October 2026:** the rectangular staff-bathroom fixture is intentional. Preserve the edited footprint of about 20.94 × 13.73. The other six shower outlines stay square at their existing common size. This is a confirmed fixture-specific exception, not permission to distort equivalent symbols to fit.
+- **Confirmed by the owner, 27 October 2026:** the rectangular staff-bathroom fixture is intentional. Preserve the edited footprint of about 20.94 × 13.73. The other six shower outlines stay square at their existing common size. The owner further clarified that this is a one-off exception. Showers normally remain consistent in size and shape across the drawing; do not generalize the exception or distort another shower to fit.
 
 The cook-house internal-use question from the preceding review remains open.
 
