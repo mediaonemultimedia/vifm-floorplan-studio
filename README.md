@@ -99,3 +99,11 @@ Boat navigation, typography roles, line controls, wall editing, area centring, f
 Release validation includes geometry/import/storage tests, browser checks of both boats, live shared-size and endpoint edits, responsive layout, and real PDF-button exports. Both exported faces retain their supplied Libre Franklin identities, embedded fonts, live text, vectors and square caps.
 
 The owner subsequently confirmed BARCO's cook house is downstairs only (27 October 2026). The upstairs copy's footprint, partitions, doors and label are omitted, including when opening a previously saved editor project. The barge perimeter and other upstairs spaces remain. This confirmation supersedes the duplicated cook-house representation in the source sheets.
+
+## Drawing revisions and BARCO V2
+
+Use Drawing revision beneath the boat picker to switch versions. BARCO defaults to V2, with V1 retained as an archived, read-only drawing. Both versions can export PDF/SVG/project files, with V1/V2 in their filenames. Revision controls are shared across boats; Odyssey currently has its editable V1 draft. Revision labels and review notes remain outside the printed artwork.
+
+Before creating a visitor's first V2, the Studio freezes a copy of that browser's existing V1, including local edits. V2 begins from that copy with the review corrections applied. V2 drawings, notes and published bases use separate browser keys. V1 is never replaced by V2 edits or automatic updates. New visitors use the frozen published V1 baseline in assets/revisions/barco99-v1.json. Its rendered SVG is regression-checked against commit ab870fa. The original unversioned browser keys remain available as backups.
+
+View change log records all twelve PDF comments with their original wording and a disposition: ten corrections, one confirmation already carried out in V1, and one downstairs cook-house arrangement awaiting more source information. That pending item is also pinned in Feedback. V2 aligns matching bedroom labels, balances 14/6 and 24/16 padding, right-aligns OFFICE, uses lighter fixture strokes, gives every shower the same 90% size with visible clearance, and clips stair/landing outlines at actual door thresholds. Flight and landing positions remain intact.

@@ -6,7 +6,7 @@ import {textPresentation,textBounds} from './theme.js';
 export function editorDeckOrigins(p){const left=p.coordinates==='drawing'?0:dockLayout(p).left;return [206,582].map(center=>({x:center-left/2-p.bounds.width/2,y:222}));}
 function fixture(f,p){return fixtureMarkup(f,p.ink).replace(/stroke-width="[^\"]+"/g,`stroke-width="${p.theme.lines.detail/f.scale}"`).replace(/font-size="[^\"]+"/g,`font-size="${p.theme.text.detail/f.scale}"`);}
 function details(d,p){
- if(p.coordinates!=='drawing')return stairMarkup(d,p).replace(/stroke-width="[^\"]+"/g,`stroke-width="${p.theme.lines.detail}"`)+fixtureLayout(d,p).map(f=>fixture(f,p)).join('')+dockMarkup(p).replace(/font-size="[^\"]+"/g,`font-size="${p.theme.text.detail}"`);
+ if(p.coordinates!=='drawing')return stairMarkup(d,p,deckDoors(d,p)).replace(/stroke-width="[^\"]+"/g,`stroke-width="${p.theme.lines.detail}"`)+fixtureLayout(d,p).map(f=>fixture(f,p)).join('')+dockMarkup(p).replace(/font-size="[^\"]+"/g,`font-size="${p.theme.text.detail}"`);
  return (d.details||[]).map(a=>{if(a.kind==='symbol')return fixture(a,p);const attrs=`fill="none" stroke="${p.ink}" stroke-width="${p.theme.lines[a.role]}" stroke-linecap="square"`;if(a.kind==='line')return `<line x1="${a.x1}" y1="${a.y1}" x2="${a.x2}" y2="${a.y2}" ${attrs}/>`;if(a.kind==='ellipse')return `<ellipse cx="${a.x+a.w/2}" cy="${a.y+a.h/2}" rx="${a.w/2}" ry="${a.h/2}" ${attrs}/>`;return `<rect x="${a.x}" y="${a.y}" width="${a.w}" height="${a.h}" ${attrs}/>`;}).join('');
 }
 function doorPaths(d,p){

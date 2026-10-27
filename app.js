@@ -1,5 +1,6 @@
-import {BOATS,projectStorageKey,restoreProject} from './projects.js';
+import {BOATS,projectStorageKey,restoreProject,revisionFor} from './projects.js';
 import {prepareEditorProject,validateEditorProject,moveElement} from './editor-project.js';
+import {revisionControls,showRevisionLog} from './revision-controls.js';
 import {themeControls} from './theme-controls.js';
 import {showElementInspector,showWallInspector} from './selection-controls.js';
 import {moveWall,editWallEndpoint} from './wall-lines.js';
@@ -11,20 +12,23 @@ import {drawing,loadLogo,deckOrigins} from './render.js';
 import {exportPDF,exportSVG,download,filename} from './export.js';
 const $=s=>document.querySelector(s);
 const seeds=new Map();
-await Promise.all(BOATS.map(async boat=>{try{const r=await fetch('./'+boat.asset,{cache:'no-store'});if(!r.ok)throw Error('Source unavailable');seeds.set(boat.id,prepareEditorProject(await r.json()));}catch(err){if(boat.id==='barco99')seeds.set(boat.id,prepareEditorProject(createProject()));else console.warn('Could not load '+boat.name,err);}}));
+await Promise.all(BOATS.flatMap(boat=>boat.revisions.map(async revision=>{try{const r=await fetch('./'+revision.asset,{cache:'no-store'});if(!r.ok)throw Error('Source unavailable');seeds.set(boat.id+':'+revision.id,prepareEditorProject(await r.json()));}catch(err){if(boat.id==='barco99'&&revision.id==='v1')seeds.set('barco99:v1',prepareEditorProject(createProject()));console.warn('Could not load '+boat.name+' '+revision.id,err);}})));
+function chooseRevision(id,requested){const boat=BOATS.find(b=>b.id===id),available=boat.revisions.filter(r=>seeds.has(id+':'+r.id));return available.find(r=>r.id===requested)?.id||available.find(r=>r.id===boat.defaultRevision)?.id||available[0]?.id;}
 let activeId=new URL(location.href).searchParams.get('boat');
 try{activeId??=localStorage.getItem('mediaone.floorplans.active');}catch{}
-if(!seeds.has(activeId))activeId='barco99';
-let KEY=projectStorageKey(activeId),startingProject=seeds.get(activeId);
+if(!BOATS.some(b=>b.id===activeId))activeId='barco99';
+let activeRevision=chooseRevision(activeId,new URL(location.href).searchParams.get('revision'));
+const readOnly=()=>!!revisionFor(activeId,activeRevision)?.readOnly;
+let KEY=projectStorageKey(activeId,activeRevision),startingProject=seeds.get(activeId+':'+activeRevision);
 let releaseVersion='local',pendingRelease=null,checkingUpdate=false;
 try{const response=await fetch('./release.json',{cache:'no-store'});if(response.ok)releaseVersion=(await response.json()).version;}catch{}
 let notes=[],activeNote=null,feedbackOpen=false;
 let project=structuredClone(startingProject),selected=null,tool='select',view='both',zoom=.75,history=[],drag=null,toastTimer;
 function restoreBoat(){
  project=structuredClone(startingProject);
- try{const local=restoreProject(localStorage,activeId,startingProject),base=JSON.parse(localStorage.getItem(KEY+'.published-base')||'null');project=base?validateEditorProject(mergeProjectUpdate(base,local,startingProject)):local;}
+ try{const local=restoreProject(localStorage,activeId,startingProject,activeRevision,seeds.get(activeId+':v1')),base=JSON.parse(localStorage.getItem(KEY+'.published-base')||'null');project=base&&!readOnly()?validateEditorProject(mergeProjectUpdate(base,local,startingProject)):local;}
  catch(err){try{localStorage.setItem(KEY+'.unreadable',localStorage.getItem(KEY)||'');}catch{}setTimeout(()=>toast('Saved drawing could not be read. A backup remains in browser storage; opening the supplied layout.'),200);}
- try{const saved=localStorage.getItem(KEY+'.feedback')||(activeId==='barco99'?localStorage.getItem('mediaone.floorplans.barco99.v1.feedback'):null);notes=validateNotes(JSON.parse(saved||'[]'));localStorage.setItem(KEY+'.published-base',JSON.stringify(startingProject));}catch{notes=[];}
+ try{const saved=localStorage.getItem(KEY+'.feedback')||(activeRevision!=='v1'?(localStorage.getItem(projectStorageKey(activeId,'v1')+'.feedback')||(activeId==='barco99'?localStorage.getItem('mediaone.floorplans.barco99.v1.feedback'):null)):null)||(activeId==='barco99'&&activeRevision==='v1'?localStorage.getItem('mediaone.floorplans.barco99.v1.feedback'):null);notes=validateNotes(JSON.parse(saved||'[]'));if(!readOnly())localStorage.setItem(KEY+'.published-base',JSON.stringify(startingProject));}catch{notes=[];}
  for(const flag of project.reviewFlags)if(!notes.some(n=>n.seedFlag===flag.id)){
   const index=project.decks.findIndex(d=>d.id===flag.deckId),o=deckOrigins(project)[index],n=createNote(project,flag.deckId,{x:o.x+flag.x,y:o.y+flag.y},releaseVersion);Object.assign(n,{seedFlag:flag.id,text:`Flag ${flag.id} - ${flag.title}\n${flag.text}`});notes.push(n);
  }
@@ -33,21 +37,23 @@ restoreBoat();
 persist();
 function toast(message){$('#toast').textContent=message;$('#toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').hidden=true,5500);}
 function checkpoint(){history.push(JSON.stringify(project));if(history.length>60)history.shift();$('#undo').disabled=false;}
-function persist(){try{localStorage.setItem(KEY,JSON.stringify(project));$('#save-status').textContent='Saved on this device';}catch{$('#save-status').textContent='Save a project file to keep changes';}}
-function render(){$('#sheet').innerHTML=drawing(project,{selected:selected?.id,interactive:true,visible:view,grid:$('#grid').checked});if(feedbackOpen)$('#drawing').insertAdjacentHTML('beforeend',feedbackPins(notes,project,view));$('#sheet').classList.toggle('placing',tool!=='select');$('#sheet').style.width=792*zoom+'px';$('#sheet').style.height=1224*zoom+'px';$('#zoom-value').textContent=Math.round(zoom*100)+'%';$('#undo').disabled=!history.length;}
+function persist(){if(readOnly())return;try{localStorage.setItem(KEY,JSON.stringify(project));$('#save-status').textContent='Saved on this device';}catch{$('#save-status').textContent='Save a project file to keep changes';}}
+function render(){$('#sheet').innerHTML=drawing(project,{selected:selected?.id,interactive:!readOnly(),visible:view,grid:$('#grid').checked});if(feedbackOpen)$('#drawing').insertAdjacentHTML('beforeend',feedbackPins(notes,project,view));$('#sheet').classList.toggle('placing',tool!=='select');$('#sheet').style.width=792*zoom+'px';$('#sheet').style.height=1224*zoom+'px';$('#zoom-value').textContent=Math.round(zoom*100)+'%';$('#undo').disabled=readOnly()||!history.length;}
 function sync(){
  syncPalette();
  for(const [id,key]of [['vessel-name','name'],['length','length'],['width','width'],['page-size','pageSize'],['paper','paper']])$('#'+id).value=project[key];
  $('h1').textContent=project.name;$('.toolbar-note').textContent=project.pageSize+' · portrait';$('#source-summary').textContent=project.sourceSummary;$('#source-status').textContent='Source: '+project.name+' drawings';
- $('#boat-select').innerHTML=BOATS.filter(b=>seeds.has(b.id)).map(b=>`<option value="${b.id}">${e(b.name)}</option>`).join('');$('#boat-select').value=activeId;
+ $('#boat-select').innerHTML=BOATS.filter(b=>b.revisions.some(r=>seeds.has(b.id+':'+r.id))).map(b=>`<option value="${b.id}">${e(b.name)}</option>`).join('');$('#boat-select').value=activeId;
  $('#source-list').innerHTML=project.sources.map((s,i)=>`<button class="wide" data-source="${i}">${e(s.title)} ↗</button>`).join('');
  themeControls(project,change,()=>{sync();inspector();},toast);
+ revisionControls(project,activeId,activeRevision,id=>seeds.has(activeId+':'+id));
  $('#view-label').textContent=view==='both'?'Complete drawing set':project.decks.find(d=>d.id===view)?.name;
 }
-function change(fn,{syncControls=true,record=true}={}){if(record)checkpoint();fn();persist();if(syncControls)sync();render();}
+function change(fn,{syncControls=true,record=true}={}){if(readOnly()){toast('This revision is archived. Switch to the working revision to make edits.');return;}if(record)checkpoint();fn();persist();if(syncControls)sync();render();}
 function element(){if(!selected||selected.wall!==undefined)return null;const d=project.decks.find(d=>d.id===selected.deck);return [...d.labels,...d.annotations,...d.rects].find(a=>a.id===selected.id);}
 function inspector(){
  if(feedbackOpen){feedbackInspector();return;}
+ if(readOnly()){$('#selection').innerHTML='<h2>Archived revision</h2><p class="muted">This drawing is preserved for comparison and export. Choose the working revision to make changes.</p>';return;}
  const options={project,selected,change,refresh:()=>{sync();render();inspector();},remove:removeSelected,toast};
  if(selected?.wall!==undefined){showWallInspector(options);return;}
  const a=element();if(!a){$('#selection').innerHTML='<div class="empty-icon">↖</div><h2>Make it yours.</h2><p class="muted">Select text or a wall segment to edit it. Shared text and line styles apply across both floors.</p>';return;}
@@ -59,11 +65,14 @@ for(const id of ['length','width'])$('#'+id).onchange=()=>{try{const next=resize
  if(project.coordinates!=='drawing'){const width=900*next.width/next.length,factor=width/project.bounds.width;for(const d of next.decks){for(const w of d.walls){w.x1*=factor;w.x2*=factor;}for(const a of [...d.labels,...d.annotations])if(a.centerArea){a.centerArea.x*=factor;a.centerArea.w*=factor;}}next.bounds.width=width;}
  project=next;
  });}catch(err){toast(err.message);sync();}};
-function activateBoat(id){
- persist();saveNotes();activeId=id;KEY=projectStorageKey(activeId);startingProject=seeds.get(activeId);restoreBoat();selected=null;activeNote=null;history=[];drag=null;persist();saveNotes();sync();render();inspector();
- try{localStorage.setItem('mediaone.floorplans.active',activeId);const url=new URL(location.href);url.searchParams.set('boat',activeId);window.history.replaceState(null,'',url);}catch{}
+function activateBoat(id,revision=null){
+ persist();saveNotes();activeId=id;activeRevision=chooseRevision(id,revision);KEY=projectStorageKey(activeId,activeRevision);startingProject=seeds.get(activeId+':'+activeRevision);restoreBoat();selected=null;activeNote=null;history=[];drag=null;persist();saveNotes();sync();setTool(feedbackOpen?'feedback':'select');inspector();
+ try{localStorage.setItem('mediaone.floorplans.active',activeId);const url=new URL(location.href);url.searchParams.set('boat',activeId);url.searchParams.set('revision',activeRevision);window.history.replaceState(null,'',url);}catch{}
 }
 $('#boat-select').onchange=()=>activateBoat($('#boat-select').value);
+$('#revision-select').onchange=()=>activateBoat(activeId,$('#revision-select').value);
+$('#view-changes').onclick=()=>showRevisionLog(project,readOnly());
+$('#close-revisions').onclick=()=>$('#revision-dialog').close();
 $('#source-list').onclick=ev=>{const b=ev.target.closest('[data-source]');if(!b)return;const source=project.sources[Number(b.dataset.source)];$('#source-title').textContent=source.title;$('#source-image').src=source.src;$('#source-dialog').showModal();};
 $('#deck-tabs').onclick=ev=>{const b=ev.target.closest('[data-view]');if(!b)return;view=b.dataset.view;document.querySelectorAll('[data-view]').forEach(x=>x.classList.toggle('active',x===b));$('#view-label').textContent=view==='both'?'Complete drawing set':project.decks.find(d=>d.id===view).name;selected=null;render();inspector();};
 function setTool(next){tool=next;document.querySelectorAll('[data-tool]').forEach(b=>b.classList.toggle('active',b.dataset.tool===tool));$('#tool-status').textContent=tool==='select'?'Select an element to edit':tool==='feedback'?'Click a location on either floorplan to leave a note':'Click a deck to place '+tool;render();}
@@ -73,6 +82,7 @@ function locate(q){return project.decks.map((d,i)=>({d,o:deckOrigins(project)[i]
 $('#sheet').addEventListener('pointerdown',ev=>{if(ev.button!==0)return;
  const pin=ev.target.closest('[data-note]');if(pin){ev.preventDefault();openFeedback(pin.dataset.note);return;}
  if(tool==='feedback'){ev.preventDefault();const q=svgPoint(ev),hit=locateFeedback(q);if(!hit){toast('Click on a floorplan or its dock to place a note.');return;}const target=ev.target.closest('[data-element],[data-wall],[data-fixture],[data-stair]'),context=target?Object.fromEntries(Object.entries(target.dataset)):null;const note=createNote(project,hit.d.id,q,releaseVersion,context);notes.push(note);activeNote=note.id;saveNotes();render();feedbackInspector();$('#note-text').focus();return;}
+ if(readOnly())return;
  const wall=ev.target.closest('[data-wall]');
  if(tool==='select'&&wall){selected={id:'wall-'+wall.dataset.deckId+'-'+wall.dataset.wall,deck:wall.dataset.deckId,wall:Number(wall.dataset.wall)};const w=project.decks.find(d=>d.id===selected.deck).walls[selected.wall];drag={type:wall.dataset.wallEnd?'endpoint':'wall',endpoint:wall.dataset.wallEnd,start:svgPoint(ev),original:structuredClone(w),wall:w,changed:false};ev.preventDefault();render();inspector();return;}
  const target=ev.target.closest('[data-element]');
@@ -100,18 +110,18 @@ document.addEventListener('keydown',ev=>{
  if(['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName))return;
  if((ev.metaKey||ev.ctrlKey)&&ev.key.toLowerCase()==='z'){ev.preventDefault();$('#undo').click();return;}
  if(ev.key==='Escape'){selected=null;if(feedbackOpen){feedbackOpen=false;$('#feedback-toggle').setAttribute('aria-pressed','false');$('#inspector-title').textContent='PROPERTIES';}setTool('select');inspector();}
- if(ev.key==='Delete'||ev.key==='Backspace'){ev.preventDefault();removeSelected();return;}
- if(selected&&['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(ev.key)){
+ if(!readOnly()&&(ev.key==='Delete'||ev.key==='Backspace')){ev.preventDefault();removeSelected();return;}
+ if(!readOnly()&&selected&&['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(ev.key)){
  ev.preventDefault();const step=ev.shiftKey?10:1,dx=ev.key==='ArrowLeft'?-step:ev.key==='ArrowRight'?step:0,dy=ev.key==='ArrowUp'?-step:ev.key==='ArrowDown'?step:0;
  change(()=>{if(selected.wall!==undefined)moveWall(project.decks.find(d=>d.id===selected.deck).walls[selected.wall],dx,dy);else moveElement(element(),project,dx,dy);});inspector();}
 });
 $('#grid').onchange=render;$('#zoom-in').onclick=()=>{zoom=Math.min(1.5,zoom+.1);render();};$('#zoom-out').onclick=()=>{zoom=Math.max(.25,zoom-.1);render();};$('#fit').onclick=()=>{zoom=Math.max(.25,Math.min(1,($('#stage').clientWidth-65)/792,($('#stage').clientHeight-65)/1224));render();};
-$('#save-project').onclick=()=>download(JSON.stringify(project,null,2),filename(project,'json'),'application/json');$('#load-project').onclick=()=>$('#import-file').click();$('#import-file').onchange=async ev=>{const file=ev.target.files[0];if(!file)return;try{if(file.size>2000000)throw Error('Project file is too large (maximum 2 MB).');const next=prepareEditorProject(JSON.parse(await file.text()));if(!seeds.has(next.id))throw Error('This boat is not in the Studio yet.');if(next.id!==activeId)activateBoat(next.id);change(()=>{project=next;selected=null;});saveNotes();inspector();toast('Project opened.');}catch(err){toast('Could not open project: '+err.message);}finally{ev.target.value='';}};
+$('#save-project').onclick=()=>download(JSON.stringify(project,null,2),filename(project,'json'),'application/json');$('#load-project').onclick=()=>$('#import-file').click();$('#import-file').onchange=async ev=>{const file=ev.target.files[0];if(!file)return;try{if(file.size>2000000)throw Error('Project file is too large (maximum 2 MB).');const next=prepareEditorProject(JSON.parse(await file.text()));const revision=next.drawingRevision||'v1';next.drawingRevision=revision;if(!seeds.has(next.id+':'+revision))throw Error('This boat or drawing revision is not in the Studio yet.');if(next.id!==activeId||revision!==activeRevision)activateBoat(next.id,revision);if(readOnly()){project=next;sync();render();}else change(()=>{project=next;selected=null;});saveNotes();inspector();toast('Project opened.');}catch(err){toast('Could not open project: '+err.message);}finally{ev.target.value='';}};
 $('#reset').onclick=()=>{if(confirm('Reset '+project.name+' to its supplied layout? You can undo this.')){change(()=>{project=prepareEditorProject(startingProject);selected=null;});inspector();}};
 $('#close-source').onclick=()=>$('#source-dialog').close();
 async function exporting(button,fn){button.disabled=true;const text=button.textContent;button.textContent='Preparing…';try{await document.fonts.ready;await fn(project);toast('Export ready.');}catch(err){console.error(err);toast('Export failed: '+err.message);}finally{button.disabled=false;button.textContent=text;}}
 $('#export-pdf').onclick=()=>exporting($('#export-pdf'),exportPDF);$('#export-svg').onclick=()=>exporting($('#export-svg'),exportSVG);
-try{await loadLogo();sync();render();$('#fit').click();}catch(err){toast('Could not start the drawing: '+err.message);}
+try{await loadLogo();sync();render();$('#fit').click();inspector();}catch(err){toast('Could not start the drawing: '+err.message);}
 
 $('#sheet').addEventListener('keydown',ev=>{const pin=ev.target.closest('[data-note]');if(pin&&(ev.key==='Enter'||ev.key===' ')){ev.preventDefault();openFeedback(pin.dataset.note);return;}const wall=ev.target.closest('[data-wall]');if(wall&&(ev.key==='Enter'||ev.key===' ')){ev.preventDefault();selected={id:'wall-'+wall.dataset.deckId+'-'+wall.dataset.wall,deck:wall.dataset.deckId,wall:Number(wall.dataset.wall)};render();inspector();return;}const target=ev.target.closest('[data-element]');if(target&&(ev.key==='Enter'||ev.key===' ')){ev.preventDefault();selected={id:target.dataset.element,deck:target.closest('[data-deck]').dataset.deck};render();inspector();}});
 
@@ -146,7 +156,8 @@ async function checkPublishedUpdate(manual=false){
 }
 async function applyPublishedUpdate(){
  if(!pendingRelease)return;
- try{const response=await fetch('./'+BOATS.find(b=>b.id===activeId).asset,{cache:'no-store'});if(!response.ok)throw Error('The updated drawing is not ready yet.');const remote=prepareEditorProject(await response.json()),merged=validateEditorProject(mergeProjectUpdate(startingProject,project,remote));localStorage.setItem(KEY+'.before-published-update',JSON.stringify(project));localStorage.setItem(KEY,JSON.stringify(merged));localStorage.setItem(KEY+'.published-base',JSON.stringify(remote));saveNotes();const url=new URL(location.href);url.searchParams.set('v',pendingRelease.version);location.replace(url.href);}catch(err){toast('Update could not be applied: '+err.message);}
+ if(readOnly()){saveNotes();const url=new URL(location.href);url.searchParams.set('v',pendingRelease.version);location.replace(url.href);return;}
+ try{const response=await fetch('./'+revisionFor(activeId,activeRevision).asset,{cache:'no-store'});if(!response.ok)throw Error('The updated drawing is not ready yet.');const remote=prepareEditorProject(await response.json()),merged=validateEditorProject(mergeProjectUpdate(startingProject,project,remote));localStorage.setItem(KEY+'.before-published-update',JSON.stringify(project));localStorage.setItem(KEY,JSON.stringify(merged));localStorage.setItem(KEY+'.published-base',JSON.stringify(remote));saveNotes();const url=new URL(location.href);url.searchParams.set('v',pendingRelease.version);location.replace(url.href);}catch(err){toast('Update could not be applied: '+err.message);}
 }
 $('#apply-update').onclick=applyPublishedUpdate;
 saveNotes();setInterval(()=>checkPublishedUpdate(),45000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkPublishedUpdate();});

@@ -7,7 +7,7 @@ export function setPDFFontNames(pdf){
 }
 async function base64File(path){const r=await fetch(path);if(!r.ok)throw Error(`Could not load ${path}`);const bytes=new Uint8Array(await r.arrayBuffer());let s='';for(let i=0;i<bytes.length;i+=8192)s+=String.fromCharCode(...bytes.subarray(i,i+8192));return btoa(s);}
 export function download(data,name,type){const url=URL.createObjectURL(new Blob([data],{type}));const a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);}
-export function filename(p,ext){return `${p.name.replace(/[^a-z0-9_-]+/gi,'-')}-floorplans.${ext}`;}
+export function filename(p,ext){return `${p.name.replace(/[^a-z0-9_-]+/gi,'-')}-floorplans${p.drawingRevision?'-'+p.drawingRevision.toUpperCase():''}.${ext}`;}
 export async function exportSVG(p){let svg=drawing(p);const [normal,bold]=await Promise.all(Object.values(FONTS).map(f=>base64File('./assets/'+f)));svg=svg.replace(/url\('assets\/LibreFranklin-Medium.ttf'\)/g,`url('data:font/ttf;base64,${normal}')`).replace(/url\('assets\/LibreFranklin-Bold.ttf'\)/g,`url('data:font/ttf;base64,${bold}')`);download(svg,filename(p,'svg'),'image/svg+xml');}
 export async function createPDF(p){
  if(!window.jspdf?.jsPDF)throw Error('PDF library is missing. Reload the page and try again.');

@@ -49,7 +49,7 @@ export function fixtureLayout(d,p){
   out.push({...item('toilet',right-2.1-27.89*FIXTURE_SCALE/2,bayBottom-2.1-23.66*FIXTURE_SCALE/2,90),area:'staff-bathroom'});
 
  }
- return out;
+ return out.map(f=>f.type==='shower'&&p.showerScaleFactor?{...f,scale:f.scale*p.showerScaleFactor}:f);
 }
 export function fixtureMarkup(f,ink){const s=fixtureSize(f);let body=f.type==='sinkBank'?sinkBankMarkup(f.basinCount,ink):s.body.replaceAll('__INK__',ink);if(['washer','dryer','washerDryer'].includes(f.type)&&f.rotation)body=body.replace(/<text\b[\s\S]*?<\/text>/g,text=>`<g transform="rotate(${-f.rotation} ${s.width/2} ${s.height/2})">${text}</g>`);return `<g data-fixture="${f.type}" transform="translate(${f.x} ${f.y}) rotate(${f.rotation}) scale(${f.scale}) translate(${-s.width/2} ${-s.height/2})">${body}</g>`;}
 export function stallEntries(d){return d.id==='main'?MAIN_STALLS.map(([start,end])=>({x:start+(end-start-24*294/520)/2,y:190,swing:-1})):Array.from({length:2},(_,i)=>({x:88+i*32+(32-24*294/520)/2,y:169,swing:1}));}

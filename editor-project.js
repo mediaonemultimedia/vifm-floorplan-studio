@@ -32,6 +32,10 @@ export function validateEditorProject(p){
  if(!['main','upper'].every((id,i)=>p.decks[i].id===id)||!finite(p.length,50,300)||!finite(p.width,15,70))throw Error('Invalid vessel or floor dimensions.');
  for(const color of [p.ink,p.header,p.paper])if(!/^#[0-9a-f]{6}$/i.test(color))throw Error('Invalid drawing colour.');
  if(!['Original 11 × 17','A3','Letter'].includes(p.pageSize)||!finite(p.bounds?.width,50,600)||!finite(p.bounds?.height,100,1000))throw Error('Invalid drawing bounds.');
+ if(p.drawingRevision!==undefined&&!/^v[1-9][0-9]{0,3}$/.test(p.drawingRevision))throw Error('Invalid drawing revision.');
+ if(p.clearStairEntries!==undefined&&typeof p.clearStairEntries!=='boolean')throw Error('Invalid stair clearance setting.');
+ if(p.showerScaleFactor!==undefined&&!finite(p.showerScaleFactor,.5,1))throw Error('Invalid common shower scale.');
+ if(p.revisionMeta){const m=p.revisionMeta;if(typeof m.label!=='string'||m.label.length>100||typeof m.summary!=='string'||m.summary.length>2000||!/^\d{4}-\d{2}-\d{2}$/.test(m.date)||!Array.isArray(m.changes)||m.changes.length>100||m.changes.some(c=>typeof c.id!=='string'||c.id.length>80||typeof c.title!=='string'||c.title.length>200||typeof c.text!=='string'||c.text.length>4000||!['done','waiting','carried'].includes(c.status)||(c.sourceComment!==undefined&&(typeof c.sourceComment!=='string'||c.sourceComment.length>4000))))throw Error('Invalid revision history.');}
  validateTheme(p.theme);if(!finite(p.wallWidth,.2,12))throw Error('Invalid wall weight.');if(p.sourceSummary!==undefined&&(typeof p.sourceSummary!=='string'||p.sourceSummary.length>2000))throw Error('Invalid source summary.');const ids=new Set();
  const identify=a=>{if(typeof a.id!=='string'||a.id.length>120||ids.has(a.id))throw Error('Invalid or duplicate element identity.');ids.add(a.id);};
  for(const d of p.decks){

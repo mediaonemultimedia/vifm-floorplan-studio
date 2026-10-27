@@ -55,3 +55,13 @@ The supplied sketches establish Odyssey geometry ahead of the prose. Treat the r
 ## BARCO cook-house level confirmation · 27 October 2026
 
 The owner confirmed that the cook house exists downstairs only and explicitly selected omission of its footprint upstairs. This overrides its duplication in the supplied upstairs evacuation sheet. Remove the upstairs copy's partitions, external footprint lines, doors and label together. Keep the barge perimeter, staff cabins and separately documented stair connections. Do not draw or label a roof in its place. Existing editor saves receive this correction once, preserving the main floor and unrelated edits. The earlier shared cook-house assembly rules describe the original source interpretation; they now apply to the main floor only.
+
+## Revision history and PDF review · BARCO V2
+
+V1 means the published drawing after the downstairs-only cook-house confirmation and before the twelve PDF comments. Preserve its geometry, styles and local working state as an archived snapshot. Apply the PDF review in V2, with separate drawing/feedback storage and versioned download names. Shared revision navigation applies to every boat. Change logs and revision badges belong in the editor; do not add them to the original print composition.
+
+Matching forward bedroom rows use top-right numbers; matching aft rows use bottom-right numbers. Staff rooms 1–4 use bottom-right numbers. For 14/6 and 24/16, reserve the longest paired number, use matching right insets, and keep equal visible ink gaps above/below the divider. Reduce the padded-side inset before changing the common number size. OFFICE uses the requested lower-right alignment.
+
+Fixtures, stairs and door details use thinner strokes than main walls. All seven BARCO showers are scaled uniformly to 90% to leave visible ink clearance without changing their relative placements or faucet orientations. Stair outlines and landing borders must stop at exact door jambs, just as structural walls do. Do not draw a solid rectangle edge across a dotted doorway. Keep a clear landing and retain the flight/tread geometry.
+
+The reviewer’s downstairs cook-house information request remains unresolved; do not invent an arrangement to mark the note complete. Record the upper cook-house removal as a V1 confirmation carried into V2, since the original PDF note's floor wording conflicts with its pin and the owner separately clarified the instruction.

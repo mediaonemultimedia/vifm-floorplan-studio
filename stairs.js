@@ -1,4 +1,5 @@
 import {planPoint} from './model.js';
+import {lineSegments,cutWall} from './wall-lines.js';
 const DRY_ROOM_WALL=666,DRY_ROOM_FRONT=278,LANDING_DEPTH=36;
 export function dryRoomDoorPoint(p){const wall=planPoint(DRY_ROOM_WALL,DRY_ROOM_FRONT,p);return {x:wall.x,y:wall.y+30};}
 // This source-specific connector projects past the cook-house corner. Its
@@ -33,8 +34,13 @@ export function stairTreads(s){
  const count=Math.max(3,Math.min(30,Math.round((end-start)/5)));
  return Array.from({length:count-1},(_,i)=>{const t=start+(end-start)*(i+1)/count;return s.vertical?{x:s.left,y:s.top+t,dx:s.width,dy:0}:{x:s.left+t,y:s.top,dx:0,dy:s.height};});
 }
-export function stairMarkup(d,p){return `<g fill="none" stroke="${p.ink}" stroke-width="${p.wallWidth*2/3}" stroke-linejoin="round">${stairLayout(d,p).map(s=>{
+export function stairOutlineSegments(s,doors=[]){
+ const rectangles=[{left:s.left,top:s.top,width:s.width,height:s.height},...(s.landing?[s.landing]:[])];
+ const seen=new Set();return rectangles.flatMap(r=>lineSegments(`M${r.left} ${r.top}H${r.left+r.width}V${r.top+r.height}H${r.left}Z`)).flatMap(w=>cutWall(w,doors)).filter(w=>{const key=[w.x1,w.y1,w.x2,w.y2].join(',');if(seen.has(key))return false;seen.add(key);return true;});
+}
+export function stairMarkup(d,p,doors=[]){return `<g fill="none" stroke="${p.ink}" stroke-width="${p.wallWidth*2/3}" stroke-linejoin="round">${stairLayout(d,p).map(s=>{
  const path=stairTreads(s).map(t=>`M${t.x} ${t.y}l${t.dx} ${t.dy}`).join('');
  const landing=s.landing?`<rect data-stair-landing="${s.id}" x="${s.landing.left}" y="${s.landing.top}" width="${s.landing.width}" height="${s.landing.height}"/>`:'';
+ if(p.clearStairEntries){const outline=stairOutlineSegments(s,doors).map(w=>`M${w.x1} ${w.y1}L${w.x2} ${w.y2}`).join('');return `<g data-stair="${s.id}"><path class="stair-outline" d="${outline}" stroke-linecap="butt"/><path d="${path}"/></g>`;}
  return `<g data-stair="${s.id}"><rect x="${s.left}" y="${s.top}" width="${s.width}" height="${s.height}"/>${landing}<path d="${path}"/></g>`;
  }).join('')}</g>`;}
