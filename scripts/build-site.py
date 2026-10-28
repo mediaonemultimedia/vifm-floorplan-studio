@@ -14,7 +14,7 @@ if destination.exists():
 destination.mkdir()
 for folder in ('assets', 'vendor'):
     shutil.copytree(root / folder, destination / folder)
-for source in [root / 'index.html', root / 'style.css', root / '.nojekyll', *root.glob('*.js')]:
+for source in [root / 'index.html', root / 'style.css', root / '.nojekyll', root / 'generation-config.json', *root.glob('*.js')]:
     text = source.read_text()
     if source.suffix == '.js':
         text = re.sub(r"(from\s*['\"])(\./[^'\"]+\.js)(['\"])", lambda match: f'{match[1]}{match[2]}?v={revision}{match[3]}', text)

@@ -1,10 +1,15 @@
+import {draftHorizontalExtent} from './draft-geometry.js';
 import {planPoint,escapeXML as e} from './model.js';
 import {deckDoors} from './reference-style.js';
 import {stairMarkup} from './stairs.js';
 import {fixtureLayout,fixtureMarkup,dockMarkup,dockLayout} from './fixtures.js';
 import {textPresentation,textBounds} from './theme.js';
-export function editorDeckOrigins(p){const left=p.coordinates==='drawing'?0:dockLayout(p).left;return [206,582].map(center=>({x:center-left/2-p.bounds.width/2,y:222}));}
-function fixture(f,p){return fixtureMarkup(f,p.ink).replace(/stroke-width="[^\"]+"/g,`stroke-width="${p.theme.lines.detail/f.scale}"`).replace(/font-size="[^\"]+"/g,`font-size="${p.theme.text.detail/f.scale}"`);}
+export function editorDeckOrigins(p){if(p.generationInfo){const single=p.decks.some(d=>d.omitFromOutput);return p.decks.map((d,i)=>{const b=draftHorizontalExtent(d,p);return {x:(single?396:[206,582][i])-(b.left+b.right)/2,y:222};});}if(p.decks.some(d=>d.omitFromOutput))return p.decks.map(()=>({x:396-p.bounds.width/2,y:222}));const left=p.coordinates==='drawing'?0:dockLayout(p).left;return [206,582].map(center=>({x:center-left/2-p.bounds.width/2,y:222}));}
+function fixture(f,p){
+ const text=p.generationInfo?{textSize:(f.type==='muster'?p.theme.text.label:p.theme.text.detail)/f.scale}:{};
+ const markup=fixtureMarkup(f,p.ink,text).replace(/stroke-width="[^\"]+"/g,`stroke-width="${p.theme.lines.detail/f.scale}"`);
+ return p.generationInfo?markup:markup.replace(/font-size="[^\"]+"/g,`font-size="${p.theme.text.detail/f.scale}"`);
+}
 function details(d,p){
  if(p.coordinates!=='drawing')return stairMarkup(d,p,deckDoors(d,p)).replace(/stroke-width="[^\"]+"/g,`stroke-width="${p.theme.lines.detail}"`)+fixtureLayout(d,p).map(f=>fixture(f,p)).join('')+dockMarkup(p).replace(/font-size="[^\"]+"/g,`font-size="${p.theme.text.detail}"`);
  return (d.details||[]).map(a=>{if(a.kind==='symbol')return fixture(a,p);const attrs=`fill="none" stroke="${p.ink}" stroke-width="${p.theme.lines[a.role]}" stroke-linecap="square"`;if(a.kind==='line')return `<line x1="${a.x1}" y1="${a.y1}" x2="${a.x2}" y2="${a.y2}" ${attrs}/>`;if(a.kind==='ellipse')return `<ellipse cx="${a.x+a.w/2}" cy="${a.y+a.h/2}" rx="${a.w/2}" ry="${a.h/2}" ${attrs}/>`;return `<rect x="${a.x}" y="${a.y}" width="${a.w}" height="${a.h}" ${attrs}/>`;}).join('');
@@ -32,7 +37,7 @@ export function editorDrawing(p,{selected=null,interactive=false,visible='both',
  const captionY=Math.max(p.bounds.height+25,contentBottom+20);
  let s=`<svg xmlns="http://www.w3.org/2000/svg" id="drawing" viewBox="0 0 792 1224" width="792" height="1224" aria-label="${e(p.name)} editable floorplans"><defs><style>@font-face{font-family:LibreFranklin;src:url('assets/LibreFranklin-Medium.ttf')}@font-face{font-family:LibreFranklin;src:url('assets/LibreFranklin-Bold.ttf');font-weight:bold}</style><pattern id="grid" width="12" height="12" patternUnits="userSpaceOnUse"><path d="M12 0H0V12" fill="none" stroke="${p.ink}" stroke-opacity=".1" stroke-width=".5"/></pattern></defs><rect width="792" height="1224" fill="${p.paper}"/><rect width="792" height="124.59" fill="${p.header}"/><svg x="31" y="25" width="128.42" height="74.14" viewBox="${logoViewBox}">${logo}</svg><text x="758" y="60" text-anchor="end" font-family="LibreFranklin" font-size="${t.title}" font-weight="bold" fill="${p.paper}">${e(p.name)}</text><text x="758" y="88" text-anchor="end" font-family="LibreFranklin" font-size="${t.subtitle}" fill="${p.paper}">CAMP LAYOUT</text>`;
  if(grid&&interactive)s+=`<rect x="25" y="200" width="742" height="930" fill="url(#grid)"/>`;
- p.decks.forEach((d,i)=>{if(visible!=='both'&&visible!==d.id)return;const o=editorDeckOrigins(p)[i];s+=`<g transform="translate(${o.x} ${o.y})" ${interactive?`data-deck="${d.id}"`:''}>`;
+ p.decks.forEach((d,i)=>{if(d.omitFromOutput)return;if(visible!=='both'&&visible!==d.id)return;const o=editorDeckOrigins(p)[i];s+=`<g transform="translate(${o.x} ${o.y})" ${interactive?`data-deck="${d.id}"`:''}>`;
  for(const [j,w]of d.walls.entries()){
   s+=`<line x1="${w.x1}" y1="${w.y1}" x2="${w.x2}" y2="${w.y2}" stroke="${selected===`wall-${d.id}-${j}`?'#f05024':p.ink}" stroke-width="${l[w.role]}" stroke-linecap="square"/>`;
   if(interactive)s+=`<line x1="${w.x1}" y1="${w.y1}" x2="${w.x2}" y2="${w.y2}" stroke="transparent" stroke-width="8" data-wall="${j}" data-deck-id="${d.id}" tabindex="0" role="button" aria-label="Edit wall segment ${j+1}"/>`;

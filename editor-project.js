@@ -1,3 +1,4 @@
+import {validateIntake} from './intake.js';
 import {createProject,validateProject,planPoint,sourcePoint,planPath} from './model.js';
 import {applyReferenceStyle,deckDoors,builtWallPaths,fitLabel,referenceLabelArea} from './reference-style.js';
 import {lineSegments,cutWall} from './wall-lines.js';
@@ -29,16 +30,18 @@ export function validateEditorProject(p){
  if(!p?.editorRevision)return validateProject(p);
  const finite=(n,min=-300,max=1600)=>typeof n==='number'&&Number.isFinite(n)&&n>=min&&n<=max;
  if(p.editorRevision!==1||p.version!==1||!/^[-a-z0-9]+$/.test(p.id)||p.id.length>80||typeof p.name!=='string'||p.name.length>100||!Array.isArray(p.decks)||p.decks.length!==2)throw Error('Unsupported drawing project.');
- if(!['main','upper'].every((id,i)=>p.decks[i].id===id)||!finite(p.length,50,300)||!finite(p.width,15,70))throw Error('Invalid vessel or floor dimensions.');
+ if(!['main','upper'].every((id,i)=>p.decks[i].id===id)||!finite(p.length,p.coordinates==='drawing'?1:50,p.coordinates==='drawing'?1000:300)||!finite(p.width,p.coordinates==='drawing'?1:15,p.coordinates==='drawing'?300:70))throw Error('Invalid vessel or floor dimensions.');
  for(const color of [p.ink,p.header,p.paper])if(!/^#[0-9a-f]{6}$/i.test(color))throw Error('Invalid drawing colour.');
  if(!['Original 11 × 17','A3','Letter'].includes(p.pageSize)||!finite(p.bounds?.width,50,600)||!finite(p.bounds?.height,100,1000))throw Error('Invalid drawing bounds.');
  if(p.drawingRevision!==undefined&&!/^v[1-9][0-9]{0,3}$/.test(p.drawingRevision))throw Error('Invalid drawing revision.');
  if(p.clearStairEntries!==undefined&&typeof p.clearStairEntries!=='boolean')throw Error('Invalid stair clearance setting.');
  if(p.showerScaleFactor!==undefined&&!finite(p.showerScaleFactor,.5,1))throw Error('Invalid common shower scale.');
  if(p.revisionMeta){const m=p.revisionMeta;if(typeof m.label!=='string'||m.label.length>100||typeof m.summary!=='string'||m.summary.length>2000||!/^\d{4}-\d{2}-\d{2}$/.test(m.date)||!Array.isArray(m.changes)||m.changes.length>100||m.changes.some(c=>typeof c.id!=='string'||c.id.length>80||typeof c.title!=='string'||c.title.length>200||typeof c.text!=='string'||c.text.length>4000||!['done','waiting','carried'].includes(c.status)||(c.sourceComment!==undefined&&(typeof c.sourceComment!=='string'||c.sourceComment.length>4000))))throw Error('Invalid revision history.');}
+ if(p.generationInfo){if(p.generationInfo.status!=='draft')throw Error('Invalid generation metadata.');validateIntake(p.generationInfo.brief);}
  validateTheme(p.theme);if(!finite(p.wallWidth,.2,12))throw Error('Invalid wall weight.');if(p.sourceSummary!==undefined&&(typeof p.sourceSummary!=='string'||p.sourceSummary.length>2000))throw Error('Invalid source summary.');const ids=new Set();
  const identify=a=>{if(typeof a.id!=='string'||a.id.length>120||ids.has(a.id))throw Error('Invalid or duplicate element identity.');ids.add(a.id);};
  for(const d of p.decks){
+  if(d.omitFromOutput!==undefined&&typeof d.omitFromOutput!=='boolean')throw Error('Invalid floor visibility.');
   if(typeof d.name!=='string'||d.name.length>100||!Array.isArray(d.walls)||d.walls.length>1500)throw Error('Invalid wall collection.');
   for(const w of d.walls){identify(w);if(!['wall','secondary','detail'].includes(w.role)||![w.x1,w.y1,w.x2,w.y2].every(n=>finite(n)))throw Error('Invalid wall line.');}
   for(const key of ['labels','annotations','rects']){
@@ -55,7 +58,8 @@ export function validateEditorProject(p){
   for(const a of d.details||[]){identify(a);if(!['line','rect','ellipse','symbol'].includes(a.kind)||!['secondary','detail'].includes(a.role)||!finite(a.width,.1,8))throw Error('Unsupported drawing detail.');
    const nums=a.kind==='line'?[a.x1,a.y1,a.x2,a.y2]:a.kind==='symbol'?[a.x,a.y,a.scale,a.rotation]:[a.x,a.y,a.w,a.h];if(!nums.every(n=>finite(n,-360,1600)))throw Error('Invalid detail coordinates.');
    if(['rect','ellipse'].includes(a.kind)&&(!finite(a.w,.01,1200)||!finite(a.h,.01,1200)))throw Error('Invalid detail size.');
-   if(a.kind==='symbol'&&(!Object.hasOwn(SYMBOLS,a.type)||!finite(a.scale,.01,5)))throw Error('Invalid fixture symbol.');
+   if(a.kind==='symbol'&&a.type==='sinkBank'&&(!Number.isInteger(a.basinCount)||a.basinCount<1||a.basinCount>20))throw Error('Invalid sink-bank count.');
+   if(a.kind==='symbol'&&(!(Object.hasOwn(SYMBOLS,a.type)||a.type==='sinkBank')||!finite(a.scale,.01,5)))throw Error('Invalid fixture symbol.');
   }
   for(const a of d.doors||[]){identify(a);if(![a.x,a.y,...a.u,...a.v].every(n=>finite(n))||Math.abs(Math.hypot(...a.u)-Math.hypot(...a.v))>.001||Math.abs(a.u[0]*a.v[0]+a.u[1]*a.v[1])>.001)throw Error('Invalid circular door.');}
  }

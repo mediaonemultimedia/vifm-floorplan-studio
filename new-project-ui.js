@@ -1,0 +1,63 @@
+import {escapeXML as e} from './model.js';
+import {validateIntake,referenceKind,chatBrief,validateConnection,INTAKE_LIMITS} from './intake.js';
+import {referenceStore} from './intake-storage.js';
+import {videoFrames,prepareMedia} from './reference-media.js';
+import {generateFloorplan} from './generation-client.js';
+import {compileDraft} from './generation-schema.js';
+import {download} from './export.js';
+const DRAFT_KEY='active-intake';
+export function setupNewProject({onCreated,toast}){
+ const $=s=>document.querySelector(s),dialog=$('#new-project-dialog'),form=$('#new-project-form'),files=$('#new-reference-files'),list=$('#new-reference-list'),error=$('#new-project-error'),status=$('#new-project-status');
+ let refs=[],opened=false,busy=false,controller=null,endpoint='',saveTimer=null,saveQueue=Promise.resolve(),urls=[];
+ const token=()=>$('#generation-access').value;
+ const value=key=>{const v=$('#new-'+key).value.trim();return v===''?null:Number(v);};
+ const brief=()=>({name:$('#new-name').value.trim(),length:value('length'),beam:value('beam'),rooms:value('rooms'),floors:value('floors'),details:$('#new-details').value,references:refs.map(r=>({...r.meta}))});
+ function message(text,isError=false){error.hidden=!isError;error.textContent=isError?text:'';status.textContent=isError?'':text;}
+ function setBusy(value){busy=value;$('#new-project-inputs').disabled=value;$('#new-project-close').disabled=value;$('#generate-floorplan').disabled=value;$('#copy-new-brief').disabled=value;$('#download-new-brief').disabled=value;$('#cancel-generation').hidden=!value||!controller;$('#save-new-intake').disabled=value;$('#save-generation-connection').disabled=value;$('#disconnect-generation').disabled=value;$('#generation-endpoint').disabled=value;$('#generation-access').disabled=value;$('#new-project-form').setAttribute('aria-busy',String(value));}
+ function queueSave(){clearTimeout(saveTimer);saveTimer=setTimeout(()=>saveDraft().catch(()=>{}),350);}
+ function saveDraft(){clearTimeout(saveTimer);const record={brief:brief(),refs:structuredClone(refs)};saveQueue=saveQueue.catch(()=>{}).then(()=>referenceStore(DRAFT_KEY,record));return saveQueue.then(()=>{$('#intake-save-status').textContent='Intake saved in this browser';}).catch(err=>{$('#intake-save-status').textContent='Intake could not be saved';message(err.message,true);throw err;});}
+ function renderRefs(){
+  for(const url of urls)URL.revokeObjectURL(url);urls=[];
+  list.innerHTML=refs.map(r=>{const kind=referenceKind(r.file),url=kind==='image'?URL.createObjectURL(r.file):null;if(url)urls.push(url);return `<article class="reference-card" data-reference="${e(r.meta.id)}"><div class="reference-head">${url?`<img src="${url}" alt="Reference preview">`:'<span class="reference-file-icon" aria-hidden="true">'+(kind==='video'?'▶':kind==='pdf'?'PDF':kind==='svg'?'SVG':'TXT')+'</span>'}<div><strong>${e(r.meta.name)}</strong><small>${(r.file.size/1024/1024).toFixed(1)} MB · ${kind==='video'?'Select stills to send':kind.toUpperCase()}</small></div><button type="button" class="remove-reference" aria-label="Remove ${e(r.meta.name)}">Remove</button></div><div class="field-row"><label>Reference type<select data-reference-kind><option value="plan">Drawing plan</option><option value="photo">Photo</option><option value="walkthrough">Walkthrough</option><option value="written">Written information</option><option value="other">Other</option></select></label><label>Floor / coverage<select data-reference-floor><option value="unknown">Not sure</option><option value="whole">Whole boat</option><option value="main">Lower / Main</option><option value="upper">Upper</option></select></label></div><label>What does this show?<input data-reference-note maxlength="2000" value="${e(r.meta.note)}" placeholder="For example: main-floor washrooms, looking aft"></label>${kind==='video'?`<div class="video-preparation"><p class="help">Choose how many evenly spaced stills to extract. Remove any that do not show useful layout evidence. Audio is not transcribed.</p><div class="video-actions"><label>Sample count<select data-frame-count><option>4</option><option selected>8</option><option>12</option></select></label><button type="button" class="extract-video">${r.frames?.length?'Replace':'Extract'} video stills</button></div><div class="video-stills">${(r.frames||[]).map((f,i)=>`<figure><img src="${f.data}" alt="Walkthrough still at ${f.seconds} seconds"><figcaption>${f.seconds}s <button type="button" data-remove-frame="${i}" aria-label="Remove still at ${f.seconds} seconds">×</button></figcaption></figure>`).join('')}</div></div>`:''}</article>`;}).join('')||'<p class="reference-empty">No references yet. Add plans, sketches, boat photos or walkthroughs.</p>';
+  $('#reference-count').textContent=`${refs.length} reference${refs.length===1?'':'s'}`;
+  for(const card of list.querySelectorAll('[data-reference]')){const r=refs.find(r=>r.meta.id===card.dataset.reference);const k=card.querySelector('[data-reference-kind]'),f=card.querySelector('[data-reference-floor]');k.value=r.meta.kind;f.value=r.meta.floor;k.onchange=()=>{r.meta.kind=k.value;queueSave();};f.onchange=()=>{r.meta.floor=f.value;queueSave();};card.querySelector('[data-reference-note]').oninput=ev=>{r.meta.note=ev.target.value;queueSave();};card.querySelector('.remove-reference').onclick=()=>{refs=refs.filter(a=>a!==r);renderRefs();queueSave();};
+   for(const b of card.querySelectorAll('[data-remove-frame]'))b.onclick=()=>{r.frames.splice(Number(b.dataset.removeFrame),1);renderRefs();queueSave();};
+   const extract=card.querySelector('.extract-video');if(extract)extract.onclick=async()=>{controller=new AbortController();setBusy(true);extract.disabled=true;message('Extracting stills from '+r.meta.name+'…');try{r.frames=await videoFrames(r.file,Number(card.querySelector('[data-frame-count]').value),(_,n)=>message(`Extracting still ${n}…`),controller.signal);renderRefs();await saveDraft();message('Review the stills and remove any you do not want to send.');}catch(err){message(err.name==='AbortError'?'Video preparation stopped. Your earlier references are kept.':err.message,true);}finally{extract.disabled=false;controller=null;setBusy(false);}};
+  }
+ }
+ function refreshConnection(){const ready=!!endpoint&&!!token();$('#generation-state').textContent=ready?'Generation service configured':'Generation not connected';$('#generation-state').classList.toggle('connected',ready);$('#generate-floorplan').textContent=ready?'Generate draft in Studio':'Connect generation';}
+ async function open(){
+  if(!opened){try{const saved=await referenceStore(DRAFT_KEY);if(saved?.brief){for(const key of ['name','length','beam','rooms','floors','details'])$('#new-'+key).value=saved.brief[key]??'';refs=Array.isArray(saved.refs)?saved.refs:[];}}catch(err){toast(err.message);}opened=true;renderRefs();}
+  try{endpoint=localStorage.getItem('mediaone.floorplans.generation-endpoint')||'';$('#generation-access').value=sessionStorage.getItem('mediaone.floorplans.generation-access')||'';}catch{}
+  if(!endpoint){try{const r=await fetch('./generation-config.json',{cache:'no-store'});if(r.ok){const c=await r.json();if(c.endpoint)endpoint=validateConnection(c.endpoint).endpoint;}}catch{}}
+  $('#generation-endpoint').value=endpoint;refreshConnection();dialog.showModal();$('#new-name').focus();
+ }
+ $('#new-floorplan').onclick=open;
+ for(const b of document.querySelectorAll('[data-intake-section]'))b.onclick=()=>{document.getElementById(b.dataset.intakeSection).scrollIntoView({block:'start',behavior:'instant'});};
+ $('#new-project-close').onclick=()=>{dialog.close();saveDraft().catch(()=>{});};
+ dialog.addEventListener('cancel',ev=>{if(busy)ev.preventDefault();else saveDraft().catch(()=>{});});
+ form.addEventListener('input',queueSave);form.addEventListener('change',queueSave);
+ files.onchange=async()=>{
+  message('');const additions=[...files.files];files.value='';
+  try{if(refs.length+additions.length>INTAKE_LIMITS.files)throw Error('Use up to 24 source files per floorplan.');let total=refs.reduce((s,r)=>s+r.file.size,0);for(const file of additions){const kind=referenceKind(file);if(kind==='unsupported')throw Error(file.name+': use PDF, SVG, image, MP4/MOV/WebM, TXT, MD, CSV or JSON.');if(file.size>INTAKE_LIMITS.fileBytes)throw Error(file.name+': use files up to 100 MB.');total+=file.size;if(total>INTAKE_LIMITS.totalBytes)throw Error('Use up to 300 MB of source files.');}
+   refs.push(...additions.map(file=>({file,meta:{id:'ref-'+crypto.randomUUID(),name:file.name,type:file.type,kind:['pdf','svg'].includes(referenceKind(file))?'plan':referenceKind(file)==='video'?'walkthrough':referenceKind(file)==='text'?'written':'photo',floor:'unknown',note:'',size:file.size},frames:[]})));renderRefs();await saveDraft();
+  }catch(err){message(err.message,true);}
+ };
+ $('#save-new-intake').onclick=()=>saveDraft().then(()=>message('Intake saved. You can close this form and return later.')).catch(()=>{});
+ $('#download-new-brief').onclick=()=>{try{const b=validateIntake(brief());download(chatBrief(b),b.name.replace(/[^a-z0-9_-]+/gi,'-')+'-floorplan-brief.txt','text/plain');}catch(err){message(err.message,true);}};
+ $('#copy-new-brief').onclick=async()=>{try{const text=chatBrief(validateIntake(brief()));try{await navigator.clipboard.writeText(text);message('Brief copied. Paste it into this chat and attach the listed source files.');}catch{$('#feedback-copy-text').value=text;$('#feedback-copy-dialog').showModal();$('#feedback-copy-text').select();}}catch(err){message(err.message,true);}};
+ $('#save-generation-connection').onclick=async()=>{
+  const button=$('#save-generation-connection');button.disabled=true;message('Checking generation connection…');
+  try{const url=validateConnection($('#generation-endpoint').value.trim()).endpoint,access=token();if(!access||/^sk-/.test(access))throw Error('Use the Studio access code, not your OpenAI API key. The API key belongs on the Worker.');const r=await fetch(url+'/health',{headers:{Authorization:'Bearer '+access}});const health=await r.json();if(!r.ok||!health.ready||health.format!=='vifm-floorplan-draft-v1')throw Error(health.error||'This service is not ready for floorplan generation.');localStorage.setItem('mediaone.floorplans.generation-endpoint',url);sessionStorage.setItem('mediaone.floorplans.generation-access',access);endpoint=url;refreshConnection();message('Generation service connected. Your API key stays on the Worker.');}catch(err){message(err.message==='Failed to fetch'?'Could not reach the Worker. Check its address and allowed Studio origin.':err.message,true);}finally{button.disabled=false;}
+ };
+ $('#disconnect-generation').onclick=()=>{endpoint='';$('#generation-endpoint').value='';$('#generation-access').value='';try{localStorage.removeItem('mediaone.floorplans.generation-endpoint');sessionStorage.removeItem('mediaone.floorplans.generation-access');}catch{}refreshConnection();message('Generation disconnected. Your intake and drawings are kept.');};
+ $('#cancel-generation').onclick=()=>{if(controller)controller.abort();};
+ form.onsubmit=async ev=>{
+  ev.preventDefault();if(busy)return;
+  if(!endpoint||!token()||$('#generation-endpoint').value.trim().replace(/\/$/,'')!==endpoint){$('#generation-settings').open=true;$('#generation-endpoint').focus();message('Connect your Cloudflare generation service below. You can save or copy the intake while setup is pending.');return;}
+  controller=new AbortController();setBusy(true);const timeout=setTimeout(()=>controller.abort(),300000);
+  try{if(/^sk-/.test(token()))throw Error('Use the Studio access code, not an OpenAI API key.');const b=validateIntake(brief());await saveDraft();const media=await prepareMedia(refs,text=>message(text),controller.signal);if(controller.signal.aborted)throw new DOMException('Aborted','AbortError');message('Reading the references and drafting the layout. This may take a few minutes.');const result=await generateFloorplan(endpoint,token(),{brief:b,media},controller.signal);message('Checking editable geometry…');const p=compileDraft(result.draft,b,'user-'+crypto.randomUUID());await referenceStore('project:'+p.id,{brief:b,refs:structuredClone(refs)});await onCreated(p);dialog.close();form.reset();refs=[];renderRefs();try{await saveDraft();}catch{}toast('New draft opened. Review its flagged uncertainties before exporting.');
+  }catch(err){message(err.name==='AbortError'?'Stopped waiting. Your intake is saved. The service may still be processing; avoid retrying immediately.':err.message,true);}finally{clearTimeout(timeout);controller=null;setBusy(false);}
+ };
+ return {open};
+}

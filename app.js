@@ -1,3 +1,6 @@
+import {setupNewProject} from './new-project-ui.js';
+import {loadLocalProjects,registerLocalProject,localBoatEntry} from './local-projects.js';
+import {referenceStore} from './intake-storage.js';
 import {BOATS,projectStorageKey,restoreProject,revisionFor} from './projects.js';
 import {prepareEditorProject,validateEditorProject,moveElement} from './editor-project.js';
 import {revisionControls,showRevisionLog} from './revision-controls.js';
@@ -12,7 +15,8 @@ import {drawing,loadLogo,deckOrigins} from './render.js';
 import {exportPDF,exportSVG,download,filename} from './export.js';
 const $=s=>document.querySelector(s);
 const seeds=new Map();
-await Promise.all(BOATS.flatMap(boat=>boat.revisions.map(async revision=>{try{const r=await fetch('./'+revision.asset,{cache:'no-store'});if(!r.ok)throw Error('Source unavailable');seeds.set(boat.id+':'+revision.id,prepareEditorProject(await r.json()));}catch(err){if(boat.id==='barco99'&&revision.id==='v1')seeds.set('barco99:v1',prepareEditorProject(createProject()));console.warn('Could not load '+boat.name+' '+revision.id,err);}})));
+try{for(const entry of loadLocalProjects(localStorage)){BOATS.push(localBoatEntry(entry.project));seeds.set(entry.id+':v1',entry.project);}}catch{}
+await Promise.all(BOATS.filter(boat=>!boat.local).flatMap(boat=>boat.revisions.map(async revision=>{try{const r=await fetch('./'+revision.asset,{cache:'no-store'});if(!r.ok)throw Error('Source unavailable');seeds.set(boat.id+':'+revision.id,prepareEditorProject(await r.json()));}catch(err){if(boat.id==='barco99'&&revision.id==='v1')seeds.set('barco99:v1',prepareEditorProject(createProject()));console.warn('Could not load '+boat.name+' '+revision.id,err);}})));
 function chooseRevision(id,requested){const boat=BOATS.find(b=>b.id===id),available=boat.revisions.filter(r=>seeds.has(id+':'+r.id));return available.find(r=>r.id===requested)?.id||available.find(r=>r.id===boat.defaultRevision)?.id||available[0]?.id;}
 let activeId=new URL(location.href).searchParams.get('boat');
 try{activeId??=localStorage.getItem('mediaone.floorplans.active');}catch{}
@@ -42,9 +46,12 @@ function render(){$('#sheet').innerHTML=drawing(project,{selected:selected?.id,i
 function sync(){
  syncPalette();
  for(const [id,key]of [['vessel-name','name'],['length','length'],['width','width'],['page-size','pageSize'],['paper','paper']])$('#'+id).value=project[key];
+ const generated=project.generationInfo?.brief;if(generated){$('#length').value=generated.length??'';$('#width').value=generated.beam??'';}
+ $('#length').min=project.coordinates==='drawing'?1:50;$('#length').max=project.coordinates==='drawing'?1000:300;$('#width').min=project.coordinates==='drawing'?1:15;$('#width').max=project.coordinates==='drawing'?300:70;
+ document.querySelector('[data-view=upper]').hidden=!!project.decks[1].omitFromOutput;document.querySelector('[data-view=both]').textContent=project.decks[1].omitFromOutput?'Complete plan':'Both floors';
  $('h1').textContent=project.name;$('.toolbar-note').textContent=project.pageSize+' · portrait';$('#source-summary').textContent=project.sourceSummary;$('#source-status').textContent='Source: '+project.name+' drawings';
- $('#boat-select').innerHTML=BOATS.filter(b=>b.revisions.some(r=>seeds.has(b.id+':'+r.id))).map(b=>`<option value="${b.id}">${e(b.name)}</option>`).join('');$('#boat-select').value=activeId;
- $('#source-list').innerHTML=project.sources.map((s,i)=>`<button class="wide" data-source="${i}">${e(s.title)} ↗</button>`).join('');
+ $('#boat-select').innerHTML=BOATS.filter(b=>b.revisions.some(r=>seeds.has(b.id+':'+r.id))).map(b=>`<option value="${b.id}">${e(b.id===activeId?project.name:b.name)}</option>`).join('');$('#boat-select').value=activeId;
+ $('#source-list').innerHTML=project.sources.map((s,i)=>`<button class="wide" data-source="${i}">${e(s.title)} ↗</button>`).join('')+(project.generationInfo?.brief.references||[]).map((r,i)=>`<button class="wide" data-upload-source="${i}">${e(r.name)} ↗</button>`).join('');
  themeControls(project,change,()=>{sync();inspector();},toast);
  revisionControls(project,activeId,activeRevision,id=>seeds.has(activeId+':'+id));
  $('#view-label').textContent=view==='both'?'Complete drawing set':project.decks.find(d=>d.id===view)?.name;
@@ -61,19 +68,23 @@ function inspector(){
 }
 function removeSelected(){if(selected?.wall!==undefined){change(()=>{project.decks.find(d=>d.id===selected.deck).walls.splice(selected.wall,1);selected=null;});inspector();return;}const a=element();if(!a)return;change(()=>{const d=project.decks.find(d=>d.id===selected.deck);for(const key of ['labels','annotations','rects'])d[key]=d[key].filter(x=>x.id!==a.id);selected=null;});inspector();}
 for(const [id,key]of [['vessel-name','name'],['page-size','pageSize'],['paper','paper']])$('#'+id).onchange=()=>change(()=>project[key]=key==='wallWidth'?Number($('#'+id).value):$('#'+id).value);
-for(const id of ['length','width'])$('#'+id).onchange=()=>{try{const next=resizeHull(project,Number($('#length').value),Number($('#width').value));change(()=>{
+for(const id of ['length','width'])$('#'+id).onchange=()=>{try{if(project.coordinates==='drawing'){const value=Number($('#'+id).value);if(!Number.isFinite(value)||value<1||value>(id==='length'?1000:300))throw Error('Enter a valid vessel dimension.');change(()=>{project[id]=value;if(project.generationInfo)project.generationInfo.brief[id==='length'?'length':'beam']=value;});return;}const next=resizeHull(project,Number($('#length').value),Number($('#width').value));change(()=>{
  if(project.coordinates!=='drawing'){const width=900*next.width/next.length,factor=width/project.bounds.width;for(const d of next.decks){for(const w of d.walls){w.x1*=factor;w.x2*=factor;}for(const a of [...d.labels,...d.annotations])if(a.centerArea){a.centerArea.x*=factor;a.centerArea.w*=factor;}}next.bounds.width=width;}
  project=next;
  });}catch(err){toast(err.message);sync();}};
 function activateBoat(id,revision=null){
- persist();saveNotes();activeId=id;activeRevision=chooseRevision(id,revision);KEY=projectStorageKey(activeId,activeRevision);startingProject=seeds.get(activeId+':'+activeRevision);restoreBoat();selected=null;activeNote=null;history=[];drag=null;persist();saveNotes();sync();setTool(feedbackOpen?'feedback':'select');inspector();
+ persist();saveNotes();activeId=id;activeRevision=chooseRevision(id,revision);KEY=projectStorageKey(activeId,activeRevision);startingProject=seeds.get(activeId+':'+activeRevision);restoreBoat();selected=null;activeNote=null;history=[];drag=null;view='both';document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view==='both'));persist();saveNotes();sync();setTool(feedbackOpen?'feedback':'select');inspector();
  try{localStorage.setItem('mediaone.floorplans.active',activeId);const url=new URL(location.href);url.searchParams.set('boat',activeId);url.searchParams.set('revision',activeRevision);window.history.replaceState(null,'',url);}catch{}
 }
 $('#boat-select').onchange=()=>activateBoat($('#boat-select').value);
 $('#revision-select').onchange=()=>activateBoat(activeId,$('#revision-select').value);
 $('#view-changes').onclick=()=>showRevisionLog(project,readOnly());
 $('#close-revisions').onclick=()=>$('#revision-dialog').close();
-$('#source-list').onclick=ev=>{const b=ev.target.closest('[data-source]');if(!b)return;const source=project.sources[Number(b.dataset.source)];$('#source-title').textContent=source.title;$('#source-image').src=source.src;$('#source-dialog').showModal();};
+let sourceBlobURL=null;
+$('#source-list').onclick=async ev=>{const upload=ev.target.closest('[data-upload-source]'),b=ev.target.closest('[data-source]');if(!upload&&!b)return;const pane=$('#source-content');pane.replaceChildren();if(sourceBlobURL){URL.revokeObjectURL(sourceBlobURL);sourceBlobURL=null;}
+ try{let src,type='image',title;if(upload){const meta=project.generationInfo.brief.references[Number(upload.dataset.uploadSource)],saved=await referenceStore('project:'+project.id),ref=saved?.refs?.find(r=>r.meta.id===meta.id);if(!ref)throw Error('This reference is stored in the browser where the project was created. Add it again through New floorplan to generate another draft.');title=meta.name;sourceBlobURL=URL.createObjectURL(ref.file);src=sourceBlobURL;type=ref.file.type.startsWith('video/')?'video':meta.name.toLowerCase().endsWith('.pdf')?'pdf':['.txt','.md','.csv','.json'].some(ext=>meta.name.toLowerCase().endsWith(ext))?'text':'image';if(type==='text'){const pre=document.createElement('pre');pre.textContent=(await ref.file.text()).slice(0,200000);pane.append(pre);}}
+ else {const source=project.sources[Number(b.dataset.source)];src=source.src;title=source.title;}
+ if(type!=='text'){const el=document.createElement(type==='pdf'?'iframe':type==='video'?'video':'img');el.src=src;if(type==='video')el.controls=true;if(type==='image')el.alt=title;if(type==='pdf'){el.title=title;el.className='source-pdf';}pane.append(el);}$('#source-title').textContent=title;$('#source-dialog').showModal();}catch(err){toast(err.message);}};
 $('#deck-tabs').onclick=ev=>{const b=ev.target.closest('[data-view]');if(!b)return;view=b.dataset.view;document.querySelectorAll('[data-view]').forEach(x=>x.classList.toggle('active',x===b));$('#view-label').textContent=view==='both'?'Complete drawing set':project.decks.find(d=>d.id===view).name;selected=null;render();inspector();};
 function setTool(next){tool=next;document.querySelectorAll('[data-tool]').forEach(b=>b.classList.toggle('active',b.dataset.tool===tool));$('#tool-status').textContent=tool==='select'?'Select an element to edit':tool==='feedback'?'Click a location on either floorplan to leave a note':'Click a deck to place '+tool;render();}
 document.querySelectorAll('[data-tool]').forEach(b=>b.onclick=()=>setTool(b.dataset.tool));
@@ -116,9 +127,9 @@ document.addEventListener('keydown',ev=>{
  change(()=>{if(selected.wall!==undefined)moveWall(project.decks.find(d=>d.id===selected.deck).walls[selected.wall],dx,dy);else moveElement(element(),project,dx,dy);});inspector();}
 });
 $('#grid').onchange=render;$('#zoom-in').onclick=()=>{zoom=Math.min(1.5,zoom+.1);render();};$('#zoom-out').onclick=()=>{zoom=Math.max(.25,zoom-.1);render();};$('#fit').onclick=()=>{zoom=Math.max(.25,Math.min(1,($('#stage').clientWidth-65)/792,($('#stage').clientHeight-65)/1224));render();};
-$('#save-project').onclick=()=>download(JSON.stringify(project,null,2),filename(project,'json'),'application/json');$('#load-project').onclick=()=>$('#import-file').click();$('#import-file').onchange=async ev=>{const file=ev.target.files[0];if(!file)return;try{if(file.size>2000000)throw Error('Project file is too large (maximum 2 MB).');const next=prepareEditorProject(JSON.parse(await file.text()));const revision=next.drawingRevision||'v1';next.drawingRevision=revision;if(!seeds.has(next.id+':'+revision))throw Error('This boat or drawing revision is not in the Studio yet.');if(next.id!==activeId||revision!==activeRevision)activateBoat(next.id,revision);if(readOnly()){project=next;sync();render();}else change(()=>{project=next;selected=null;});saveNotes();inspector();toast('Project opened.');}catch(err){toast('Could not open project: '+err.message);}finally{ev.target.value='';}};
+$('#save-project').onclick=()=>download(JSON.stringify(project,null,2),filename(project,'json'),'application/json');$('#load-project').onclick=()=>$('#import-file').click();$('#import-file').onchange=async ev=>{const file=ev.target.files[0];if(!file)return;try{if(file.size>2000000)throw Error('Project file is too large (maximum 2 MB).');const next=prepareEditorProject(JSON.parse(await file.text()));const revision=next.drawingRevision||'v1';next.drawingRevision=revision;if(!seeds.has(next.id+':'+revision)){if(!next.id.startsWith('user-')||revision!=='v1')throw Error('This boat or drawing revision is not in the Studio yet.');registerLocalProject(localStorage,next);BOATS.push(localBoatEntry(next));seeds.set(next.id+':v1',structuredClone(next));}if(next.id!==activeId||revision!==activeRevision)activateBoat(next.id,revision);if(readOnly()){project=next;sync();render();}else change(()=>{project=next;selected=null;});saveNotes();inspector();toast('Project opened.');}catch(err){toast('Could not open project: '+err.message);}finally{ev.target.value='';}};
 $('#reset').onclick=()=>{if(confirm('Reset '+project.name+' to its supplied layout? You can undo this.')){change(()=>{project=prepareEditorProject(startingProject);selected=null;});inspector();}};
-$('#close-source').onclick=()=>$('#source-dialog').close();
+$('#close-source').onclick=()=>$('#source-dialog').close();$('#source-dialog').addEventListener('close',()=>{if(sourceBlobURL){URL.revokeObjectURL(sourceBlobURL);sourceBlobURL=null;}});
 async function exporting(button,fn){button.disabled=true;const text=button.textContent;button.textContent='Preparing…';try{await document.fonts.ready;await fn(project);toast('Export ready.');}catch(err){console.error(err);toast('Export failed: '+err.message);}finally{button.disabled=false;button.textContent=text;}}
 $('#export-pdf').onclick=()=>exporting($('#export-pdf'),exportPDF);$('#export-svg').onclick=()=>exporting($('#export-svg'),exportSVG);
 try{await loadLogo();sync();render();$('#fit').click();inspector();}catch(err){toast('Could not start the drawing: '+err.message);}
@@ -156,8 +167,10 @@ async function checkPublishedUpdate(manual=false){
 }
 async function applyPublishedUpdate(){
  if(!pendingRelease)return;
- if(readOnly()){saveNotes();const url=new URL(location.href);url.searchParams.set('v',pendingRelease.version);location.replace(url.href);return;}
+ if(readOnly()||BOATS.find(b=>b.id===activeId)?.local){persist();saveNotes();const url=new URL(location.href);url.searchParams.set('v',pendingRelease.version);location.replace(url.href);return;}
  try{const response=await fetch('./'+revisionFor(activeId,activeRevision).asset,{cache:'no-store'});if(!response.ok)throw Error('The updated drawing is not ready yet.');const remote=prepareEditorProject(await response.json()),merged=validateEditorProject(mergeProjectUpdate(startingProject,project,remote));localStorage.setItem(KEY+'.before-published-update',JSON.stringify(project));localStorage.setItem(KEY,JSON.stringify(merged));localStorage.setItem(KEY+'.published-base',JSON.stringify(remote));saveNotes();const url=new URL(location.href);url.searchParams.set('v',pendingRelease.version);location.replace(url.href);}catch(err){toast('Update could not be applied: '+err.message);}
 }
 $('#apply-update').onclick=applyPublishedUpdate;
 saveNotes();setInterval(()=>checkPublishedUpdate(),45000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkPublishedUpdate();});
+
+setupNewProject({toast,onCreated:async p=>{registerLocalProject(localStorage,p);BOATS.push(localBoatEntry(p));seeds.set(p.id+':v1',structuredClone(p));activateBoat(p.id,'v1');$('#fit').click();}});

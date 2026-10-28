@@ -1,6 +1,6 @@
 # VIFM Floorplan Studio
 
-A static, motion-free editor for VIFM accommodation floorplans. Includes BARCO 99 and the sketch-based ODYSSEY 102 draft. There is no server-side data processing or account requirement.
+A motion-free editor for VIFM accommodation floorplans, hosted as a static GitHub Pages app. Includes BARCO 99, the sketch-based ODYSSEY 102 draft and a new-floorplan intake. Editing, source intake and portable chat briefs work without an account. Direct draft generation uses a separately deployed, authenticated Cloudflare Worker and the OpenAI API; production account setup is still pending.
 
 ## Run locally
 
@@ -22,10 +22,23 @@ Open http://127.0.0.1:4173. Use an HTTP server; opening index.html directly as a
 - Line styles separately control main walls, secondary lines, fixture/stair/door details, dotted thresholds and dot/gap length. Each setting applies throughout both floors.
 - Interior coordinates are drawing units, **not measurements in feet**. BARCO envelope dimensions can adjust its width; Odyssey dimensions are metadata because its reviewed sketch geometry has its own proportions.
 - Undo is available in the header and with Command/Ctrl+Z outside text fields. Text fields retain normal text undo.
-- Both/Lower/Upper tabs control the preview. PDF and SVG exports always include the complete two-deck drawing set.
+- Both/Lower/Upper tabs control the preview. PDF and SVG exports include all populated floors; a new single-floor draft omits the empty upper floor from the artwork.
 - Download PDF produces one portrait page with vector artwork and embedded Libre Franklin Medium/Bold text. Text is retained, not outlined. A PDF editor is required to edit the resulting PDF; use project JSON for ongoing edits in this app.
 - Download editable SVG embeds the two fonts and retains text elements and vector geometry.
 - Save project downloads JSON. Open saved project restores it. The browser also automatically saves to local storage; use JSON backups when changing browser, device or hosting address.
+
+## Start a new floorplan
+
+1. Choose **New floorplan**. Enter the boat name and explain the layout, connections, facilities, reliable references and unresolved details. Length, beam, room count and floor count may remain unknown. The editor supports up to two floor drawings.
+2. Add plans, sketches, photos, walkthrough videos or written information: PDF, SVG, browser-supported images/video, TXT, MD, CSV or JSON. Set each reference's type, floor/coverage and explanatory note. Source limits are 24 files, 100 MB each and 300 MB total; PDFs submitted for generation must be 10 MB or smaller.
+3. For a video, extract 4, 8 or 12 timestamped stills, review them and remove unhelpful frames. Only retained stills are sent for generation; audio is not transcribed. Browser media support varies, so convert unsupported files to JPEG/PNG or MP4.
+4. Use **Save intake** to return later in the same browser. **Copy brief for chat** or **Download brief** provides the explanation, reference manifest and shared drawing rules. Paste it into this conversation and attach the listed original files separately; the brief does not include upload bytes or post to chat automatically.
+5. After [one-time Worker activation](server/README.md#one-time-activation), open **Generation connection**, enter the Worker address and Studio access code, and choose **Check and save connection**. Then choose **Generate draft in Studio**. Keep the OpenAI API key on the Worker.
+6. A validated result opens as a separate editable boat under **Boat**, with its own V1 draft and feedback. Review the evidence, flagged uncertainties and actual PDF before client release. Unsupported or failed geometry leaves existing drawings intact. BARCO V1/V2 and Odyssey remain separate.
+
+The intake, original uploads and selected video stills persist in this browser's IndexedDB. Generated drawings and their Boat entries use local storage. Save project JSON for a portable editable drawing; it contains the reference manifest, **not original source files**. Keep separate backups of those files. There is no shared cloud project library or cross-device source sync.
+
+Direct generation is implemented but is **not live yet**: no Cloudflare/OpenAI credentials or production Worker were provisioned during the build. Local end-to-end verification used a synthetic response to test the upload-to-editor contract; it does not establish real model drawing quality. See [the backend setup and verification boundary](server/README.md).
 
 ## Source of truth and drafting notes
 
@@ -40,7 +53,7 @@ The approved AMIX, HELI, FOSS and RAINIER artwork establishes the print style: s
 Live app: https://mediaonemultimedia.github.io/vifm-floorplan-studio/
 
 
-Commit the contents of this folder to the intended MediaOne repository (or a subfolder of it). The browser app is static: index.html, all root JavaScript files, style.css, .nojekyll, assets/ and vendor/ are all that hosting needs. GitHub Pages uses the Publish Studio workflow to package and deploy the site. All URLs are relative, so repository subpaths work. No credentials, CDN or external service is required at runtime. The app is hosted on GitHub Pages from mediaonemultimedia/vifm-floorplan-studio. Pushes to main run the checks and publish a versioned static package. Edits save in each visitor’s browser; Save project transfers them between browsers or devices. Sharing the app link opens the bundled starting drawing, not another visitor’s unsaved changes.
+Commit the contents of this folder to the intended MediaOne repository (or a subfolder of it). The browser app is static: index.html, all root JavaScript files, style.css, generation-config.json, .nojekyll, assets/ and vendor/ are all that hosting needs. GitHub Pages uses the Publish Studio workflow to package and deploy the site. All URLs are relative, so repository subpaths work. Editing, export and intake require no credentials, CDN or external service. Direct generation calls the separately activated Worker; its secrets never belong in the public site. The app is hosted on GitHub Pages from mediaonemultimedia/vifm-floorplan-studio. Pushes to main run the checks and publish a versioned static package. Edits save in each visitor’s browser; Save project transfers them between browsers or devices. Sharing the app link opens the bundled starting drawing, not another visitor’s unsaved changes.
 
 ## Development
 
@@ -94,7 +107,7 @@ Matching bedroom rows share one baseline when any member needs lower placement. 
 
 Odyssey uses the reviewed hand-sketch interpretation. The first two photos join at the bench area to form the lower level; the shorter upper level contains the helipad, office and weight room. The 43 × 35 ft pad anchors its proportions. Only the ten bedrooms visible in the sketches are drawn, with provisional L1–L5/R1–R5 identifiers. The written twenty-room count, floor naming and other uncertain connections remain unresolved. Nine pinned review notes appear in Feedback and stay outside exports. All four original sketch photos are available in Source drawings.
 
-Boat navigation, typography roles, line controls, wall editing, area centring, feedback and export use the same editor for both boats. Values are saved per boat, so changing one drawing does not silently restyle another. The existing BARCO save is migrated to independent lines while preserving its text, colour and feedback coordinates; the original v1 browser save remains as a backup. Save project downloads the complete editable state. No media-intake wizard or automatic sketch generation is included.
+Boat navigation, typography roles, line controls, wall editing, area centring, feedback and export use the same editor for the bundled boats and new generated drafts. Values are saved per boat, so changing one drawing does not silently restyle another. The existing BARCO save is migrated to independent lines while preserving its text, colour and feedback coordinates; the original v1 browser save remains as a backup. Save project downloads the complete editable drawing state. New-floorplan media intake and the separately activated generation service are described above.
 
 Release validation includes geometry/import/storage tests, browser checks of both boats, live shared-size and endpoint edits, responsive layout, and real PDF-button exports. Both exported faces retain their supplied Libre Franklin identities, embedded fonts, live text, vectors and square caps.
 

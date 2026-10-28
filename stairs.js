@@ -30,7 +30,7 @@ export function stairLayout(d,p){const specs=d.id==='main'?[
  }
  return run;});}
 export function stairTreads(s){
- const length=s.vertical?s.height:s.width,start=s.landing&&s.landing.top===s.top?s.landing.height:0,end=s.landing&&s.landing.top!==s.top?length-s.landing.height:length;
+ const length=s.vertical?s.height:s.width,landingSize=s.landing?(s.vertical?s.landing.height:s.landing.width):0,landingAtStart=s.landing&&(s.vertical?s.landing.top===s.top:s.landing.left===s.left),start=landingAtStart?landingSize:0,end=s.landing&&!landingAtStart?length-landingSize:length;
  const count=Math.max(3,Math.min(30,Math.round((end-start)/5)));
  return Array.from({length:count-1},(_,i)=>{const t=start+(end-start)*(i+1)/count;return s.vertical?{x:s.left,y:s.top+t,dx:s.width,dy:0}:{x:s.left+t,y:s.top,dx:0,dy:s.height};});
 }

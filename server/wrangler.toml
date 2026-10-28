@@ -1,0 +1,16 @@
+name = "vifm-floorplan-generator"
+main = "worker.js"
+compatibility_date = "2026-10-28"
+workers_dev = true
+
+[vars]
+ALLOWED_ORIGIN = "https://mediaonemultimedia.github.io"
+OPENAI_MODEL = "gpt-5.4"
+
+[[ratelimits]]
+name = "GENERATION_RATE_LIMITER"
+namespace_id = "102991"
+simple = { limit = 2, period = 60 }
+
+[observability]
+enabled = false

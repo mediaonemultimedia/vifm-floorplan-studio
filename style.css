@@ -6,3 +6,69 @@
 
 .revision-picker{margin-top:12px}.revision-picker select{font-weight:700}.revision-summary{line-height:1.7;max-width:70ch}.change-log{padding-left:22px;line-height:1.6}.change-log li{padding:12px 0;border-bottom:1px solid #dce4e4}.change-log strong{display:block}.change-log p{font-size:12px;margin:6px 0;max-width:75ch}.change-state{font-size:10px;display:inline-block;margin-bottom:6px;color:#25585b}.change-state.waiting{color:#985123}.change-state.carried{color:#64767b}#revision-dialog{max-width:850px}#revision-status{margin-bottom:3px}#view-changes{margin-top:0}#sheet.archived [data-element]{cursor:default}
 .change-log .source-comment{font-size:11px;color:#61767a}
+
+/* New floorplan intake extends the existing editor control vocabulary. */
+#new-floorplan{margin:0 0 18px}
+#new-project-dialog{width:min(1080px,calc(100vw - 40px));max-width:none;max-height:calc(100dvh - 40px);padding:24px;overflow:auto}
+#new-project-dialog .dialog-head{align-items:flex-start;margin-bottom:12px}
+#new-project-dialog h2{font-size:24px;margin:4px 0 0;line-height:1.2}
+#new-project-dialog h3{font-size:14px;margin:0 0 16px}
+.eyebrow{font-size:10px;font-weight:700;letter-spacing:.1em;color:#527477}
+.intake-intro{font-size:13px;line-height:1.6;color:#527477;max-width:72ch;margin:0 0 24px}
+#new-project-inputs{border:0;margin:0;padding:0;min-width:0}
+.intake-columns{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:32px}
+.intake-columns section{min-width:0}
+#new-project-form label{display:block;margin-bottom:14px;font-size:12px;font-weight:600;line-height:1.5}
+#new-project-form input:not([type=file]),#new-project-form select,#new-project-form textarea{display:block;width:100%;margin-top:6px;box-sizing:border-box}
+#new-project-form textarea{resize:vertical;min-height:100px}
+.required-label{font-size:10px;font-weight:400;color:#527477;margin-left:5px}
+.reference-section-head{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+#reference-count{font-size:11px;color:#527477}
+.reference-upload{padding:16px;background:#f0f5f4;border:1px dashed #8ba5a5;border-radius:5px}
+.reference-upload input{display:block;font-size:11px;width:100%;margin-top:10px}
+.reference-empty{font-size:12px;color:#527477;line-height:1.6;padding:18px 0}
+.reference-card{border-top:1px solid #dbe5e7;padding:16px 0}
+.reference-head{display:flex;gap:12px;align-items:center;margin-bottom:14px}
+.reference-head img{width:52px;height:52px;object-fit:contain;background:#f0f5f4;border:1px solid #dbe5e7}
+.reference-head>div{flex:1;min-width:0}
+.reference-head strong{display:block;font-size:12px;overflow-wrap:anywhere}
+.reference-head small{display:block;font-size:10px;color:#527477;margin-top:4px}
+.reference-file-icon{display:grid;place-items:center;width:52px;height:52px;flex-shrink:0;background:#f0f5f4;font-size:11px;font-weight:700}
+.remove-reference{font-size:10px;padding:6px 8px}
+.video-actions{display:flex;align-items:center;gap:12px}
+#new-project-form .video-actions label{margin-bottom:0}
+.video-stills{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:14px}
+.video-stills figure{margin:0;min-width:0}
+.video-stills img{width:100%;aspect-ratio:4/3;object-fit:contain;background:#f0f5f4;display:block}
+.video-stills figcaption{display:flex;justify-content:space-between;align-items:center;font-size:10px;padding-top:4px}
+.video-stills button{padding:2px 6px;min-height:24px}
+.generation-settings{margin:20px 0 0;border-top:1px solid #dbe5e7;padding-top:12px}
+.generation-settings summary{font-size:12px;cursor:pointer;padding:4px 0}
+#generation-state{font-weight:400;color:#795e2e;margin-left:8px}
+#generation-state.connected{color:#25585b}
+.intake-error{color:#8b2929;background:#fff1ee;padding:12px;font-size:12px;line-height:1.6;border-left:3px solid #a94634}
+.intake-status{font-size:12px;line-height:1.6;min-height:18px;margin:14px 0;color:#25585b}
+.intake-footer{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:flex-start;border-top:1px solid #dbe5e7;padding-top:16px}
+.intake-footer>div:first-child{display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.intake-actions{display:flex;flex-wrap:wrap;gap:8px}
+.intake-privacy{margin:12px 0 0}
+.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:720px){#new-project-dialog{width:calc(100vw - 20px);max-height:calc(100dvh - 20px);padding:18px}.intake-columns{grid-template-columns:minmax(0,1fr);gap:24px}.intake-actions{width:100%}.intake-actions button{flex:1 1 auto}.generation-settings .field-row{grid-template-columns:1fr}.reference-head{gap:8px}.reference-head img,.reference-file-icon{width:40px;height:40px}.video-stills{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+#source-content img,#source-content video{display:block;max-width:100%;max-height:75dvh;margin:auto}#source-content .source-pdf{display:block;width:100%;height:75dvh;border:0}#source-content pre{white-space:pre-wrap;overflow-wrap:anywhere;max-width:75ch}
+#new-project-dialog[open]{display:flex;flex-direction:column;color:#23464a;overflow:hidden}
+#new-project-dialog .dialog-head,.intake-intro{flex-shrink:0}
+#new-project-form{display:flex;flex-direction:column;min-height:0;overflow:auto}
+#new-project-inputs{flex:1 1 auto;min-height:120px;overflow:auto;padding-right:6px}
+#new-project-form>.generation-settings,#new-project-form>.intake-footer,#new-project-form>.intake-privacy,#new-project-form>.intake-error,#new-project-form>.intake-status{flex-shrink:0}
+#new-project-form>.generation-settings{max-height:220px;overflow:auto;margin-top:12px}
+#new-project-form>.intake-status{margin:8px 0;min-height:0}
+#new-project-form>.intake-footer{padding-top:12px}
+#new-project-form>.intake-privacy{font-size:10px;margin-top:8px}
+#new-project-form .help{font-size:11px;line-height:1.55}
+@media(max-width:720px){#new-project-dialog[open]{height:calc(100dvh - 20px)}#new-project-inputs{min-height:100px}.intake-footer{gap:8px}.intake-actions button{min-height:40px}.intake-intro{margin-bottom:16px}}
+
+#new-project-inputs{display:block;min-height:0;overflow:visible;padding:0;flex:none}.intake-scroll{flex:1 1 auto;min-height:100px;overflow:auto;padding-right:6px}
+
+.intake-mobile-nav{display:none;flex-shrink:0;margin:0 0 12px;gap:8px}.intake-mobile-nav button{flex:1;min-height:40px}
+@media(max-width:720px){.intake-mobile-nav{display:flex}}

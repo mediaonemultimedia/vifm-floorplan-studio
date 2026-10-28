@@ -1,0 +1,42 @@
+name: Deploy floorplan generator
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: floorplan-generator
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      STUDIO_ACCESS_TOKEN: ${{ secrets.STUDIO_ACCESS_TOKEN }}
+      WRANGLER_SEND_METRICS: 'false'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check required secret configuration
+        run: |
+          node --input-type=module <<'JS'
+          const names=['CLOUDFLARE_API_TOKEN','CLOUDFLARE_ACCOUNT_ID','OPENAI_API_KEY','STUDIO_ACCESS_TOKEN'];
+          const missing=names.filter(name=>!process.env[name]);
+          if(missing.length){console.error('Add the following repository Actions secrets before deployment: '+missing.join(', '));process.exit(1);}
+          JS
+      - run: npm ci
+      - run: npm test
+      - run: npm run worker:deploy
+      - name: Configure private Worker secrets
+        run: |
+          node --input-type=module <<'JS'
+          import {writeFileSync} from 'node:fs';
+          writeFileSync('/tmp/vifm-worker-secrets.json',JSON.stringify({OPENAI_API_KEY:process.env.OPENAI_API_KEY,STUDIO_ACCESS_TOKEN:process.env.STUDIO_ACCESS_TOKEN}),{mode:0o600});
+          JS
+          npx wrangler secret bulk /tmp/vifm-worker-secrets.json --config server/wrangler.toml
+      - name: Remove temporary secrets
+        if: always()
+        run: rm -f /tmp/vifm-worker-secrets.json
