@@ -5,15 +5,16 @@ import {videoFrames,prepareMedia} from './reference-media.js';
 import {generateFloorplan} from './generation-client.js';
 import {compileDraft} from './generation-schema.js';
 import {download} from './export.js';
+import {connectionAccess,saveConnection,forgetRememberedAccess,disconnectConnection} from './generation-connection.js';
 const DRAFT_KEY='active-intake';
 export function setupNewProject({onCreated,toast}){
  const $=s=>document.querySelector(s),dialog=$('#new-project-dialog'),form=$('#new-project-form'),files=$('#new-reference-files'),list=$('#new-reference-list'),error=$('#new-project-error'),status=$('#new-project-status');
  let refs=[],opened=false,busy=false,controller=null,endpoint='',saveTimer=null,saveQueue=Promise.resolve(),urls=[];
- const token=()=>$('#generation-access').value;
+ const token=()=>$('#generation-access').value.trim();
  const value=key=>{const v=$('#new-'+key).value.trim();return v===''?null:Number(v);};
  const brief=()=>({name:$('#new-name').value.trim(),length:value('length'),beam:value('beam'),rooms:value('rooms'),floors:value('floors'),details:$('#new-details').value,references:refs.map(r=>({...r.meta}))});
  function message(text,isError=false){error.hidden=!isError;error.textContent=isError?text:'';status.textContent=isError?'':text;}
- function setBusy(value){busy=value;$('#new-project-inputs').disabled=value;$('#new-project-close').disabled=value;$('#generate-floorplan').disabled=value;$('#copy-new-brief').disabled=value;$('#download-new-brief').disabled=value;$('#cancel-generation').hidden=!value||!controller;$('#save-new-intake').disabled=value;$('#save-generation-connection').disabled=value;$('#disconnect-generation').disabled=value;$('#generation-endpoint').disabled=value;$('#generation-access').disabled=value;$('#new-project-form').setAttribute('aria-busy',String(value));}
+ function setBusy(value){busy=value;$('#new-project-inputs').disabled=value;$('#new-project-close').disabled=value;$('#generate-floorplan').disabled=value;$('#copy-new-brief').disabled=value;$('#download-new-brief').disabled=value;$('#cancel-generation').hidden=!value||!controller;$('#save-new-intake').disabled=value;$('#save-generation-connection').disabled=value;$('#disconnect-generation').disabled=value;$('#generation-endpoint').disabled=value;$('#generation-access').disabled=value;$('#generation-remember').disabled=value;$('#new-project-form').setAttribute('aria-busy',String(value));}
  function queueSave(){clearTimeout(saveTimer);saveTimer=setTimeout(()=>saveDraft().catch(()=>{}),350);}
  function saveDraft(){clearTimeout(saveTimer);const record={brief:brief(),refs:structuredClone(refs)};saveQueue=saveQueue.catch(()=>{}).then(()=>referenceStore(DRAFT_KEY,record));return saveQueue.then(()=>{$('#intake-save-status').textContent='Intake saved in this browser';}).catch(err=>{$('#intake-save-status').textContent='Intake could not be saved';message(err.message,true);throw err;});}
  function renderRefs(){
@@ -28,8 +29,10 @@ export function setupNewProject({onCreated,toast}){
  function refreshConnection(){const ready=!!endpoint&&!!token();$('#generation-state').textContent=ready?'Generation service configured':'Generation not connected';$('#generation-state').classList.toggle('connected',ready);$('#generate-floorplan').textContent=ready?'Generate draft in Studio':'Connect generation';}
  async function open(){
   if(!opened){try{const saved=await referenceStore(DRAFT_KEY);if(saved?.brief){for(const key of ['name','length','beam','rooms','floors','details'])$('#new-'+key).value=saved.brief[key]??'';refs=Array.isArray(saved.refs)?saved.refs:[];}}catch(err){toast(err.message);}opened=true;renderRefs();}
-  try{endpoint=localStorage.getItem('mediaone.floorplans.generation-endpoint')||'';$('#generation-access').value=sessionStorage.getItem('mediaone.floorplans.generation-access')||'';}catch{}
+  $('#generation-access').value='';$('#generation-remember').checked=false;
+  try{endpoint=localStorage.getItem('mediaone.floorplans.generation-endpoint')||'';}catch{}
   if(!endpoint){try{const r=await fetch('./generation-config.json',{cache:'no-store'});if(r.ok){const c=await r.json();if(c.endpoint)endpoint=validateConnection(c.endpoint).endpoint;}}catch{}}
+  try{const saved=connectionAccess(localStorage,sessionStorage,endpoint);$('#generation-access').value=saved.access;$('#generation-remember').checked=saved.remember;}catch{}
   $('#generation-endpoint').value=endpoint;refreshConnection();dialog.showModal();$('#new-name').focus();
  }
  $('#new-floorplan').onclick=open;
@@ -48,9 +51,11 @@ export function setupNewProject({onCreated,toast}){
  $('#copy-new-brief').onclick=async()=>{try{const text=chatBrief(validateIntake(brief()));try{await navigator.clipboard.writeText(text);message('Brief copied. Paste it into this chat and attach the listed source files.');}catch{$('#feedback-copy-text').value=text;$('#feedback-copy-dialog').showModal();$('#feedback-copy-text').select();}}catch(err){message(err.message,true);}};
  $('#save-generation-connection').onclick=async()=>{
   const button=$('#save-generation-connection');button.disabled=true;message('Checking generation connection…');
-  try{const url=validateConnection($('#generation-endpoint').value.trim()).endpoint,access=token();if(!access||/^sk-/.test(access))throw Error('Use the Studio access code, not your OpenAI API key. The API key belongs on the Worker.');const r=await fetch(url+'/health',{headers:{Authorization:'Bearer '+access}});const health=await r.json();if(!r.ok||!health.ready||health.format!=='vifm-floorplan-draft-v1')throw Error(health.error||'This service is not ready for floorplan generation.');localStorage.setItem('mediaone.floorplans.generation-endpoint',url);sessionStorage.setItem('mediaone.floorplans.generation-access',access);endpoint=url;refreshConnection();message('Generation service connected. Your API key stays on the Worker.');}catch(err){message(err.message==='Failed to fetch'?'Could not reach the Worker. Check its address and allowed Studio origin.':err.message,true);}finally{button.disabled=false;}
+  try{const url=validateConnection($('#generation-endpoint').value.trim()).endpoint,access=token();if(!access||/^sk-/.test(access))throw Error('Use the Studio access code, not your OpenAI API key. The API key belongs on the Worker.');const r=await fetch(url+'/health',{headers:{Authorization:'Bearer '+access}});const health=await r.json();if(!r.ok||!health.ready||health.format!=='vifm-floorplan-draft-v1')throw Error(health.error||'This service is not ready for floorplan generation.');saveConnection(localStorage,sessionStorage,{endpoint:url,access,remember:$('#generation-remember').checked});endpoint=url;refreshConnection();message($('#generation-remember').checked?'Connected and remembered on this device. Use Disconnect to forget the saved code.':'Connected for this tab session. Your API key stays on the Worker.');}catch(err){message(err.message==='Failed to fetch'?'Could not reach the Worker. Check its address and allowed Studio origin.':err.message,true);}finally{button.disabled=false;}
  };
- $('#disconnect-generation').onclick=()=>{endpoint='';$('#generation-endpoint').value='';$('#generation-access').value='';try{localStorage.removeItem('mediaone.floorplans.generation-endpoint');sessionStorage.removeItem('mediaone.floorplans.generation-access');}catch{}refreshConnection();message('Generation disconnected. Your intake and drawings are kept.');};
+ $('#generation-remember').onchange=()=>{if(!$('#generation-remember').checked){try{forgetRememberedAccess(localStorage);message('Saved code forgotten on this device. The current tab can still use it until closed.');}catch{$('#generation-remember').checked=true;message('The browser could not forget the saved code. Clear site data to forget this device.',true);}}};
+ $('#generation-endpoint').oninput=()=>{$('#generation-access').value='';$('#generation-remember').checked=false;refreshConnection();};
+ $('#disconnect-generation').onclick=()=>{try{disconnectConnection(localStorage,sessionStorage);endpoint='';$('#generation-endpoint').value='';$('#generation-access').value='';$('#generation-remember').checked=false;refreshConnection();message('Disconnected and saved code forgotten on this device. Your intake and drawings are kept.');}catch(err){message(err.message,true);}};
  $('#cancel-generation').onclick=()=>{if(controller)controller.abort();};
  form.onsubmit=async ev=>{
   ev.preventDefault();if(busy)return;

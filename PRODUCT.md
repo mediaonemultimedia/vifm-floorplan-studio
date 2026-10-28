@@ -23,7 +23,7 @@ The source intake accepts up to 24 files, 100 MB each and 300 MB total. Generati
 
 Intake details, original uploads and selected stills persist in IndexedDB in the current browser. Generated project state and Boat navigation entries use local storage. Exported project JSON carries the reference manifest, not original source bytes. Portable drawings and original reference backups are separate responsibilities. Shared cloud project storage and cross-device source sync are outside this feature.
 
-The public editor, intake and brief handoff remain usable without an account. Direct generation requires a separately configured Worker address and Studio access code; the OpenAI API key stays on the Worker. The address is stored locally and the access code in tab-session storage. The Worker is stateless and does not save references or projects.
+The public editor, intake and brief handoff remain usable without an account. Direct generation requires a separately configured Worker address and shared Studio access code; other users do not need Cloudflare or OpenAI accounts. The OpenAI API key stays on the Worker. The address is stored locally and the access code in tab-session storage by default. **Remember this device** opts into retaining the code in this browser across visits, bound to its Worker address, after successful verification. Unchecking the option removes the persistent copy; Disconnect forgets both copies. The Worker is stateless and does not save references or projects.
 
 ## Production activation remains open
 

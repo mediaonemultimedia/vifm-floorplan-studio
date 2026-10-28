@@ -46,6 +46,9 @@
 .generation-settings summary{font-size:12px;cursor:pointer;padding:4px 0}
 #generation-state{font-weight:400;color:#795e2e;margin-left:8px}
 #generation-state.connected{color:#25585b}
+#new-project-form .remember-device{display:flex;align-items:center;gap:8px;margin:8px 0;font-weight:500}
+#new-project-form .remember-device input{width:auto;margin:0;accent-color:#25585b}
+.connection-actions{position:sticky;bottom:0;background:white;padding:8px 0 2px;display:flex;flex-wrap:wrap;gap:6px}
 .intake-error{color:#8b2929;background:#fff1ee;padding:12px;font-size:12px;line-height:1.6;border-left:3px solid #a94634}
 .intake-status{font-size:12px;line-height:1.6;min-height:18px;margin:14px 0;color:#25585b}
 .intake-footer{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:flex-start;border-top:1px solid #dbe5e7;padding-top:16px}
