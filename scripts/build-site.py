@@ -14,6 +14,10 @@ if destination.exists():
 destination.mkdir()
 for folder in ('assets', 'vendor'):
     shutil.copytree(root / folder, destination / folder)
+for name in ('DESIGN.md', 'PRODUCT.md', 'docs/reviews/2026-10-27-barco-manual-v2.md'):
+    target = destination / name
+    target.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(root / name, target)
 for source in [root / 'index.html', root / 'style.css', root / '.nojekyll', root / 'generation-config.json', *root.glob('*.js')]:
     text = source.read_text()
     if source.suffix == '.js':

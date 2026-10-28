@@ -1,4 +1,4 @@
-import {DRAWING_RULES} from './drawing-instructions.js';
+import {codexBrief} from './codex-brief.js';
 export const INTAKE_LIMITS={files:24,fileBytes:100*1024*1024,totalBytes:300*1024*1024,payloadBytes:18*1024*1024,images:32};
 export function referenceKind(file){const ext=file.name?.split('.').pop().toLowerCase();if(file.type?.startsWith('video/')||['mp4','mov','webm','m4v'].includes(ext))return 'video';if(ext==='svg')return 'svg';if(file.type?.startsWith('image/')||['png','jpg','jpeg','webp','gif','heic','heif'].includes(ext))return 'image';if(ext==='pdf')return 'pdf';if(['txt','md','csv','json'].includes(ext))return 'text';return 'unsupported';}
 export function validateIntake(b){
@@ -11,5 +11,5 @@ export function validateIntake(b){
  if(!b.references.length&&!b.details.trim())throw Error('Add a reference or describe the layout before generating.');
  return b;
 }
-export function chatBrief(b){validateIntake(b);return `VIFM Floorplan Studio — new floorplan\nBoat: ${b.name}\nLength: ${b.length??'Unknown'} ft\nBeam: ${b.beam??'Unknown'} ft\nRoom count: ${b.rooms??'Unknown'}\nFloors shown: ${b.floors??'Unknown'}\n\nOwner explanation:\n${b.details||'None yet'}\n\nReferences (attach these files to chat with this brief):\n${b.references.map(r=>`- [${r.id}] ${r.name} | ${r.kind} | ${r.floor}\n  ${r.note||'No additional note'}`).join('\n')||'No files'}\n\nApply these drawing rules:\n${DRAWING_RULES}\n\nBuild the draft in the Studio's editable project format. List uncertain connections with the reference and floor. Do not claim a generated draft is verified.`;}
+export function chatBrief(b){validateIntake(b);return codexBrief(b);}
 export function validateConnection(value){let url;try{url=new URL(value);}catch{throw Error('Enter the HTTPS address of your generation Worker.');}const local=['localhost','127.0.0.1','[::1]'].includes(url.hostname);if((url.protocol!=='https:'&&!(url.protocol==='http:'&&local))||url.username||url.password||url.search||url.hash||url.hostname==='api.openai.com'||url.hostname.endsWith('.openai.com'))throw Error('Use your private backend HTTPS address, without credentials or query parameters.');return {endpoint:url.href.replace(/\/$/,'')};}
