@@ -4,7 +4,7 @@ The public Studio remains on GitHub Pages. This Worker is its authenticated gene
 
 ## One-time activation
 
-Requires a Cloudflare account with Workers access and a funded OpenAI API project with access to the configured model. These are separate from access to this Codex chat. No account, credential or production backend was provisioned during the local build.
+Requires a Cloudflare account with Workers access and a funded OpenAI API project with access to the configured model. These are separate from access to this Codex chat. The Worker was deployed on October 28, 2026 at `https://vifm-floorplan-generator.vifm-floorplan-studio.workers.dev`. Its private API key and Studio access code still need to be entered before generation is active.
 
 From the repository root:
 
