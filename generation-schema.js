@@ -14,7 +14,7 @@ export const DRAFT_SCHEMA=obj({
   walls:array(obj({x1:num,y1:num,x2:num,y2:num,role:choice(['wall','secondary'])}),600),
   doors:array(obj({x:num,y:num,ux:num,uy:num,vx:num,vy:num}),100),
   labels:array(obj({text:str,role:choice(['room','label','detail','marker']),x:num,y:num,align:choice(['start','middle','end']),area:{anyOf:[area,{type:'null'}]}}),200),
-  fixtures:array(obj({type:choice(['toilet','shower','urinal','doubleSink','largeSink','smallSink','washer','dryer','washerDryer','sinkBank','muster']),x:num,y:num,rotation:{type:'integer',enum:[0,90,180,270]},basinCount:{type:'integer',minimum:0,maximum:20}}),150),
+  fixtures:array(obj({type:choice(['toilet','shower','urinal','doubleSink','largeSink','smallSink','washer','dryer','washerDryer','sinkBank','muster','deskChair']),x:num,y:num,rotation:{type:'integer',enum:[0,90,180,270]},basinCount:{type:'integer',minimum:0,maximum:20}}),150),
   stairs:array(obj({x:num,y:num,w:num,h:num,vertical:{type:'boolean'},landing:choice(['start','end','none'])}),30)
  }),2),
  uncertainties:array(obj({deckId:choice(['main','upper']),x:num,y:num,title:str,text:str,referenceIds:array(str,24)}),60)

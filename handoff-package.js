@@ -3,7 +3,7 @@ import {DRAWING_RULES} from './drawing-instructions.js';
 import {DRAFT_SCHEMA} from './generation-schema.js';
 import {zipFiles} from './handoff-zip.js';
 
-export const HANDOFF_CONTEXT_FILES=['DESIGN.md','PRODUCT.md','docs/reviews/2026-10-27-barco-manual-v2.md'];
+export const HANDOFF_CONTEXT_FILES=['DESIGN.md','PRODUCT.md','docs/reviews/2026-10-27-barco-manual-v2.md','docs/reviews/2026-11-13-odyssey-v2.md'];
 const safeName=name=>name.replace(/[^a-z0-9._-]+/gi,'-').replace(/^\.+/,'').slice(0,160)||'reference';
 const text=(name,value)=>({name,blob:new Blob([value],{type:'text/plain;charset=utf-8'})});
 export async function loadHandoffContext(signal){

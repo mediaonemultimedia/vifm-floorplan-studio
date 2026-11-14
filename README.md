@@ -107,7 +107,7 @@ Matching bedroom rows share one baseline when any member needs lower placement. 
 
 ## Odyssey working draft and shared editing system
 
-Odyssey uses the reviewed hand-sketch interpretation. The first two photos join at the bench area to form the lower level; the shorter upper level contains the helipad, office and weight room. The 43 × 35 ft pad anchors its proportions. Only the ten bedrooms visible in the sketches are drawn, with provisional L1–L5/R1–R5 identifiers. The written twenty-room count, floor naming and other uncertain connections remain unresolved. Nine pinned review notes appear in Feedback and stay outside exports. All four original sketch photos are available in Source drawings.
+Odyssey uses the reviewed hand-sketch interpretation. The first two photos join at the bench area to form the lower level; the shorter upper level contains the helipad, office and weight room. The 43 × 35 ft pad anchors its proportions. Only the ten bedrooms visible in the sketches are drawn, with provisional L1–L5/R1–R5 identifiers. The written twenty-room count and other uncertain connections remain unresolved. V2 applies the 41 written PDF comments, with five current source flags in Feedback outside exports. All four original sketch photos are available in Source drawings. The [November review record](docs/reviews/2026-11-13-odyssey-v2.md) contains each comment and disposition. Run `node scripts/build-odyssey-review-v2.mjs` to reproduce the versioned assets from the retained V1 and review data.
 
 Boat navigation, typography roles, line controls, wall editing, area centring, feedback and export use the same editor for the bundled boats and new generated drafts. Values are saved per boat, so changing one drawing does not silently restyle another. The existing BARCO save is migrated to independent lines while preserving its text, colour and feedback coordinates; the original v1 browser save remains as a backup. Save project downloads the complete editable drawing state. New-floorplan media intake and the separately activated generation service are described above.
 
@@ -117,11 +117,13 @@ The owner subsequently confirmed BARCO's cook house is downstairs only (27 Octob
 
 ## Drawing revisions and BARCO V2
 
-Use Drawing revision beneath the boat picker to switch versions. BARCO defaults to V2, with V1 retained as an archived, read-only drawing. Both versions can export PDF/SVG/project files, with V1/V2 in their filenames. Revision controls are shared across boats; Odyssey currently has its editable V1 draft. Revision labels and review notes remain outside the printed artwork.
+Use Drawing revision beneath the boat picker to switch versions. Both BARCO and Odyssey default to V2, with V1 retained as an archived, read-only drawing. Both versions can export PDF/SVG/project files, with V1/V2 in their filenames. Revision controls are shared across boats. Revision labels and review notes remain outside the printed artwork.
 
 Before creating a visitor's first V2, the Studio freezes a copy of that browser's existing V1, including local edits. V2 begins from that copy with the review corrections applied. V2 drawings, notes and published bases use separate browser keys. V1 is never replaced by V2 edits or automatic updates. New visitors use the frozen published V1 baseline in assets/revisions/barco99-v1.json. Its rendered SVG is regression-checked against commit ab870fa. The original unversioned browser keys remain available as backups.
 
 View change log records all twelve PDF comments with their original wording and a disposition: ten corrections, one confirmation already carried out in V1, and one downstairs cook-house arrangement awaiting more source information. That pending item is also pinned in Feedback. V2 aligns matching bedroom labels, balances 14/6 and 24/16 padding, right-aligns OFFICE, uses lighter fixture strokes, gives every shower the same 90% size with visible clearance, and clips stair/landing outlines at actual door thresholds. Flight and landing positions remain intact.
+
+Odyssey has its own V2 change log: 41 written comments and one empty pin. The reviewed layout replaces connected V1 geometry while retaining local colours, text hierarchy, deliberate label wording and added annotations. The earlier browser drawing remains in its V1 archive. Unchanged system flags superseded by V2 become resolved; manually edited feedback stays open. Shared optional chair symbols, joined bench outlines and stair-arrow details are available to other boats without changing existing artwork.
 
 
 ## Owner-edited V2 evidence review

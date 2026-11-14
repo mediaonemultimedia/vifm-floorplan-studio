@@ -8,7 +8,7 @@ import {themeControls} from './theme-controls.js';
 import {showElementInspector,showWallInspector} from './selection-controls.js';
 import {moveWall,editWallEndpoint} from './wall-lines.js';
 import {dockLayout} from './fixtures.js';
-import {createNote,feedbackReport,feedbackPins,validateNotes} from './feedback.js';
+import {createNote,feedbackReport,feedbackPins,validateNotes,reconcileReviewNotes} from './feedback.js';
 import {mergeProjectUpdate} from './project-updates.js';
 import {PALETTE,createProject,resizeHull,sourcePoint,planPoint,escapeXML as e} from './model.js';
 import {drawing,loadLogo,deckOrigins} from './render.js';
@@ -33,6 +33,7 @@ function restoreBoat(){
  try{const local=restoreProject(localStorage,activeId,startingProject,activeRevision,seeds.get(activeId+':v1')),base=JSON.parse(localStorage.getItem(KEY+'.published-base')||'null');project=base&&!readOnly()?validateEditorProject(mergeProjectUpdate(base,local,startingProject)):local;}
  catch(err){try{localStorage.setItem(KEY+'.unreadable',localStorage.getItem(KEY)||'');}catch{}setTimeout(()=>toast('Saved drawing could not be read. A backup remains in browser storage; opening the supplied layout.'),200);}
  try{const saved=localStorage.getItem(KEY+'.feedback')||(activeRevision!=='v1'?(localStorage.getItem(projectStorageKey(activeId,'v1')+'.feedback')||(activeId==='barco99'?localStorage.getItem('mediaone.floorplans.barco99.v1.feedback'):null)):null)||(activeId==='barco99'&&activeRevision==='v1'?localStorage.getItem('mediaone.floorplans.barco99.v1.feedback'):null);notes=validateNotes(JSON.parse(saved||'[]'));if(!readOnly())localStorage.setItem(KEY+'.published-base',JSON.stringify(startingProject));}catch{notes=[];}
+ notes=reconcileReviewNotes(notes,project,[...seeds.values()].filter(p=>p.id===activeId).flatMap(p=>p.reviewFlags));
  for(const flag of project.reviewFlags)if(!notes.some(n=>n.seedFlag===flag.id)){
   const index=project.decks.findIndex(d=>d.id===flag.deckId),o=deckOrigins(project)[index],n=createNote(project,flag.deckId,{x:o.x+flag.x,y:o.y+flag.y},releaseVersion);Object.assign(n,{seedFlag:flag.id,text:`Flag ${flag.id} - ${flag.title}\n${flag.text}`});notes.push(n);
  }

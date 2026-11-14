@@ -1,6 +1,15 @@
 import {planPoint,sourcePoint,escapeXML as escape} from './model.js';
 import {deckOrigins} from './render.js';
 const round=n=>Math.round(n*10)/10;
+// Only retire an unchanged system question whose source flag was replaced.
+// Owner-written or edited feedback stays open; earlier revision storage is untouched.
+export function reconcileReviewNotes(notes,project,previousFlags){
+ const active=new Set(project.reviewFlags.map(f=>f.id));
+ return notes.map(n=>{
+  const prior=previousFlags.find(f=>f.id===n.seedFlag);
+  return prior&&!active.has(prior.id)&&n.text===`Flag ${prior.id} - ${prior.title}\n${prior.text}`?{...n,resolved:true}:n;
+ });
+}
 export function createNote(project,deckId,page,release,target=null){
  const index=project.decks.findIndex(d=>d.id===deckId);if(index<0)throw Error('Choose a floorplan.');
  const deck=project.decks[index],origin=deckOrigins(project)[index],local={x:page.x-origin.x,y:page.y-origin.y},source=sourcePoint(local.x,local.y,project);

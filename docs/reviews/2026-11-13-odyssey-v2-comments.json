@@ -1,0 +1,305 @@
+{
+  "source": "ODYSSEY-102-floorplans-2-FEEDBACK-V1.pdf",
+  "sha256": "4094774e59479249e042afa5038c6acdb01d163c9ffe370e8e2782c3cf925387",
+  "page": {
+    "width": 792,
+    "height": 1224,
+    "origin": "top-left"
+  },
+  "notes": [
+    {
+      "number": 1,
+      "id": "cd766673-6c72-bf4b-9b66-43bb50e9d171",
+      "x": 457.73,
+      "y": 444.27,
+      "text": "Appears the door entrance is on the other side of this wall, close to the stairs"
+    },
+    {
+      "number": 2,
+      "id": "f9137d62-b8a6-0043-82c9-a9de18925ec7",
+      "x": 550.05,
+      "y": 522.67,
+      "text": "I think this should be a solid wall"
+    },
+    {
+      "number": 3,
+      "id": "c32267a6-bb42-fa49-a7fc-8cdbb28459c1",
+      "x": 570.13,
+      "y": 451.08,
+      "text": "we usually do a thicker line with a light stroke for these stair arrows"
+    },
+    {
+      "number": 4,
+      "id": "e3f479f5-8f3a-2640-b89a-63059dea9bb0",
+      "x": 573.31,
+      "y": 431.93,
+      "text": "don't think we need the stair pad thing here"
+    },
+    {
+      "number": 5,
+      "id": "de85930b-9947-5345-91e6-d222d749abfe",
+      "x": 656.87,
+      "y": 451.56,
+      "text": "door opening should be in corner"
+    },
+    {
+      "number": 6,
+      "id": "79901d38-fc2e-c946-91be-eac698393959",
+      "x": 706.53,
+      "y": 479.07,
+      "text": "can you add a desk chair for funziez?"
+    },
+    {
+      "number": 7,
+      "id": "44459352-8620-db45-a569-e23cbb5dfe44",
+      "x": 718.78,
+      "y": 439.15,
+      "text": "I feel like the outer walls should line up but double check this"
+    },
+    {
+      "number": 8,
+      "id": "7dcad967-db48-5747-a4d6-bba805db8663",
+      "x": 537.0,
+      "y": 624.54,
+      "text": "maybe have the cabinets end right before the sink? This matches the sketch but I highly doubt the sink is inside the cabinets"
+    },
+    {
+      "number": 9,
+      "id": "f2e30073-324c-4844-9c54-765b053f5372",
+      "x": 564.8,
+      "y": 674.76,
+      "text": "door opens the other way"
+    },
+    {
+      "number": 10,
+      "id": "e7c1ca7b-36c9-c14c-b0b2-9838fe070f16",
+      "x": 552.15,
+      "y": 681.09,
+      "text": "also add some space so there's a tiny bit of wall before the door"
+    },
+    {
+      "number": 11,
+      "id": "93ee9eaa-2cbe-6744-b208-5c097ebd3cd2",
+      "x": 525.18,
+      "y": 697.63,
+      "text": "It looks like these stars move up, so the room above is shorter than the weight room and the stars lead directly into the weight room"
+    },
+    {
+      "number": 12,
+      "id": "f57645cd-a650-654f-afb9-95faff81cb10",
+      "x": 628.08,
+      "y": 694.45,
+      "text": "death door. see other comment regarding the stairs and having them have an extended path at the top that leads to the weight room"
+    },
+    {
+      "number": 13,
+      "id": "ffdffe1a-9659-2543-a96a-93bde0ae2ff8",
+      "x": 28.36,
+      "y": 228.98,
+      "text": "I think the image says chains here not stairs"
+    },
+    {
+      "number": 14,
+      "id": "6332dc6a-b294-f54d-87dd-68be93544bd8",
+      "x": 195.34,
+      "y": 215.1,
+      "text": "make this back area larger"
+    },
+    {
+      "number": 15,
+      "id": "83580892-8d1f-ae46-88dd-a5e7d409d150",
+      "x": 205.74,
+      "y": 220.64,
+      "text": "door needed, opening outwards"
+    },
+    {
+      "number": 16,
+      "id": "8caa08a3-b3b3-9141-83c1-ec6b186a6ef5",
+      "x": 190.16,
+      "y": 362.33,
+      "text": "wall missing here"
+    },
+    {
+      "number": 17,
+      "id": "9b0282aa-0de7-4846-8c25-77a04cae8bd4",
+      "x": 173.17,
+      "y": 300.03,
+      "text": "wall missing here, shelf should be much smaller"
+    },
+    {
+      "number": 18,
+      "id": "2a330f3a-7efa-cf40-9079-3f6ad4b7f8ac",
+      "x": 284.55,
+      "y": 260.01,
+      "text": "gas is smaller than the others"
+    },
+    {
+      "number": 19,
+      "id": "cc3b835a-5255-ee46-88d9-7e653c473bed",
+      "x": 105.21,
+      "y": 432.18,
+      "text": "this section should be a wall, with bench/shelves on the left and a shorter bench on the right"
+    },
+    {
+      "number": 20,
+      "id": "b2b1c1a5-ba79-eb40-b588-ef10895b62db",
+      "x": 139.57,
+      "y": 484.66,
+      "text": "missing double doors opening out"
+    },
+    {
+      "number": 21,
+      "id": "b2153c8e-e778-b845-b390-fa70d0edfb71",
+      "x": 79.16,
+      "y": 483.53,
+      "text": "missing wall and double doors opening out"
+    },
+    {
+      "number": 22,
+      "id": "0b6df6a8-5d11-2743-a1c9-0bc603c6e5b9",
+      "x": 191.67,
+      "y": 466.54,
+      "text": "Stairsneed another hard pass. should only be a few stairs and a landing, leading to a door opening out"
+    },
+    {
+      "number": 23,
+      "id": "8ea538a1-512c-744d-893c-186ff8933409",
+      "x": 126.36,
+      "y": 520.15,
+      "text": "needs another pass, should be going up to a shard landing with the other stairs and only be a few steps large"
+    },
+    {
+      "number": 24,
+      "id": "802585c2-18ac-2445-82e1-a1584d3dc618",
+      "x": 224.9,
+      "y": 519.77,
+      "text": "needs another pass, should be going up to a shard landing with the other stairs and only be a few steps large"
+    },
+    {
+      "number": 25,
+      "id": "aa2f8d9e-ac94-7144-b03d-5c7b815db76f",
+      "x": 240.0,
+      "y": 495.99,
+      "text": "centre label"
+    },
+    {
+      "number": 26,
+      "id": "bbdd1d42-fb7f-694c-a24f-15bcdea12693",
+      "x": 303.05,
+      "y": 489.19,
+      "text": "centre label"
+    },
+    {
+      "number": 27,
+      "id": "986b2603-63bb-9c48-8538-ea62f00d25d1",
+      "x": 260.77,
+      "y": 476.35,
+      "text": "missing wall"
+    },
+    {
+      "number": 28,
+      "id": "de0e83ba-839a-1e4b-9f5f-54578d2332fa",
+      "x": 317.02,
+      "y": 515.24,
+      "text": "Looks more like \"experiment bench\" to me, can you double check"
+    },
+    {
+      "number": 29,
+      "id": "76fdec77-e89c-e447-b9ce-a67f2a7b34cf",
+      "x": 133.43,
+      "y": 580.86,
+      "text": "if we're labelling benches continue here"
+    },
+    {
+      "number": 30,
+      "id": "2cc15d27-fef4-1f4b-b8c7-be0aa1fb5cb7",
+      "x": 160.31,
+      "y": 587.88,
+      "text": "L bench should be on piece"
+    },
+    {
+      "number": 31,
+      "id": "808d63d8-7cd7-154d-b6d8-613ca7cfba4c",
+      "x": 167.34,
+      "y": 603.18,
+      "text": "missing wall"
+    },
+    {
+      "number": 32,
+      "id": "41410044-302f-1e4b-9471-46885de1a4af",
+      "x": 341.43,
+      "y": 584.16,
+      "text": "make bench one piece"
+    },
+    {
+      "number": 33,
+      "id": "27408428-923c-b94c-877e-c5867b5a3ad2",
+      "x": 97.45,
+      "y": 634.2,
+      "text": "missing wall"
+    },
+    {
+      "number": 34,
+      "id": "d3980bf8-a660-e84c-8a7c-14a15b13d390",
+      "x": 130.53,
+      "y": 639.99,
+      "text": "this door doesn't go into the storgage. It should open left into the bathroom"
+    },
+    {
+      "number": 35,
+      "id": "38ff49a9-85dc-b647-81be-2ed91ce604b2",
+      "x": 79.26,
+      "y": 659.01,
+      "text": "see other comment about the storage door, the room is bigger than you've made it"
+    },
+    {
+      "number": 36,
+      "id": "d6721574-0103-7f45-ab22-d54cecc3fb85",
+      "x": 155.34,
+      "y": 691.26,
+      "text": "dont need to have these extra landings at the bottom of the stairs"
+    },
+    {
+      "number": 37,
+      "id": "74f10a4e-8c0b-004f-95d6-c656a73ce7be",
+      "x": 52.38,
+      "y": 723.52,
+      "text": "in the drawing there almost looks to be a door here? There's something here, please check"
+    },
+    {
+      "number": 38,
+      "id": "cc6537b0-c451-8a48-be0f-719e8d11a155",
+      "x": 95.8,
+      "y": 718.56,
+      "text": "stairs should be flush with this wall"
+    },
+    {
+      "number": 39,
+      "id": "f67bbef6-175b-8440-bf95-e79d1d958fee",
+      "x": 55.27,
+      "y": 690.44,
+      "text": "make this landing bigger"
+    },
+    {
+      "number": 40,
+      "id": "b3a5590d-6aff-dd42-aa88-a4286746d7aa",
+      "x": 230.6,
+      "y": 751.64,
+      "text": "missing wall (which we should add a door to)"
+    },
+    {
+      "number": 41,
+      "id": "32eb6e03-53b2-5440-b689-198e75e1dcc6",
+      "x": 68.51,
+      "y": 876.93,
+      "text": "can you make these look more like chairs?"
+    },
+    {
+      "number": 42,
+      "id": "b2e13c67-3044-8a41-9506-b4b3e394ab5a",
+      "x": 396.01,
+      "y": 176.85,
+      "text": "[EMPTY]"
+    }
+  ]
+}

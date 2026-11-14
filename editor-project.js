@@ -55,8 +55,10 @@ export function validateEditorProject(p){
    }
   }
   if((d.details?.length||0)>2500||(d.doors?.length||0)>200)throw Error('Too many details.');
-  for(const a of d.details||[]){identify(a);if(!['line','rect','ellipse','symbol'].includes(a.kind)||!['secondary','detail'].includes(a.role)||!finite(a.width,.1,8))throw Error('Unsupported drawing detail.');
-   const nums=a.kind==='line'?[a.x1,a.y1,a.x2,a.y2]:a.kind==='symbol'?[a.x,a.y,a.scale,a.rotation]:[a.x,a.y,a.w,a.h];if(!nums.every(n=>finite(n,-360,1600)))throw Error('Invalid detail coordinates.');
+  for(const a of d.details||[]){identify(a);if(!['line','rect','ellipse','symbol','polyline','stairArrow'].includes(a.kind)||!['secondary','detail'].includes(a.role)||!finite(a.width,.1,8))throw Error('Unsupported drawing detail.');
+   if(a.kind==='polyline'&&(!Array.isArray(a.points)||a.points.length<2||a.points.length>60||a.points.some(q=>!Array.isArray(q)||q.length!==2)||typeof a.closed!=='boolean'))throw Error('Invalid detail outline.');
+   const nums=['line','stairArrow'].includes(a.kind)?[a.x1,a.y1,a.x2,a.y2]:a.kind==='polyline'?a.points.flat():a.kind==='symbol'?[a.x,a.y,a.scale,a.rotation]:[a.x,a.y,a.w,a.h];if(!nums.every(n=>finite(n,-360,1600)))throw Error('Invalid detail coordinates.');
+   if(a.kind==='stairArrow'&&(Math.hypot(a.x2-a.x1,a.y2-a.y1)<10||(a.x1!==a.x2&&a.y1!==a.y2)))throw Error('Invalid stair arrow.');
    if(['rect','ellipse'].includes(a.kind)&&(!finite(a.w,.01,1200)||!finite(a.h,.01,1200)))throw Error('Invalid detail size.');
    if(a.kind==='symbol'&&a.type==='sinkBank'&&(!Number.isInteger(a.basinCount)||a.basinCount<1||a.basinCount>20))throw Error('Invalid sink-bank count.');
    if(a.kind==='symbol'&&(!(Object.hasOwn(SYMBOLS,a.type)||a.type==='sinkBank')||!finite(a.scale,.01,5)))throw Error('Invalid fixture symbol.');

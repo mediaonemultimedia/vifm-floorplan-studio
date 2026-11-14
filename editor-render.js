@@ -1,4 +1,5 @@
 import {draftHorizontalExtent} from './draft-geometry.js';
+import {diagramDetailMarkup} from './diagram-details.js';
 import {planPoint,escapeXML as e} from './model.js';
 import {deckDoors} from './reference-style.js';
 import {stairMarkup} from './stairs.js';
@@ -12,7 +13,7 @@ function fixture(f,p){
 }
 function details(d,p){
  if(p.coordinates!=='drawing')return stairMarkup(d,p,deckDoors(d,p)).replace(/stroke-width="[^\"]+"/g,`stroke-width="${p.theme.lines.detail}"`)+fixtureLayout(d,p).map(f=>fixture(f,p)).join('')+dockMarkup(p).replace(/font-size="[^\"]+"/g,`font-size="${p.theme.text.detail}"`);
- return (d.details||[]).map(a=>{if(a.kind==='symbol')return fixture(a,p);const attrs=`fill="none" stroke="${p.ink}" stroke-width="${p.theme.lines[a.role]}" stroke-linecap="square"`;if(a.kind==='line')return `<line x1="${a.x1}" y1="${a.y1}" x2="${a.x2}" y2="${a.y2}" ${attrs}/>`;if(a.kind==='ellipse')return `<ellipse cx="${a.x+a.w/2}" cy="${a.y+a.h/2}" rx="${a.w/2}" ry="${a.h/2}" ${attrs}/>`;return `<rect x="${a.x}" y="${a.y}" width="${a.w}" height="${a.h}" ${attrs}/>`;}).join('');
+ return (d.details||[]).map(a=>{if(a.kind==='symbol')return fixture(a,p);if(['polyline','stairArrow'].includes(a.kind))return diagramDetailMarkup(a,p);const attrs=`fill="none" stroke="${p.ink}" stroke-width="${p.theme.lines[a.role]}" stroke-linecap="square"`;if(a.kind==='line')return `<line x1="${a.x1}" y1="${a.y1}" x2="${a.x2}" y2="${a.y2}" ${attrs}/>`;if(a.kind==='ellipse')return `<ellipse cx="${a.x+a.w/2}" cy="${a.y+a.h/2}" rx="${a.w/2}" ry="${a.h/2}" ${attrs}/>`;return `<rect x="${a.x}" y="${a.y}" width="${a.w}" height="${a.h}" ${attrs}/>`;}).join('');
 }
 function doorPaths(d,p){
  if(p.coordinates!=='drawing')return deckDoors(d,p);

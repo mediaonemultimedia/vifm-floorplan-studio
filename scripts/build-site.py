@@ -14,7 +14,7 @@ if destination.exists():
 destination.mkdir()
 for folder in ('assets', 'vendor'):
     shutil.copytree(root / folder, destination / folder)
-for name in ('DESIGN.md', 'PRODUCT.md', 'docs/reviews/2026-10-27-barco-manual-v2.md'):
+for name in ('DESIGN.md', 'PRODUCT.md', 'docs/reviews/2026-10-27-barco-manual-v2.md', 'docs/reviews/2026-11-13-odyssey-v2.md'):
     target = destination / name
     target.parent.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(root / name, target)

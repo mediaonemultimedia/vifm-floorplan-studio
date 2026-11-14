@@ -1,0 +1,4355 @@
+{
+  "version": 1,
+  "editorRevision": 1,
+  "id": "odyssey102",
+  "coordinates": "drawing",
+  "name": "ODYSSEY 102",
+  "length": 130,
+  "width": 46,
+  "ink": "#18331e",
+  "header": "#19331f",
+  "paper": "#e9e3db",
+  "wallWidth": 2.42,
+  "status": "Schematic · not to scale",
+  "pageSize": "Original 11 × 17",
+  "notes": "PDF corrections applied in V2; original V1 geometry and per-browser working states remain archived.",
+  "bounds": {
+    "width": 306,
+    "height": 892.5
+  },
+  "theme": {
+    "text": {
+      "room": 20,
+      "label": 7.6,
+      "detail": 4.8,
+      "caption": 12.92,
+      "title": 30.91,
+      "subtitle": 24,
+      "annotation": 8.88,
+      "marker": 70
+    },
+    "lines": {
+      "wall": 2.42,
+      "secondary": 1.15,
+      "detail": 0.85,
+      "threshold": 1.6,
+      "dash": 2.1
+    }
+  },
+  "decks": [
+    {
+      "id": "main",
+      "name": "LOWER LEVEL",
+      "paths": [],
+      "walls": [
+        {
+          "id": "main-port-perimeter-0",
+          "role": "wall",
+          "x1": 0,
+          "y1": 0,
+          "x2": 0,
+          "y2": 479.3
+        },
+        {
+          "id": "main-port-perimeter-1",
+          "role": "wall",
+          "x1": 0,
+          "y1": 503.3,
+          "x2": 0,
+          "y2": 892.5
+        },
+        {
+          "id": "main-starboard-perimeter-0",
+          "role": "wall",
+          "x1": 306,
+          "y1": 0,
+          "x2": 306,
+          "y2": 450.5
+        },
+        {
+          "id": "main-starboard-perimeter-1",
+          "role": "wall",
+          "x1": 306,
+          "y1": 474.5,
+          "x2": 306,
+          "y2": 892.5
+        },
+        {
+          "id": "main-rear-building-wall-0",
+          "role": "wall",
+          "x1": 0,
+          "y1": 0,
+          "x2": 72.25,
+          "y2": 0
+        },
+        {
+          "id": "main-rear-building-wall-1",
+          "role": "wall",
+          "x1": 96.25,
+          "y1": 0,
+          "x2": 141,
+          "y2": 0
+        },
+        {
+          "id": "main-rear-building-wall-2",
+          "role": "wall",
+          "x1": 165,
+          "y1": 0,
+          "x2": 306,
+          "y2": 0
+        },
+        {
+          "id": "main-generator-side-wall-0",
+          "role": "wall",
+          "x1": 124.25,
+          "y1": 0,
+          "x2": 124.25,
+          "y2": 269.45
+        },
+        {
+          "id": "main-generator-workshop-divider-0",
+          "role": "wall",
+          "x1": 0,
+          "y1": 149.6,
+          "x2": 124.25,
+          "y2": 149.6
+        },
+        {
+          "id": "main-workshop-divider-0",
+          "role": "wall",
+          "x1": 62.9,
+          "y1": 149.6,
+          "x2": 62.9,
+          "y2": 269.45
+        },
+        {
+          "id": "main-workshop-left-front-0",
+          "role": "wall",
+          "x1": 0,
+          "y1": 269.45,
+          "x2": 7.45,
+          "y2": 269.45
+        },
+        {
+          "id": "main-workshop-left-front-1",
+          "role": "wall",
+          "x1": 31.45,
+          "y1": 269.45,
+          "x2": 31.450000000000003,
+          "y2": 269.45
+        },
+        {
+          "id": "main-workshop-left-front-2",
+          "role": "wall",
+          "x1": 55.45,
+          "y1": 269.45,
+          "x2": 62.9,
+          "y2": 269.45
+        },
+        {
+          "id": "main-workshop-right-front-0",
+          "role": "wall",
+          "x1": 62.9,
+          "y1": 269.45,
+          "x2": 69.575,
+          "y2": 269.45
+        },
+        {
+          "id": "main-workshop-right-front-1",
+          "role": "wall",
+          "x1": 117.575,
+          "y1": 269.45,
+          "x2": 124.25,
+          "y2": 269.45
+        },
+        {
+          "id": "main-fuel-separation-0",
+          "role": "wall",
+          "x1": 169.15,
+          "y1": 7.65,
+          "x2": 169.15,
+          "y2": 261.95
+        },
+        {
+          "id": "main-fuel-front-wall-0",
+          "role": "wall",
+          "x1": 169.15,
+          "y1": 261.95,
+          "x2": 306,
+          "y2": 261.95
+        },
+        {
+          "id": "main-central-upper-entry-wall-0",
+          "role": "wall",
+          "x1": 130.9,
+          "y1": 242,
+          "x2": 135.9,
+          "y2": 242
+        },
+        {
+          "id": "main-central-upper-entry-wall-1",
+          "role": "wall",
+          "x1": 159.9,
+          "y1": 242,
+          "x2": 164.9,
+          "y2": 242
+        },
+        {
+          "id": "main-central-exit-wall-0",
+          "role": "wall",
+          "x1": 0,
+          "y1": 351.9,
+          "x2": 135.9,
+          "y2": 351.9
+        },
+        {
+          "id": "main-central-exit-wall-1",
+          "role": "wall",
+          "x1": 159.9,
+          "y1": 351.9,
+          "x2": 306,
+          "y2": 351.9
+        },
+        {
+          "id": "main-bench-return-0",
+          "role": "wall",
+          "x1": 117.3,
+          "y1": 385.9,
+          "x2": 117.3,
+          "y2": 392.25
+        },
+        {
+          "id": "main-bathroom-rear-wall-0",
+          "role": "wall",
+          "x1": 0,
+          "y1": 392.25,
+          "x2": 117.3,
+          "y2": 392.25
+        },
+        {
+          "id": "main-bathroom-side-wall-0",
+          "role": "wall",
+          "x1": 90.95,
+          "y1": 392.25,
+          "x2": 90.95,
+          "y2": 395.25
+        },
+        {
+          "id": "main-bathroom-side-wall-1",
+          "role": "wall",
+          "x1": 90.95,
+          "y1": 419.25,
+          "x2": 90.95,
+          "y2": 463.25
+        },
+        {
+          "id": "main-bathroom-front-wall-0",
+          "role": "wall",
+          "x1": 0,
+          "y1": 463.25,
+          "x2": 90.95,
+          "y2": 463.25
+        },
+        {
+          "id": "main-service-top-0",
+          "role": "wall",
+          "x1": 90.95,
+          "y1": 420.75,
+          "x2": 233.75,
+          "y2": 420.75
+        },
+        {
+          "id": "main-service-bottom-0",
+          "role": "wall",
+          "x1": 90.95,
+          "y1": 450.5,
+          "x2": 105.725,
+          "y2": 450.5
+        },
+        {
+          "id": "main-service-bottom-1",
+          "role": "wall",
+          "x1": 129.725,
+          "y1": 450.5,
+          "x2": 233.75,
+          "y2": 450.5
+        },
+        {
+          "id": "main-service-divider-0-0",
+          "role": "wall",
+          "x1": 144.5,
+          "y1": 420.75,
+          "x2": 144.5,
+          "y2": 450.5
+        },
+        {
+          "id": "main-service-divider-1-0",
+          "role": "wall",
+          "x1": 191.25,
+          "y1": 420.75,
+          "x2": 191.25,
+          "y2": 450.5
+        },
+        {
+          "id": "main-service-divider-2-0",
+          "role": "wall",
+          "x1": 233.75,
+          "y1": 420.75,
+          "x2": 233.75,
+          "y2": 450.5
+        },
+        {
+          "id": "main-shared-bathroom-front-0",
+          "role": "wall",
+          "x1": 0,
+          "y1": 506.6,
+          "x2": 92,
+          "y2": 506.6
+        },
+        {
+          "id": "main-shared-bathroom-front-1",
+          "role": "wall",
+          "x1": 116,
+          "y1": 506.6,
+          "x2": 119,
+          "y2": 506.6
+        },
+        {
+          "id": "main-shared-bathroom-side-0",
+          "role": "wall",
+          "x1": 119,
+          "y1": 506.6,
+          "x2": 119,
+          "y2": 578
+        },
+        {
+          "id": "main-toilet-stall-fronts-0",
+          "role": "wall",
+          "x1": 0,
+          "y1": 527,
+          "x2": 8.5,
+          "y2": 527
+        },
+        {
+          "id": "main-toilet-stall-fronts-1",
+          "role": "wall",
+          "x1": 32.5,
+          "y1": 527,
+          "x2": 45.9,
+          "y2": 527
+        },
+        {
+          "id": "main-toilet-stall-fronts-2",
+          "role": "wall",
+          "x1": 69.9,
+          "y1": 527,
+          "x2": 74.8,
+          "y2": 527
+        },
+        {
+          "id": "main-toilet-divider-0-0",
+          "role": "wall",
+          "x1": 37.4,
+          "y1": 527,
+          "x2": 37.4,
+          "y2": 578
+        },
+        {
+          "id": "main-toilet-divider-1-0",
+          "role": "wall",
+          "x1": 74.8,
+          "y1": 527,
+          "x2": 74.8,
+          "y2": 578
+        },
+        {
+          "id": "main-laundry-shower-top-0",
+          "role": "wall",
+          "x1": 176.8,
+          "y1": 476,
+          "x2": 306,
+          "y2": 476
+        },
+        {
+          "id": "main-laundry-shower-side-0",
+          "role": "wall",
+          "x1": 176.8,
+          "y1": 476,
+          "x2": 176.8,
+          "y2": 538
+        },
+        {
+          "id": "main-laundry-shower-side-1",
+          "role": "wall",
+          "x1": 176.8,
+          "y1": 562,
+          "x2": 176.8,
+          "y2": 578
+        },
+        {
+          "id": "main-laundry-shower-bottom-0",
+          "role": "wall",
+          "x1": 176.8,
+          "y1": 578,
+          "x2": 306,
+          "y2": 578
+        },
+        {
+          "id": "main-shower-divider-0-0",
+          "role": "wall",
+          "x1": 221,
+          "y1": 476,
+          "x2": 221,
+          "y2": 527
+        },
+        {
+          "id": "main-shower-divider-1-0",
+          "role": "wall",
+          "x1": 263.5,
+          "y1": 476,
+          "x2": 263.5,
+          "y2": 527
+        },
+        {
+          "id": "main-shower-stall-fronts-0",
+          "role": "wall",
+          "x1": 221,
+          "y1": 527,
+          "x2": 225.25,
+          "y2": 527
+        },
+        {
+          "id": "main-shower-stall-fronts-1",
+          "role": "wall",
+          "x1": 249.25,
+          "y1": 527,
+          "x2": 267.75,
+          "y2": 527
+        },
+        {
+          "id": "main-shower-stall-fronts-2",
+          "role": "wall",
+          "x1": 291.75,
+          "y1": 527,
+          "x2": 306,
+          "y2": 527
+        },
+        {
+          "id": "main-bedroom-corridor-119-0",
+          "role": "wall",
+          "x1": 119,
+          "y1": 578,
+          "x2": 119,
+          "y2": 583.9499999999999
+        },
+        {
+          "id": "main-bedroom-corridor-119-1",
+          "role": "wall",
+          "x1": 119,
+          "y1": 607.9499999999999,
+          "x2": 119,
+          "y2": 673.85
+        },
+        {
+          "id": "main-bedroom-corridor-119-2",
+          "role": "wall",
+          "x1": 119,
+          "y1": 697.85,
+          "x2": 119,
+          "y2": 709.75
+        },
+        {
+          "id": "main-bedroom-corridor-119-3",
+          "role": "wall",
+          "x1": 119,
+          "y1": 733.75,
+          "x2": 119,
+          "y2": 799.65
+        },
+        {
+          "id": "main-bedroom-corridor-119-4",
+          "role": "wall",
+          "x1": 119,
+          "y1": 823.65,
+          "x2": 119,
+          "y2": 835.55
+        },
+        {
+          "id": "main-bedroom-corridor-119-5",
+          "role": "wall",
+          "x1": 119,
+          "y1": 859.55,
+          "x2": 119,
+          "y2": 892.5
+        },
+        {
+          "id": "main-bedroom-corridor-187-0",
+          "role": "wall",
+          "x1": 187,
+          "y1": 578,
+          "x2": 187,
+          "y2": 583.9499999999999
+        },
+        {
+          "id": "main-bedroom-corridor-187-1",
+          "role": "wall",
+          "x1": 187,
+          "y1": 607.9499999999999,
+          "x2": 187,
+          "y2": 673.85
+        },
+        {
+          "id": "main-bedroom-corridor-187-2",
+          "role": "wall",
+          "x1": 187,
+          "y1": 697.85,
+          "x2": 187,
+          "y2": 709.75
+        },
+        {
+          "id": "main-bedroom-corridor-187-3",
+          "role": "wall",
+          "x1": 187,
+          "y1": 733.75,
+          "x2": 187,
+          "y2": 799.65
+        },
+        {
+          "id": "main-bedroom-corridor-187-4",
+          "role": "wall",
+          "x1": 187,
+          "y1": 823.65,
+          "x2": 187,
+          "y2": 835.55
+        },
+        {
+          "id": "main-bedroom-corridor-187-5",
+          "role": "wall",
+          "x1": 187,
+          "y1": 859.55,
+          "x2": 187,
+          "y2": 892.5
+        },
+        {
+          "id": "main-bedroom-left-divider-0-0",
+          "role": "wall",
+          "x1": 0,
+          "y1": 578,
+          "x2": 119,
+          "y2": 578
+        },
+        {
+          "id": "main-bedroom-right-divider-0-0",
+          "role": "wall",
+          "x1": 187,
+          "y1": 578,
+          "x2": 306,
+          "y2": 578
+        },
+        {
+          "id": "main-bedroom-left-divider-1-0",
+          "role": "wall",
+          "x1": 0,
+          "y1": 640.9,
+          "x2": 119,
+          "y2": 640.9
+        },
+        {
+          "id": "main-bedroom-right-divider-1-0",
+          "role": "wall",
+          "x1": 187,
+          "y1": 640.9,
+          "x2": 306,
+          "y2": 640.9
+        },
+        {
+          "id": "main-bedroom-left-divider-2-0",
+          "role": "wall",
+          "x1": 0,
+          "y1": 703.8,
+          "x2": 119,
+          "y2": 703.8
+        },
+        {
+          "id": "main-bedroom-right-divider-2-0",
+          "role": "wall",
+          "x1": 187,
+          "y1": 703.8,
+          "x2": 306,
+          "y2": 703.8
+        },
+        {
+          "id": "main-bedroom-left-divider-3-0",
+          "role": "wall",
+          "x1": 0,
+          "y1": 766.7,
+          "x2": 119,
+          "y2": 766.7
+        },
+        {
+          "id": "main-bedroom-right-divider-3-0",
+          "role": "wall",
+          "x1": 187,
+          "y1": 766.7,
+          "x2": 306,
+          "y2": 766.7
+        },
+        {
+          "id": "main-bedroom-left-divider-4-0",
+          "role": "wall",
+          "x1": 0,
+          "y1": 829.6,
+          "x2": 119,
+          "y2": 829.6
+        },
+        {
+          "id": "main-bedroom-right-divider-4-0",
+          "role": "wall",
+          "x1": 187,
+          "y1": 829.6,
+          "x2": 306,
+          "y2": 829.6
+        },
+        {
+          "id": "main-forward-perimeter-0",
+          "role": "wall",
+          "x1": 0,
+          "y1": 892.5,
+          "x2": 141,
+          "y2": 892.5
+        },
+        {
+          "id": "main-forward-perimeter-1",
+          "role": "wall",
+          "x1": 165,
+          "y1": 892.5,
+          "x2": 306,
+          "y2": 892.5
+        }
+      ],
+      "labels": [
+        {
+          "id": "main-label-0",
+          "kind": "label",
+          "text": "REAR RAILING",
+          "x": 153,
+          "y": -43,
+          "size": 5.95,
+          "align": "middle",
+          "rotation": 0,
+          "textStyle": "detail"
+        },
+        {
+          "id": "main-label-1",
+          "kind": "label",
+          "text": "BENCH",
+          "x": 6.8,
+          "y": 49.214999999999996,
+          "size": 4.675,
+          "align": "middle",
+          "rotation": -90,
+          "textStyle": "detail",
+          "centerArea": {
+            "x": 2.55,
+            "y": 20.4,
+            "w": 8.5,
+            "h": 55.25
+          }
+        },
+        {
+          "id": "main-label-2",
+          "kind": "label",
+          "text": "GEN 1",
+          "x": 41.225,
+          "y": 99.11,
+          "size": 5.95,
+          "align": "middle",
+          "rotation": 0,
+          "textStyle": "detail",
+          "centerArea": {
+            "x": 22.95,
+            "y": 24.65,
+            "w": 36.55,
+            "h": 61.199999999999996
+          }
+        },
+        {
+          "id": "main-label-3",
+          "kind": "label",
+          "text": "GEN 2",
+          "x": 85.425,
+          "y": 84.66,
+          "size": 5.95,
+          "align": "middle",
+          "rotation": 0,
+          "textStyle": "detail",
+          "centerArea": {
+            "x": 72.25,
+            "y": 24.65,
+            "w": 26.349999999999998,
+            "h": 46.75
+          }
+        },
+        {
+          "id": "main-label-4",
+          "kind": "label",
+          "text": "SHELF",
+          "x": 114.325,
+          "y": 68.34,
+          "size": 4.675,
+          "align": "middle",
+          "rotation": -90,
+          "textStyle": "detail",
+          "centerArea": {
+            "x": 107.95,
+            "y": 64,
+            "w": 9,
+            "h": 42
+          }
+        },
+        {
+          "id": "main-label-5",
+          "kind": "label",
+          "text": "COMP.",
+          "x": 108.8,
+          "y": 143.5,
+          "size": 5.1,
+          "align": "middle",
+          "rotation": 0,
+          "textStyle": "detail"
+        },
+        {
+          "id": "main-label-6",
+          "kind": "label",
+          "text": "SHELF",
+          "x": 29.75,
+          "y": 160.99,
+          "size": 4.675,
+          "align": "middle",
+          "rotation": 0,
+          "textStyle": "detail",
+          "centerArea": {
+            "x": 3.4,
+            "y": 149.6,
+            "w": 52.699999999999996,
+            "h": 20.4
+          }
+        },
+        {
+          "id": "main-label-7",
+          "kind": "label",
+          "text": "BENCH",
+          "x": 91.8,
+          "y": 160.99,
+          "size": 4.675,
+          "align": "middle",
+          "rotation": 0,
+          "textStyle": "detail",
+          "centerArea": {
+            "x": 62.05,
+            "y": 149.6,
+            "w": 59.5,
+            "h": 20.4
+          }
+        },
+        {
+          "id": "main-label-8",
+          "kind": "label",
+          "text": "BENCH / SHELVES",
+          "x": 28.9,
+          "y": 231.03,
+          "size": 5.1,
+          "align": "middle",
+          "rotation": -90,
+          "textStyle": "detail",
+          "centerArea": {
+            "x": 3.4,
+            "y": 183.6,
+            "w": 11.9,
+            "h": 85.85
+          }
+        },
+        {
+          "id": "main-label-9",
+          "kind": "label",
+          "text": "BENCH / SHELVES",
+          "x": 94.35,
+          "y": 231.03,
+          "size": 5.1,
+          "align": "middle",
+          "rotation": -90,
+          "textStyle": "detail",
+          "centerArea": {
+            "x": 109.64999999999999,
+            "y": 183.6,
+            "w": 11.9,
+            "h": 85.85
+          }
+        },
+        {
+          "id": "main-label-10",
+          "kind": "label",
+          "text": "GAS",
+          "x": 238.42499999999998,
+          "y": 43.095,
+          "size": 7.6499999999999995,
+          "align": "middle",
+          "rotation": 0,
+          "textStyle": "detail",
+          "centerArea": {
+            "x": 189.975,
+            "y": 20.4,
+            "w": 96.9,
+            "h": 39.95
+          }
+        },
+        {
+          "id": "main-label-11",
+          "kind": "label",
+          "text": "DIESEL",
+          "x": 238.42499999999998,
+          "y": 103.02,
+          "size": 7.6499999999999995,
+          "align": "middle",
+          "rotation": 0,
+          "textStyle": "detail",
+          "centerArea": {
+            "x": 179.35,
+            "y": 77.35,
+            "w": 118.14999999999999,
+            "h": 45.9
+          }
+        },
+        {
+          "id": "main-label-12",
+          "kind": "label",
+          "text": "DIESEL",
+          "x": 238.42499999999998,
+          "y": 167.61999999999998,
+          "size": 7.6499999999999995,
+          "align": "middle",
+          "rotation": 0,
+          "textStyle": "detail",
+          "centerArea": {
+            "x": 179.35,
+            "y": 141.95,
+            "w": 118.14999999999999,
+            "h": 45.9
+          }
+        },
+        {
+          "id": "main-label-13",
+          "kind": "label",
+          "text": "JET",
+          "x": 238.42499999999998,
+          "y": 236.89499999999998,
+          "size": 7.6499999999999995,
+          "align": "middle",
+          "rotation": 0,
+          "textStyle": "detail",
+          "centerArea": {
+            "x": 179.35,
+            "y": 209.95,
+            "w": 118.14999999999999,
+            "h": 48.449999999999996
+          }
+        },
+        {
+          "id": "main-label-14",
+          "kind": "label",
+          "text": "MIXED",
+          "x": 194.225,
+          "y": 280.772,
+          "size": 4.59,
+          "align": "middle",
+          "rotation": 0,
+          "textStyle": "detail",
+          "centerArea": {
+            "x": 179.35,
+            "y": 268.6,
+            "w": 29.75,
+            "h": 23.8
+          }
+        },
+        {
+          "id": "main-label-15",
+          "kind": "label",
+          "text": "STRAIGHT GAS",
+          "x": 243.525,
+          "y": 280.908,
+          "size": 4.76,
+          "align": "middle",
+          "rotation": 0,
+          "textStyle": "detail",
+          "centerArea": {
+            "x": 212.5,
+            "y": 268.6,
+            "w": 62.05,
+            "h": 23.8
+          }
+        },
+        {
+          "id": "main-label-16",
+          "kind": "label",
+          "text": "INSTRUMENT",
+          "x": 286.45,
+          "y": 297.84,
+          "size": 4.675,
+          "align": "end",
+          "rotation": 0,
+          "textStyle": "detail"
+        },
+        {
+          "id": "main-label-17",
+          "kind": "label",
+          "text": "BENCH",
+          "x": 286.45,
+          "y": 306.34,
+          "size": 4.675,
+          "align": "end",
+          "rotation": 0,
+          "textStyle": "detail"
+        },
+        {
+          "id": "main-label-18",
+          "kind": "label",
+          "text": "UP",
+          "x": 147.9,
+          "y": 236,
+          "size": 5.5249999999999995,
+          "align": "middle",
+          "rotation": 0,
+          "textStyle": "detail"
+        },
+        {
+          "id": "main-label-19",
+          "kind": "label",
+          "text": "DOWN",
+          "x": 114.9,
+          "y": 300,
+          "size": 5.5249999999999995,
+          "align": "middle",
+          "rotation": 0,
+          "textStyle": "detail"
+        },
+        {
+          "id": "main-label-20",
+          "kind": "label",
+          "text": "DOWN",
+          "x": 180.9,
+          "y": 300,
+          "size": 5.5249999999999995,
+          "align": "middle",
+          "rotation": 0,
+          "textStyle": "detail"
+        },
+        {
+          "id": "main-label-21",
+          "kind": "label",
+          "text": "EXIT",
+          "x": 147.9,
+          "y": 345,
+          "size": 5.5249999999999995,
+          "align": "middle",
+          "rotation": 0,
+          "textStyle": "detail"
+        },
+        {
+          "id": "main-label-22",
+          "kind": "label",
+          "text": "STORAGE",
+          "x": 95,
+          "y": 426.5,
+          "size": 4.845,
+          "align": "start",
+          "rotation": 0,
+          "textStyle": "detail"
+        },
+        {
+          "id": "main-label-23",
+          "kind": "label",
+          "text": "BOILER",
+          "x": 243.1,
+          "y": 435.06399999999996,
+          "size": 4.08,
+          "align": "middle",
+          "rotation": -90,
+          "textStyle": "detail",
+          "centerArea": {
+            "x": 233.75,
+            "y": 420.75,
+            "w": 18.7,
+            "h": 29.75
+          }
+        },
+        {
+          "id": "main-label-24",
+          "kind": "label",
+          "text": "FURNACE",
+          "x": 263.925,
+          "y": 434.928,
+          "size": 4,
+          "align": "middle",
+          "rotation": -90,
+          "textStyle": "detail",
+          "centerArea": {
+            "x": 252.45,
+            "y": 420.75,
+            "w": 22.95,
+            "h": 29.75
+          }
+        },
+        {
+          "id": "main-label-25",
+          "kind": "label",
+          "text": "HWT / TANKS",
+          "x": 283.05,
+          "y": 456.58599999999996,
+          "size": 4.42,
+          "align": "middle",
+          "rotation": 0,
+          "textStyle": "detail"
+        },
+        {
+          "id": "main-label-26",
+          "kind": "label",
+          "text": "EXIT",
+          "x": 331.5,
+          "y": 463.42,
+          "size": 5.5249999999999995,
+          "align": "start",
+          "rotation": 0,
+          "textStyle": "detail"
+        },
+        {
+          "id": "main-label-27",
+          "kind": "label",
+          "text": "UP",
+          "x": 62,
+          "y": 470,
+          "size": 5.5249999999999995,
+          "align": "middle",
+          "rotation": 0,
+          "textStyle": "detail"
+        },
+        {
+          "id": "main-label-30",
+          "kind": "label",
+          "text": "LAUNDRY",
+          "x": 199.75,
+          "y": 513.57,
+          "size": 5.5249999999999995,
+          "align": "middle",
+          "rotation": 0,
+          "textStyle": "detail",
+          "centerArea": {
+            "x": 176.8,
+            "y": 502.5,
+            "w": 44.2,
+            "h": 21
+          }
+        },
+        {
+          "id": "main-label-31",
+          "kind": "label",
+          "text": "SHOWERS",
+          "x": 263.5,
+          "y": 543.66,
+          "size": 5.95,
+          "align": "middle",
+          "rotation": 0,
+          "textStyle": "detail"
+        },
+        {
+          "id": "main-label-32",
+          "kind": "room",
+          "text": "L1",
+          "x": -10.2,
+          "y": 611.32,
+          "size": 7.6499999999999995,
+          "align": "end",
+          "rotation": 0,
+          "textStyle": "room",
+          "centerArea": {
+            "x": 51,
+            "y": 578,
+            "w": 51,
+            "h": 62.9
+          }
+        },
+        {
+          "id": "main-label-33",
+          "kind": "room",
+          "text": "R1",
+          "x": 316.2,
+          "y": 611.32,
+          "size": 7.6499999999999995,
+          "align": "start",
+          "rotation": 0,
+          "textStyle": "room",
+          "centerArea": {
+            "x": 204,
+            "y": 578,
+            "w": 51,
+            "h": 62.9
+          }
+        },
+        {
+          "id": "main-label-34",
+          "kind": "room",
+          "text": "L2",
+          "x": -10.2,
+          "y": 674.22,
+          "size": 7.6499999999999995,
+          "align": "end",
+          "rotation": 0,
+          "textStyle": "room",
+          "centerArea": {
+            "x": 51,
+            "y": 640.9,
+            "w": 51,
+            "h": 62.9
+          }
+        },
+        {
+          "id": "main-label-35",
+          "kind": "room",
+          "text": "R2",
+          "x": 316.2,
+          "y": 674.22,
+          "size": 7.6499999999999995,
+          "align": "start",
+          "rotation": 0,
+          "textStyle": "room",
+          "centerArea": {
+            "x": 204,
+            "y": 640.9,
+            "w": 51,
+            "h": 62.9
+          }
+        },
+        {
+          "id": "main-label-36",
+          "kind": "room",
+          "text": "L3",
+          "x": -10.2,
+          "y": 737.12,
+          "size": 7.6499999999999995,
+          "align": "end",
+          "rotation": 0,
+          "textStyle": "room",
+          "centerArea": {
+            "x": 51,
+            "y": 703.8,
+            "w": 51,
+            "h": 62.9
+          }
+        },
+        {
+          "id": "main-label-37",
+          "kind": "room",
+          "text": "R3",
+          "x": 316.2,
+          "y": 737.12,
+          "size": 7.6499999999999995,
+          "align": "start",
+          "rotation": 0,
+          "textStyle": "room",
+          "centerArea": {
+            "x": 204,
+            "y": 703.8,
+            "w": 51,
+            "h": 62.9
+          }
+        },
+        {
+          "id": "main-label-38",
+          "kind": "room",
+          "text": "L4",
+          "x": -10.2,
+          "y": 800.02,
+          "size": 7.6499999999999995,
+          "align": "end",
+          "rotation": 0,
+          "textStyle": "room",
+          "centerArea": {
+            "x": 51,
+            "y": 766.6999999999999,
+            "w": 51,
+            "h": 62.9
+          }
+        },
+        {
+          "id": "main-label-39",
+          "kind": "room",
+          "text": "R4",
+          "x": 316.2,
+          "y": 800.02,
+          "size": 7.6499999999999995,
+          "align": "start",
+          "rotation": 0,
+          "textStyle": "room",
+          "centerArea": {
+            "x": 204,
+            "y": 766.6999999999999,
+            "w": 51,
+            "h": 62.9
+          }
+        },
+        {
+          "id": "main-label-40",
+          "kind": "room",
+          "text": "L5",
+          "x": -10.2,
+          "y": 862.9200000000001,
+          "size": 7.6499999999999995,
+          "align": "end",
+          "rotation": 0,
+          "textStyle": "room",
+          "centerArea": {
+            "x": 51,
+            "y": 829.6,
+            "w": 51,
+            "h": 62.9
+          }
+        },
+        {
+          "id": "main-label-41",
+          "kind": "room",
+          "text": "R5",
+          "x": 316.2,
+          "y": 862.9200000000001,
+          "size": 7.6499999999999995,
+          "align": "start",
+          "rotation": 0,
+          "textStyle": "room",
+          "centerArea": {
+            "x": 204,
+            "y": 829.6,
+            "w": 51,
+            "h": 62.9
+          }
+        },
+        {
+          "id": "main-label-42",
+          "kind": "label",
+          "text": "EXIT",
+          "x": 153,
+          "y": 925.31,
+          "size": 5.95,
+          "align": "middle",
+          "rotation": 0,
+          "textStyle": "detail"
+        },
+        {
+          "id": "main-chain-label",
+          "kind": "label",
+          "text": "CHAINS",
+          "x": -21,
+          "y": -15.5,
+          "size": 4.8,
+          "align": "middle",
+          "rotation": -90,
+          "textStyle": "detail",
+          "centerArea": {
+            "x": -27,
+            "y": -30,
+            "w": 12,
+            "h": 29
+          }
+        },
+        {
+          "id": "main-middle-bench-label",
+          "kind": "label",
+          "text": "BENCH / SHELVES",
+          "x": 54.75,
+          "y": 226.52499999999998,
+          "size": 4.8,
+          "align": "middle",
+          "rotation": -90,
+          "textStyle": "detail",
+          "centerArea": {
+            "x": 49.3,
+            "y": 183.6,
+            "w": 10.9,
+            "h": 85.85
+          }
+        },
+        {
+          "id": "main-short-bench-label",
+          "kind": "label",
+          "text": "BENCH",
+          "x": 75.8,
+          "y": 250.75,
+          "size": 4.8,
+          "align": "middle",
+          "rotation": -90,
+          "textStyle": "detail",
+          "centerArea": {
+            "x": 65.6,
+            "y": 232.05,
+            "w": 20.4,
+            "h": 37.4
+          }
+        },
+        {
+          "id": "main-left-l-bench-label",
+          "kind": "label",
+          "text": "BENCH",
+          "x": 55.25,
+          "y": 365.075,
+          "size": 4.8,
+          "align": "middle",
+          "rotation": 0,
+          "textStyle": "detail",
+          "centerArea": {
+            "x": 5.95,
+            "y": 358.7,
+            "w": 98.6,
+            "h": 12.75
+          }
+        },
+        {
+          "id": "main-right-l-bench-label",
+          "kind": "label",
+          "text": "BENCH",
+          "x": 236.725,
+          "y": 365.075,
+          "size": 4.8,
+          "align": "middle",
+          "rotation": 0,
+          "textStyle": "detail",
+          "centerArea": {
+            "x": 184.45,
+            "y": 358.7,
+            "w": 104.55,
+            "h": 12.75
+          }
+        },
+        {
+          "id": "main-lower-bench-label",
+          "kind": "label",
+          "text": "BENCH",
+          "x": 45.95,
+          "y": 383.75,
+          "size": 4.8,
+          "align": "middle",
+          "rotation": 0,
+          "textStyle": "detail",
+          "centerArea": {
+            "x": 5.95,
+            "y": 378.65,
+            "w": 80,
+            "h": 10.2
+          }
+        }
+      ],
+      "annotations": [],
+      "rects": [],
+      "details": [
+        {
+          "id": "main-detail-9",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 2.55,
+          "y": 20.4,
+          "w": 8.5,
+          "h": 55.25
+        },
+        {
+          "id": "main-detail-10",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 22.95,
+          "y": 24.65,
+          "w": 36.55,
+          "h": 61.199999999999996
+        },
+        {
+          "id": "main-detail-11",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 72.25,
+          "y": 24.65,
+          "w": 26.349999999999998,
+          "h": 46.75
+        },
+        {
+          "id": "main-detail-12",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 107.95,
+          "y": 64,
+          "w": 9,
+          "h": 42
+        },
+        {
+          "id": "main-detail-13",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 95.2,
+          "y": 85,
+          "w": 9.35,
+          "h": 18.7
+        },
+        {
+          "id": "main-detail-14",
+          "kind": "ellipse",
+          "role": "detail",
+          "width": 1,
+          "x": 99.45,
+          "y": 121.55,
+          "w": 18.7,
+          "h": 13.6
+        },
+        {
+          "id": "main-detail-15",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 3.4,
+          "y": 149.6,
+          "w": 52.699999999999996,
+          "h": 20.4
+        },
+        {
+          "id": "main-detail-16",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 62.05,
+          "y": 149.6,
+          "w": 59.5,
+          "h": 20.4
+        },
+        {
+          "id": "main-detail-17",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 3.4,
+          "y": 183.6,
+          "w": 11.9,
+          "h": 85.85
+        },
+        {
+          "id": "main-detail-18",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 49.3,
+          "y": 183.6,
+          "w": 10.9,
+          "h": 85.85
+        },
+        {
+          "id": "main-detail-19",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 109.64999999999999,
+          "y": 183.6,
+          "w": 11.9,
+          "h": 85.85
+        },
+        {
+          "id": "main-detail-20",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 65.6,
+          "y": 232.04999999999998,
+          "w": 20.4,
+          "h": 37.4
+        },
+        {
+          "id": "main-detail-21",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 189.975,
+          "y": 20.4,
+          "w": 96.9,
+          "h": 39.949999999999996
+        },
+        {
+          "id": "main-detail-22",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 179.35,
+          "y": 77.35,
+          "w": 118.14999999999999,
+          "h": 45.9
+        },
+        {
+          "id": "main-detail-23",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 179.35,
+          "y": 141.95,
+          "w": 118.14999999999999,
+          "h": 45.9
+        },
+        {
+          "id": "main-detail-24",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 179.35,
+          "y": 209.95,
+          "w": 118.14999999999999,
+          "h": 48.449999999999996
+        },
+        {
+          "id": "main-detail-25",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 179.35,
+          "y": 268.59999999999997,
+          "w": 29.75,
+          "h": 23.8
+        },
+        {
+          "id": "main-detail-26",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 212.5,
+          "y": 268.59999999999997,
+          "w": 62.05,
+          "h": 23.8
+        },
+        {
+          "id": "main-detail-27",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 292.4,
+          "y": 289.84999999999997,
+          "w": 11.049999999999999,
+          "h": 28.9
+        },
+        {
+          "id": "main-detail-74",
+          "kind": "rect",
+          "role": "detail",
+          "width": 1,
+          "x": 2.55,
+          "y": 423.3,
+          "w": 11.9,
+          "h": 13.6
+        },
+        {
+          "id": "main-detail-75",
+          "kind": "ellipse",
+          "role": "detail",
+          "width": 1,
+          "x": 5.5249999999999995,
+          "y": 426.428,
+          "w": 5.95,
+          "h": 7.344
+        },
+        {
+          "id": "main-detail-76",
+          "kind": "line",
+          "role": "detail",
+          "width": 1,
+          "x1": 8.5,
+          "y1": 430.1,
+          "x2": 3.4,
+          "y2": 430.1
+        },
+        {
+          "id": "main-detail-77",
+          "kind": "symbol",
+          "role": "detail",
+          "width": 1,
+          "type": "toilet",
+          "x": 11.049999999999999,
+          "y": 449.65,
+          "scale": 0.7224999999999999,
+          "rotation": 270
+        },
+        {
+          "id": "main-detail-78",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 233.75,
+          "y": 420.75,
+          "w": 18.7,
+          "h": 29.75
+        },
+        {
+          "id": "main-detail-79",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 252.45,
+          "y": 420.75,
+          "w": 22.95,
+          "h": 29.75
+        },
+        {
+          "id": "main-detail-80",
+          "kind": "ellipse",
+          "role": "detail",
+          "width": 1,
+          "x": 277.09999999999997,
+          "y": 424.15,
+          "w": 12.75,
+          "h": 17
+        },
+        {
+          "id": "main-detail-81",
+          "kind": "ellipse",
+          "role": "detail",
+          "width": 1,
+          "x": 294.09999999999997,
+          "y": 422.45,
+          "w": 8.5,
+          "h": 10.2
+        },
+        {
+          "id": "main-detail-82",
+          "kind": "ellipse",
+          "role": "detail",
+          "width": 1,
+          "x": 294.09999999999997,
+          "y": 437.75,
+          "w": 8.5,
+          "h": 10.2
+        },
+        {
+          "id": "main-detail-105",
+          "kind": "rect",
+          "role": "detail",
+          "width": 1,
+          "x": 238.731,
+          "y": 480.131,
+          "w": 18.938,
+          "h": 18.937999999999978
+        },
+        {
+          "id": "main-detail-106",
+          "kind": "ellipse",
+          "role": "detail",
+          "width": 1,
+          "x": 247.877,
+          "y": 489.277,
+          "w": 0.663,
+          "h": 0.663
+        },
+        {
+          "id": "main-detail-107",
+          "kind": "rect",
+          "role": "detail",
+          "width": 1,
+          "x": 281.231,
+          "y": 480.131,
+          "w": 18.938,
+          "h": 18.937999999999978
+        },
+        {
+          "id": "main-detail-108",
+          "kind": "ellipse",
+          "role": "detail",
+          "width": 1,
+          "x": 290.377,
+          "y": 489.277,
+          "w": 0.663,
+          "h": 0.663
+        },
+        {
+          "id": "main-detail-109",
+          "kind": "symbol",
+          "role": "detail",
+          "width": 1,
+          "type": "toilet",
+          "x": 18.7,
+          "y": 562.6999999999999,
+          "scale": 0.7224999999999999,
+          "rotation": 180
+        },
+        {
+          "id": "main-detail-110",
+          "kind": "symbol",
+          "role": "detail",
+          "width": 1,
+          "type": "toilet",
+          "x": 56.1,
+          "y": 562.6999999999999,
+          "scale": 0.7224999999999999,
+          "rotation": 180
+        },
+        {
+          "id": "main-detail-111",
+          "kind": "rect",
+          "role": "detail",
+          "width": 1,
+          "x": 77.35,
+          "y": 561,
+          "w": 38.25,
+          "h": 15.299999999999999
+        },
+        {
+          "id": "main-detail-112",
+          "kind": "ellipse",
+          "role": "detail",
+          "width": 1,
+          "x": 82.13125,
+          "y": 564.519,
+          "w": 9.5625,
+          "h": 8.262
+        },
+        {
+          "id": "main-detail-113",
+          "kind": "line",
+          "role": "detail",
+          "width": 1,
+          "x1": 86.9125,
+          "y1": 568.65,
+          "x2": 86.9125,
+          "y2": 573.24
+        },
+        {
+          "id": "main-detail-114",
+          "kind": "ellipse",
+          "role": "detail",
+          "width": 1,
+          "x": 101.25625,
+          "y": 564.519,
+          "w": 9.5625,
+          "h": 8.262
+        },
+        {
+          "id": "main-detail-115",
+          "kind": "line",
+          "role": "detail",
+          "width": 1,
+          "x1": 106.0375,
+          "y1": 568.65,
+          "x2": 106.0375,
+          "y2": 573.24
+        },
+        {
+          "id": "main-detail-116",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 6.8,
+          "y": 585.65,
+          "w": 44.199999999999996,
+          "h": 20.4
+        },
+        {
+          "id": "main-detail-117",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 9.35,
+          "y": 588.1999999999999,
+          "w": 8.5,
+          "h": 15.299999999999999
+        },
+        {
+          "id": "main-detail-118",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 6.8,
+          "y": 624.75,
+          "w": 34,
+          "h": 10.2
+        },
+        {
+          "id": "main-detail-120",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 103.7,
+          "y": 612,
+          "w": 15.299999999999999,
+          "h": 22.95
+        },
+        {
+          "id": "main-detail-121",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 255,
+          "y": 585.65,
+          "w": 44.199999999999996,
+          "h": 20.4
+        },
+        {
+          "id": "main-detail-122",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 288.15,
+          "y": 588.1999999999999,
+          "w": 8.5,
+          "h": 15.299999999999999
+        },
+        {
+          "id": "main-detail-123",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 265.2,
+          "y": 624.75,
+          "w": 34,
+          "h": 10.2
+        },
+        {
+          "id": "main-detail-125",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 187,
+          "y": 612,
+          "w": 15.299999999999999,
+          "h": 22.95
+        },
+        {
+          "id": "main-detail-126",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 6.8,
+          "y": 676.6,
+          "w": 44.199999999999996,
+          "h": 20.4
+        },
+        {
+          "id": "main-detail-127",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 9.35,
+          "y": 679.15,
+          "w": 8.5,
+          "h": 15.299999999999999
+        },
+        {
+          "id": "main-detail-128",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 6.8,
+          "y": 646.85,
+          "w": 34,
+          "h": 10.2
+        },
+        {
+          "id": "main-detail-130",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 103.7,
+          "y": 646.85,
+          "w": 15.299999999999999,
+          "h": 22.95
+        },
+        {
+          "id": "main-detail-131",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 255,
+          "y": 676.6,
+          "w": 44.199999999999996,
+          "h": 20.4
+        },
+        {
+          "id": "main-detail-132",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 288.15,
+          "y": 679.15,
+          "w": 8.5,
+          "h": 15.299999999999999
+        },
+        {
+          "id": "main-detail-133",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 265.2,
+          "y": 646.85,
+          "w": 34,
+          "h": 10.2
+        },
+        {
+          "id": "main-detail-135",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 187,
+          "y": 646.85,
+          "w": 15.299999999999999,
+          "h": 22.95
+        },
+        {
+          "id": "main-detail-136",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 6.8,
+          "y": 711.4499999999999,
+          "w": 44.199999999999996,
+          "h": 20.4
+        },
+        {
+          "id": "main-detail-137",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 9.35,
+          "y": 714,
+          "w": 8.5,
+          "h": 15.299999999999999
+        },
+        {
+          "id": "main-detail-138",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 6.8,
+          "y": 750.55,
+          "w": 34,
+          "h": 10.2
+        },
+        {
+          "id": "main-detail-140",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 103.7,
+          "y": 737.8,
+          "w": 15.299999999999999,
+          "h": 22.95
+        },
+        {
+          "id": "main-detail-141",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 255,
+          "y": 711.4499999999999,
+          "w": 44.199999999999996,
+          "h": 20.4
+        },
+        {
+          "id": "main-detail-142",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 288.15,
+          "y": 714,
+          "w": 8.5,
+          "h": 15.299999999999999
+        },
+        {
+          "id": "main-detail-143",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 265.2,
+          "y": 750.55,
+          "w": 34,
+          "h": 10.2
+        },
+        {
+          "id": "main-detail-145",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 187,
+          "y": 737.8,
+          "w": 15.299999999999999,
+          "h": 22.95
+        },
+        {
+          "id": "main-detail-146",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 6.8,
+          "y": 802.4,
+          "w": 44.199999999999996,
+          "h": 20.4
+        },
+        {
+          "id": "main-detail-147",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 9.35,
+          "y": 804.9499999999999,
+          "w": 8.5,
+          "h": 15.299999999999999
+        },
+        {
+          "id": "main-detail-148",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 6.8,
+          "y": 772.65,
+          "w": 34,
+          "h": 10.2
+        },
+        {
+          "id": "main-detail-150",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 103.7,
+          "y": 772.65,
+          "w": 15.299999999999999,
+          "h": 22.95
+        },
+        {
+          "id": "main-detail-151",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 255,
+          "y": 802.4,
+          "w": 44.199999999999996,
+          "h": 20.4
+        },
+        {
+          "id": "main-detail-152",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 288.15,
+          "y": 804.9499999999999,
+          "w": 8.5,
+          "h": 15.299999999999999
+        },
+        {
+          "id": "main-detail-153",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 265.2,
+          "y": 772.65,
+          "w": 34,
+          "h": 10.2
+        },
+        {
+          "id": "main-detail-155",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 187,
+          "y": 772.65,
+          "w": 15.299999999999999,
+          "h": 22.95
+        },
+        {
+          "id": "main-detail-156",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 6.8,
+          "y": 837.25,
+          "w": 44.199999999999996,
+          "h": 20.4
+        },
+        {
+          "id": "main-detail-157",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 9.35,
+          "y": 839.8,
+          "w": 8.5,
+          "h": 15.299999999999999
+        },
+        {
+          "id": "main-detail-158",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 6.8,
+          "y": 876.35,
+          "w": 34,
+          "h": 10.2
+        },
+        {
+          "id": "main-detail-160",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 103.7,
+          "y": 863.6,
+          "w": 15.299999999999999,
+          "h": 22.95
+        },
+        {
+          "id": "main-detail-161",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 255,
+          "y": 837.25,
+          "w": 44.199999999999996,
+          "h": 20.4
+        },
+        {
+          "id": "main-detail-162",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 288.15,
+          "y": 839.8,
+          "w": 8.5,
+          "h": 15.299999999999999
+        },
+        {
+          "id": "main-detail-163",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 265.2,
+          "y": 876.35,
+          "w": 34,
+          "h": 10.2
+        },
+        {
+          "id": "main-detail-165",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 187,
+          "y": 863.6,
+          "w": 15.299999999999999,
+          "h": 22.95
+        },
+        {
+          "id": "main-rear-railing",
+          "kind": "line",
+          "role": "secondary",
+          "width": 1,
+          "x1": 0,
+          "y1": -36,
+          "x2": 306,
+          "y2": -36
+        },
+        {
+          "id": "main-rear-rail-inner",
+          "kind": "line",
+          "role": "secondary",
+          "width": 1,
+          "x1": 0,
+          "y1": -31.75,
+          "x2": 306,
+          "y2": -31.75
+        },
+        {
+          "id": "main-rear-port-edge",
+          "kind": "line",
+          "role": "secondary",
+          "width": 1,
+          "x1": 0,
+          "y1": -36,
+          "x2": 0,
+          "y2": 0
+        },
+        {
+          "id": "main-rear-starboard-edge",
+          "kind": "line",
+          "role": "secondary",
+          "width": 1,
+          "x1": 306,
+          "y1": -36,
+          "x2": 306,
+          "y2": 0
+        },
+        {
+          "id": "main-chain-link-1",
+          "kind": "ellipse",
+          "role": "secondary",
+          "width": 1,
+          "x": -8,
+          "y": -27,
+          "w": 5,
+          "h": 10
+        },
+        {
+          "id": "main-chain-link-2",
+          "kind": "ellipse",
+          "role": "secondary",
+          "width": 1,
+          "x": -8,
+          "y": -20,
+          "w": 5,
+          "h": 10
+        },
+        {
+          "id": "main-left-l-bench",
+          "kind": "polyline",
+          "role": "secondary",
+          "width": 1,
+          "closed": true,
+          "points": [
+            [
+              5.95,
+              358.7
+            ],
+            [
+              117.3,
+              358.7
+            ],
+            [
+              117.3,
+              385.9
+            ],
+            [
+              104.55,
+              385.9
+            ],
+            [
+              104.55,
+              371.45
+            ],
+            [
+              5.95,
+              371.45
+            ]
+          ]
+        },
+        {
+          "id": "main-right-l-bench",
+          "kind": "polyline",
+          "role": "secondary",
+          "width": 1,
+          "closed": true,
+          "points": [
+            [
+              184.45,
+              358.7
+            ],
+            [
+              300.05,
+              358.7
+            ],
+            [
+              300.05,
+              412.25
+            ],
+            [
+              289,
+              412.25
+            ],
+            [
+              289,
+              371.45
+            ],
+            [
+              184.45,
+              371.45
+            ]
+          ]
+        },
+        {
+          "id": "main-lower-bench",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 5.95,
+          "y": 378.65,
+          "w": 80,
+          "h": 10.2
+        },
+        {
+          "id": "main-washer",
+          "kind": "symbol",
+          "role": "detail",
+          "width": 1,
+          "type": "washer",
+          "x": 189.3,
+          "y": 489.6,
+          "rotation": 0,
+          "scale": 0.65
+        },
+        {
+          "id": "main-dryer",
+          "kind": "symbol",
+          "role": "detail",
+          "width": 1,
+          "type": "dryer",
+          "x": 210,
+          "y": 489.6,
+          "rotation": 0,
+          "scale": 0.65
+        },
+        {
+          "id": "main-stair-a-left",
+          "kind": "line",
+          "role": "secondary",
+          "width": 1,
+          "x1": 130.9,
+          "y1": 242,
+          "x2": 130.9,
+          "y2": 306
+        },
+        {
+          "id": "main-stair-a-right",
+          "kind": "line",
+          "role": "secondary",
+          "width": 1,
+          "x1": 164.9,
+          "y1": 242,
+          "x2": 164.9,
+          "y2": 306
+        },
+        {
+          "id": "main-stair-a-landing-end",
+          "kind": "line",
+          "role": "secondary",
+          "width": 1,
+          "x1": 130.9,
+          "y1": 272,
+          "x2": 164.9,
+          "y2": 272
+        },
+        {
+          "id": "main-stair-a-tread-1",
+          "kind": "line",
+          "role": "detail",
+          "width": 1,
+          "x1": 130.9,
+          "y1": 280,
+          "x2": 164.9,
+          "y2": 280
+        },
+        {
+          "id": "main-stair-a-tread-2",
+          "kind": "line",
+          "role": "detail",
+          "width": 1,
+          "x1": 130.9,
+          "y1": 288,
+          "x2": 164.9,
+          "y2": 288
+        },
+        {
+          "id": "main-stair-a-tread-3",
+          "kind": "line",
+          "role": "detail",
+          "width": 1,
+          "x1": 130.9,
+          "y1": 296,
+          "x2": 164.9,
+          "y2": 296
+        },
+        {
+          "id": "main-stair-b-top",
+          "kind": "line",
+          "role": "secondary",
+          "width": 1,
+          "x1": 98.9,
+          "y1": 306,
+          "x2": 130.9,
+          "y2": 306
+        },
+        {
+          "id": "main-stair-b-bottom",
+          "kind": "line",
+          "role": "secondary",
+          "width": 1,
+          "x1": 98.9,
+          "y1": 330,
+          "x2": 130.9,
+          "y2": 330
+        },
+        {
+          "id": "main-stair-b-left",
+          "kind": "line",
+          "role": "secondary",
+          "width": 1,
+          "x1": 98.9,
+          "y1": 306,
+          "x2": 98.9,
+          "y2": 330
+        },
+        {
+          "id": "main-stair-b-right",
+          "kind": "line",
+          "role": "secondary",
+          "width": 1,
+          "x1": 130.9,
+          "y1": 306,
+          "x2": 130.9,
+          "y2": 330
+        },
+        {
+          "id": "main-stair-b-tread-1",
+          "kind": "line",
+          "role": "detail",
+          "width": 1,
+          "x1": 106.9,
+          "y1": 306,
+          "x2": 106.9,
+          "y2": 330
+        },
+        {
+          "id": "main-stair-b-tread-2",
+          "kind": "line",
+          "role": "detail",
+          "width": 1,
+          "x1": 114.9,
+          "y1": 306,
+          "x2": 114.9,
+          "y2": 330
+        },
+        {
+          "id": "main-stair-b-tread-3",
+          "kind": "line",
+          "role": "detail",
+          "width": 1,
+          "x1": 122.9,
+          "y1": 306,
+          "x2": 122.9,
+          "y2": 330
+        },
+        {
+          "id": "main-stair-c-top",
+          "kind": "line",
+          "role": "secondary",
+          "width": 1,
+          "x1": 164.9,
+          "y1": 306,
+          "x2": 196.9,
+          "y2": 306
+        },
+        {
+          "id": "main-stair-c-bottom",
+          "kind": "line",
+          "role": "secondary",
+          "width": 1,
+          "x1": 164.9,
+          "y1": 330,
+          "x2": 196.9,
+          "y2": 330
+        },
+        {
+          "id": "main-stair-c-left",
+          "kind": "line",
+          "role": "secondary",
+          "width": 1,
+          "x1": 164.9,
+          "y1": 306,
+          "x2": 164.9,
+          "y2": 330
+        },
+        {
+          "id": "main-stair-c-right",
+          "kind": "line",
+          "role": "secondary",
+          "width": 1,
+          "x1": 196.9,
+          "y1": 306,
+          "x2": 196.9,
+          "y2": 330
+        },
+        {
+          "id": "main-stair-c-tread-1",
+          "kind": "line",
+          "role": "detail",
+          "width": 1,
+          "x1": 172.9,
+          "y1": 306,
+          "x2": 172.9,
+          "y2": 330
+        },
+        {
+          "id": "main-stair-c-tread-2",
+          "kind": "line",
+          "role": "detail",
+          "width": 1,
+          "x1": 180.9,
+          "y1": 306,
+          "x2": 180.9,
+          "y2": 330
+        },
+        {
+          "id": "main-stair-c-tread-3",
+          "kind": "line",
+          "role": "detail",
+          "width": 1,
+          "x1": 188.9,
+          "y1": 306,
+          "x2": 188.9,
+          "y2": 330
+        },
+        {
+          "id": "main-shared-landing-left",
+          "kind": "line",
+          "role": "secondary",
+          "width": 1,
+          "x1": 130.9,
+          "y1": 330,
+          "x2": 130.9,
+          "y2": 351.9
+        },
+        {
+          "id": "main-shared-landing-right",
+          "kind": "line",
+          "role": "secondary",
+          "width": 1,
+          "x1": 164.9,
+          "y1": 330,
+          "x2": 164.9,
+          "y2": 351.9
+        },
+        {
+          "id": "main-stair-a-arrow",
+          "kind": "stairArrow",
+          "role": "detail",
+          "width": 1,
+          "x1": 147.9,
+          "y1": 294,
+          "x2": 147.9,
+          "y2": 278
+        },
+        {
+          "id": "main-stair-b-arrow",
+          "kind": "stairArrow",
+          "role": "detail",
+          "width": 1,
+          "x1": 126.9,
+          "y1": 318,
+          "x2": 103.9,
+          "y2": 318
+        },
+        {
+          "id": "main-stair-c-arrow",
+          "kind": "stairArrow",
+          "role": "detail",
+          "width": 1,
+          "x1": 168.9,
+          "y1": 318,
+          "x2": 191.9,
+          "y2": 318
+        },
+        {
+          "id": "main-stair-d-top",
+          "kind": "line",
+          "role": "secondary",
+          "width": 1,
+          "x1": 34,
+          "y1": 476,
+          "x2": 90,
+          "y2": 476
+        },
+        {
+          "id": "main-stair-d-bottom",
+          "kind": "line",
+          "role": "secondary",
+          "width": 1,
+          "x1": 34,
+          "y1": 506.6,
+          "x2": 90,
+          "y2": 506.6
+        },
+        {
+          "id": "main-stair-d-left",
+          "kind": "line",
+          "role": "secondary",
+          "width": 1,
+          "x1": 34,
+          "y1": 476,
+          "x2": 34,
+          "y2": 506.6
+        },
+        {
+          "id": "main-stair-d-right",
+          "kind": "line",
+          "role": "secondary",
+          "width": 1,
+          "x1": 90,
+          "y1": 476,
+          "x2": 90,
+          "y2": 506.6
+        },
+        {
+          "id": "main-stair-d-tread-1",
+          "kind": "line",
+          "role": "detail",
+          "width": 1,
+          "x1": 41,
+          "y1": 476,
+          "x2": 41,
+          "y2": 506.6
+        },
+        {
+          "id": "main-stair-d-tread-2",
+          "kind": "line",
+          "role": "detail",
+          "width": 1,
+          "x1": 48,
+          "y1": 476,
+          "x2": 48,
+          "y2": 506.6
+        },
+        {
+          "id": "main-stair-d-tread-3",
+          "kind": "line",
+          "role": "detail",
+          "width": 1,
+          "x1": 55,
+          "y1": 476,
+          "x2": 55,
+          "y2": 506.6
+        },
+        {
+          "id": "main-stair-d-tread-4",
+          "kind": "line",
+          "role": "detail",
+          "width": 1,
+          "x1": 62,
+          "y1": 476,
+          "x2": 62,
+          "y2": 506.6
+        },
+        {
+          "id": "main-stair-d-tread-5",
+          "kind": "line",
+          "role": "detail",
+          "width": 1,
+          "x1": 69,
+          "y1": 476,
+          "x2": 69,
+          "y2": 506.6
+        },
+        {
+          "id": "main-stair-d-tread-6",
+          "kind": "line",
+          "role": "detail",
+          "width": 1,
+          "x1": 76,
+          "y1": 476,
+          "x2": 76,
+          "y2": 506.6
+        },
+        {
+          "id": "main-stair-d-tread-7",
+          "kind": "line",
+          "role": "detail",
+          "width": 1,
+          "x1": 83,
+          "y1": 476,
+          "x2": 83,
+          "y2": 506.6
+        },
+        {
+          "id": "main-stair-d-landing-top",
+          "kind": "line",
+          "role": "secondary",
+          "width": 1,
+          "x1": 0,
+          "y1": 476,
+          "x2": 34,
+          "y2": 476
+        },
+        {
+          "id": "main-stair-d-landing-bottom",
+          "kind": "line",
+          "role": "secondary",
+          "width": 1,
+          "x1": 0,
+          "y1": 506.6,
+          "x2": 34,
+          "y2": 506.6
+        },
+        {
+          "id": "main-stair-d-arrow",
+          "kind": "stairArrow",
+          "role": "detail",
+          "width": 1,
+          "x1": 86,
+          "y1": 491.3,
+          "x2": 38,
+          "y2": 491.3
+        },
+        {
+          "id": "main-chair-L1",
+          "kind": "symbol",
+          "role": "detail",
+          "width": 1,
+          "type": "deskChair",
+          "x": 23.8,
+          "y": 616.7,
+          "rotation": 180,
+          "scale": 0.55
+        },
+        {
+          "id": "main-chair-R1",
+          "kind": "symbol",
+          "role": "detail",
+          "width": 1,
+          "type": "deskChair",
+          "x": 282.2,
+          "y": 616.7,
+          "rotation": 180,
+          "scale": 0.55
+        },
+        {
+          "id": "main-chair-L2",
+          "kind": "symbol",
+          "role": "detail",
+          "width": 1,
+          "type": "deskChair",
+          "x": 23.8,
+          "y": 665.1,
+          "rotation": 0,
+          "scale": 0.55
+        },
+        {
+          "id": "main-chair-R2",
+          "kind": "symbol",
+          "role": "detail",
+          "width": 1,
+          "type": "deskChair",
+          "x": 282.2,
+          "y": 665.1,
+          "rotation": 0,
+          "scale": 0.55
+        },
+        {
+          "id": "main-chair-L3",
+          "kind": "symbol",
+          "role": "detail",
+          "width": 1,
+          "type": "deskChair",
+          "x": 23.8,
+          "y": 742.5,
+          "rotation": 180,
+          "scale": 0.55
+        },
+        {
+          "id": "main-chair-R3",
+          "kind": "symbol",
+          "role": "detail",
+          "width": 1,
+          "type": "deskChair",
+          "x": 282.2,
+          "y": 742.5,
+          "rotation": 180,
+          "scale": 0.55
+        },
+        {
+          "id": "main-chair-L4",
+          "kind": "symbol",
+          "role": "detail",
+          "width": 1,
+          "type": "deskChair",
+          "x": 23.8,
+          "y": 790.9,
+          "rotation": 0,
+          "scale": 0.55
+        },
+        {
+          "id": "main-chair-R4",
+          "kind": "symbol",
+          "role": "detail",
+          "width": 1,
+          "type": "deskChair",
+          "x": 282.2,
+          "y": 790.9,
+          "rotation": 0,
+          "scale": 0.55
+        },
+        {
+          "id": "main-chair-L5",
+          "kind": "symbol",
+          "role": "detail",
+          "width": 1,
+          "type": "deskChair",
+          "x": 23.8,
+          "y": 868.3000000000001,
+          "rotation": 180,
+          "scale": 0.55
+        },
+        {
+          "id": "main-chair-R5",
+          "kind": "symbol",
+          "role": "detail",
+          "width": 1,
+          "type": "deskChair",
+          "x": 282.2,
+          "y": 868.3000000000001,
+          "rotation": 180,
+          "scale": 0.55
+        }
+      ],
+      "doors": [
+        {
+          "id": "main-door-9",
+          "x": 119,
+          "y": 583.9499999999999,
+          "u": [
+            0,
+            24
+          ],
+          "v": [
+            -24,
+            0
+          ]
+        },
+        {
+          "id": "main-door-10",
+          "x": 187,
+          "y": 583.9499999999999,
+          "u": [
+            0,
+            24
+          ],
+          "v": [
+            24,
+            0
+          ]
+        },
+        {
+          "id": "main-door-11",
+          "x": 119,
+          "y": 697.85,
+          "u": [
+            0,
+            -24
+          ],
+          "v": [
+            -24,
+            0
+          ]
+        },
+        {
+          "id": "main-door-12",
+          "x": 187,
+          "y": 697.85,
+          "u": [
+            0,
+            -24
+          ],
+          "v": [
+            24,
+            0
+          ]
+        },
+        {
+          "id": "main-door-13",
+          "x": 119,
+          "y": 709.75,
+          "u": [
+            0,
+            24
+          ],
+          "v": [
+            -24,
+            0
+          ]
+        },
+        {
+          "id": "main-door-14",
+          "x": 187,
+          "y": 709.75,
+          "u": [
+            0,
+            24
+          ],
+          "v": [
+            24,
+            0
+          ]
+        },
+        {
+          "id": "main-door-15",
+          "x": 119,
+          "y": 823.65,
+          "u": [
+            0,
+            -24
+          ],
+          "v": [
+            -24,
+            0
+          ]
+        },
+        {
+          "id": "main-door-16",
+          "x": 187,
+          "y": 823.65,
+          "u": [
+            0,
+            -24
+          ],
+          "v": [
+            24,
+            0
+          ]
+        },
+        {
+          "id": "main-door-17",
+          "x": 119,
+          "y": 835.55,
+          "u": [
+            0,
+            24
+          ],
+          "v": [
+            -24,
+            0
+          ]
+        },
+        {
+          "id": "main-door-18",
+          "x": 187,
+          "y": 835.55,
+          "u": [
+            0,
+            24
+          ],
+          "v": [
+            24,
+            0
+          ]
+        },
+        {
+          "id": "main-rear-exit",
+          "x": 165,
+          "y": 0,
+          "u": [
+            -24,
+            0
+          ],
+          "v": [
+            0,
+            -24
+          ]
+        },
+        {
+          "id": "main-generator-rear-entry",
+          "x": 96.25,
+          "y": 0,
+          "u": [
+            -24,
+            0
+          ],
+          "v": [
+            0,
+            -24
+          ]
+        },
+        {
+          "id": "main-workshop-left-left",
+          "x": 7.45,
+          "y": 269.45,
+          "u": [
+            24,
+            0
+          ],
+          "v": [
+            0,
+            24
+          ]
+        },
+        {
+          "id": "main-workshop-left-right",
+          "x": 55.45,
+          "y": 269.45,
+          "u": [
+            -24,
+            0
+          ],
+          "v": [
+            0,
+            24
+          ]
+        },
+        {
+          "id": "main-workshop-right-left",
+          "x": 69.575,
+          "y": 269.45,
+          "u": [
+            24,
+            0
+          ],
+          "v": [
+            0,
+            24
+          ]
+        },
+        {
+          "id": "main-workshop-right-right",
+          "x": 117.575,
+          "y": 269.45,
+          "u": [
+            -24,
+            0
+          ],
+          "v": [
+            0,
+            24
+          ]
+        },
+        {
+          "id": "main-stair-a-entry",
+          "x": 135.9,
+          "y": 242,
+          "u": [
+            24,
+            0
+          ],
+          "v": [
+            0,
+            24
+          ]
+        },
+        {
+          "id": "main-central-exit",
+          "x": 159.9,
+          "y": 351.9,
+          "u": [
+            -24,
+            0
+          ],
+          "v": [
+            0,
+            24
+          ]
+        },
+        {
+          "id": "main-bathroom-entry",
+          "x": 90.95,
+          "y": 419.25,
+          "u": [
+            0,
+            -24
+          ],
+          "v": [
+            -24,
+            0
+          ]
+        },
+        {
+          "id": "main-storage-entry",
+          "x": 129.725,
+          "y": 450.5,
+          "u": [
+            -24,
+            0
+          ],
+          "v": [
+            0,
+            -24
+          ]
+        },
+        {
+          "id": "main-utility-exit",
+          "x": 306,
+          "y": 450.5,
+          "u": [
+            0,
+            24
+          ],
+          "v": [
+            24,
+            0
+          ]
+        },
+        {
+          "id": "main-stair-d-side-access",
+          "x": 0,
+          "y": 479.3,
+          "u": [
+            0,
+            24
+          ],
+          "v": [
+            -24,
+            0
+          ]
+        },
+        {
+          "id": "main-shared-bathroom-entry",
+          "x": 92,
+          "y": 506.6,
+          "u": [
+            24,
+            0
+          ],
+          "v": [
+            0,
+            24
+          ]
+        },
+        {
+          "id": "main-toilet-entry-1",
+          "x": 8.5,
+          "y": 527,
+          "u": [
+            24,
+            0
+          ],
+          "v": [
+            0,
+            24
+          ]
+        },
+        {
+          "id": "main-toilet-entry-2",
+          "x": 45.9,
+          "y": 527,
+          "u": [
+            24,
+            0
+          ],
+          "v": [
+            0,
+            24
+          ]
+        },
+        {
+          "id": "main-laundry-shower-entry",
+          "x": 176.8,
+          "y": 538,
+          "u": [
+            0,
+            24
+          ],
+          "v": [
+            24,
+            0
+          ]
+        },
+        {
+          "id": "main-shower-entry-1",
+          "x": 225.25,
+          "y": 527,
+          "u": [
+            24,
+            0
+          ],
+          "v": [
+            0,
+            -24
+          ]
+        },
+        {
+          "id": "main-shower-entry-2",
+          "x": 267.75,
+          "y": 527,
+          "u": [
+            24,
+            0
+          ],
+          "v": [
+            0,
+            -24
+          ]
+        },
+        {
+          "id": "main-forward-exit",
+          "x": 165,
+          "y": 892.5,
+          "u": [
+            -24,
+            0
+          ],
+          "v": [
+            0,
+            24
+          ]
+        }
+      ]
+    },
+    {
+      "id": "upper",
+      "name": "PARTIAL UPPER LEVEL",
+      "paths": [],
+      "walls": [
+        {
+          "id": "upper-port-perimeter-0",
+          "role": "wall",
+          "x1": 0,
+          "y1": 0,
+          "x2": 0,
+          "y2": 474
+        },
+        {
+          "id": "upper-starboard-perimeter-0",
+          "role": "wall",
+          "x1": 306,
+          "y1": 0,
+          "x2": 306,
+          "y2": 492
+        },
+        {
+          "id": "upper-rear-perimeter-0",
+          "role": "wall",
+          "x1": 0,
+          "y1": 0,
+          "x2": 306,
+          "y2": 0
+        },
+        {
+          "id": "upper-pad-left-front-0",
+          "role": "wall",
+          "x1": 0,
+          "y1": 249.06976744186048,
+          "x2": 100,
+          "y2": 249.06976744186048
+        },
+        {
+          "id": "upper-pad-left-front-1",
+          "role": "wall",
+          "x1": 124,
+          "y1": 249.06976744186048,
+          "x2": 130.9,
+          "y2": 249.06976744186048
+        },
+        {
+          "id": "upper-pad-right-front-0",
+          "role": "wall",
+          "x1": 164.9,
+          "y1": 249.06976744186048,
+          "x2": 182.5,
+          "y2": 249.06976744186048
+        },
+        {
+          "id": "upper-pad-right-front-1",
+          "role": "wall",
+          "x1": 206.5,
+          "y1": 249.06976744186048,
+          "x2": 306,
+          "y2": 249.06976744186048
+        },
+        {
+          "id": "upper-office-left-0",
+          "role": "wall",
+          "x1": 178.5,
+          "y1": 249.06976744186048,
+          "x2": 178.5,
+          "y2": 315
+        },
+        {
+          "id": "upper-office-bottom-0",
+          "role": "wall",
+          "x1": 178.5,
+          "y1": 315,
+          "x2": 306,
+          "y2": 315
+        },
+        {
+          "id": "upper-utility-bottom-0",
+          "role": "wall",
+          "x1": 0,
+          "y1": 315,
+          "x2": 68,
+          "y2": 315
+        },
+        {
+          "id": "upper-utility-bottom-1",
+          "role": "wall",
+          "x1": 92,
+          "y1": 315,
+          "x2": 178.5,
+          "y2": 315
+        },
+        {
+          "id": "upper-desk-weight-divider-0",
+          "role": "wall",
+          "x1": 127.5,
+          "y1": 315,
+          "x2": 127.5,
+          "y2": 379
+        },
+        {
+          "id": "upper-desk-weight-divider-1",
+          "role": "wall",
+          "x1": 127.5,
+          "y1": 403,
+          "x2": 127.5,
+          "y2": 410
+        },
+        {
+          "id": "upper-desk-room-bottom-0",
+          "role": "wall",
+          "x1": 0,
+          "y1": 410,
+          "x2": 127.5,
+          "y2": 410
+        },
+        {
+          "id": "upper-stair-side-return-0",
+          "role": "wall",
+          "x1": 127.5,
+          "y1": 444,
+          "x2": 127.5,
+          "y2": 492
+        },
+        {
+          "id": "upper-stair-platform-bottom-0",
+          "role": "wall",
+          "x1": 0,
+          "y1": 474,
+          "x2": 127.5,
+          "y2": 474
+        },
+        {
+          "id": "upper-weight-room-bottom-0",
+          "role": "wall",
+          "x1": 127.5,
+          "y1": 492,
+          "x2": 306,
+          "y2": 492
+        }
+      ],
+      "labels": [
+        {
+          "id": "upper-label-0",
+          "kind": "label",
+          "text": "H",
+          "x": 153,
+          "y": 139.91000000000003,
+          "size": 69.7,
+          "align": "middle",
+          "rotation": 0,
+          "textStyle": "marker",
+          "centerArea": {
+            "x": 0,
+            "y": 0,
+            "w": 306,
+            "h": 249.06976744186048
+          }
+        },
+        {
+          "id": "upper-label-1",
+          "kind": "label",
+          "text": "DESK",
+          "x": 270.72499999999997,
+          "y": 249.31608695652173,
+          "size": 4.675,
+          "align": "middle",
+          "rotation": 0,
+          "textStyle": "detail",
+          "centerArea": {
+            "x": 243.1,
+            "y": 253.31976744186048,
+            "w": 55.25,
+            "h": 13.6
+          }
+        },
+        {
+          "id": "upper-label-2",
+          "kind": "label",
+          "text": "BENCH",
+          "x": 242.25,
+          "y": 308.03999999999996,
+          "size": 4.675,
+          "align": "middle",
+          "rotation": 0,
+          "textStyle": "detail",
+          "centerArea": {
+            "x": 184.45,
+            "y": 297.1,
+            "w": 115.6,
+            "h": 11.9
+          }
+        },
+        {
+          "id": "upper-label-3",
+          "kind": "label",
+          "text": "HELI OFFICE",
+          "x": 242.25,
+          "y": 278.12,
+          "size": 7.6499999999999995,
+          "align": "middle",
+          "rotation": 0,
+          "textStyle": "label",
+          "centerArea": {
+            "x": 178.5,
+            "y": 282,
+            "w": 127.5,
+            "h": 15.1
+          }
+        },
+        {
+          "id": "upper-label-4",
+          "kind": "label",
+          "text": "DOWN",
+          "x": 147.9,
+          "y": 242.06976744186048,
+          "size": 5.5249999999999995,
+          "align": "middle",
+          "rotation": 0,
+          "textStyle": "detail"
+        },
+        {
+          "id": "upper-label-5",
+          "kind": "label",
+          "text": "SHELF",
+          "x": 33.15,
+          "y": 314.84,
+          "size": 4.675,
+          "align": "middle",
+          "rotation": 0,
+          "textStyle": "detail",
+          "centerArea": {
+            "x": 5.1,
+            "y": 306.5,
+            "w": 56.1,
+            "h": 8.5
+          }
+        },
+        {
+          "id": "upper-label-6",
+          "kind": "label",
+          "text": "PUMP",
+          "x": 12.75,
+          "y": 241.73999999999998,
+          "size": 4.675,
+          "align": "middle",
+          "rotation": -90,
+          "textStyle": "detail",
+          "centerArea": {
+            "x": -13,
+            "y": 250,
+            "w": 10,
+            "h": 24
+          }
+        },
+        {
+          "id": "upper-label-7",
+          "kind": "label",
+          "text": "COUCH",
+          "x": 106.25,
+          "y": 279.14,
+          "size": 4.675,
+          "align": "middle",
+          "rotation": -90,
+          "textStyle": "detail",
+          "centerArea": {
+            "x": 97.75,
+            "y": 279.5,
+            "w": 17,
+            "h": 29.5
+          }
+        },
+        {
+          "id": "upper-label-8",
+          "kind": "label",
+          "text": "DESK",
+          "x": 14.45,
+          "y": 371.78999999999996,
+          "size": 4.675,
+          "align": "middle",
+          "rotation": -90,
+          "textStyle": "detail",
+          "centerArea": {
+            "x": 6.8,
+            "y": 331,
+            "w": 15.3,
+            "h": 61.2
+          }
+        },
+        {
+          "id": "upper-label-9",
+          "kind": "label",
+          "text": "CABINETS",
+          "x": 109.64999999999999,
+          "y": 371.28,
+          "size": 5.1,
+          "align": "middle",
+          "rotation": -90,
+          "textStyle": "detail",
+          "centerArea": {
+            "x": 100.3,
+            "y": 319.25,
+            "w": 25.5,
+            "h": 34.25
+          }
+        },
+        {
+          "id": "upper-label-10",
+          "kind": "label",
+          "text": "WEIGHT ROOM",
+          "x": 221,
+          "y": 375.36,
+          "size": 10.2,
+          "align": "middle",
+          "rotation": 0,
+          "textStyle": "label",
+          "centerArea": {
+            "x": 127.5,
+            "y": 315,
+            "w": 178.5,
+            "h": 177
+          }
+        },
+        {
+          "id": "upper-label-11",
+          "kind": "label",
+          "text": "DOWN",
+          "x": 62,
+          "y": 438,
+          "size": 5.5249999999999995,
+          "align": "middle",
+          "rotation": 0,
+          "textStyle": "detail"
+        }
+      ],
+      "annotations": [],
+      "rects": [],
+      "details": [
+        {
+          "id": "upper-detail-1",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 243.1,
+          "y": 253.31976744186048,
+          "w": 55.25,
+          "h": 13.6
+        },
+        {
+          "id": "upper-detail-2",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 184.45,
+          "y": 297.1,
+          "w": 115.6,
+          "h": 11.9
+        },
+        {
+          "id": "upper-detail-21",
+          "kind": "ellipse",
+          "role": "detail",
+          "width": 1,
+          "x": 20.4,
+          "y": 254.15,
+          "w": 13.6,
+          "h": 13.6
+        },
+        {
+          "id": "upper-detail-22",
+          "kind": "ellipse",
+          "role": "detail",
+          "width": 1,
+          "x": 39.949999999999996,
+          "y": 254.15,
+          "w": 13.6,
+          "h": 13.6
+        },
+        {
+          "id": "upper-detail-23",
+          "kind": "ellipse",
+          "role": "detail",
+          "width": 1,
+          "x": 20.4,
+          "y": 272,
+          "w": 13.6,
+          "h": 13.6
+        },
+        {
+          "id": "upper-detail-24",
+          "kind": "ellipse",
+          "role": "detail",
+          "width": 1,
+          "x": 39.949999999999996,
+          "y": 272,
+          "w": 13.6,
+          "h": 13.6
+        },
+        {
+          "id": "upper-detail-25",
+          "kind": "ellipse",
+          "role": "detail",
+          "width": 1,
+          "x": 20.4,
+          "y": 289.84999999999997,
+          "w": 13.6,
+          "h": 13.6
+        },
+        {
+          "id": "upper-detail-26",
+          "kind": "ellipse",
+          "role": "detail",
+          "width": 1,
+          "x": 39.949999999999996,
+          "y": 289.84999999999997,
+          "w": 13.6,
+          "h": 13.6
+        },
+        {
+          "id": "upper-detail-27",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 5.1,
+          "y": 306.5,
+          "w": 56.1,
+          "h": 8.5
+        },
+        {
+          "id": "upper-detail-28",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 2.55,
+          "y": 252.5,
+          "w": 7.6499999999999995,
+          "h": 15.299999999999999
+        },
+        {
+          "id": "upper-detail-29",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 97.75,
+          "y": 279.5,
+          "w": 17,
+          "h": 29.5
+        },
+        {
+          "id": "upper-detail-30",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 6.8,
+          "y": 331,
+          "w": 15.299999999999999,
+          "h": 61.199999999999996
+        },
+        {
+          "id": "upper-detail-31",
+          "kind": "rect",
+          "role": "secondary",
+          "width": 1,
+          "x": 100.3,
+          "y": 319.25,
+          "w": 25.5,
+          "h": 34.25
+        },
+        {
+          "id": "upper-detail-32",
+          "kind": "rect",
+          "role": "detail",
+          "width": 1,
+          "x": 102.85,
+          "y": 358.5,
+          "w": 21.25,
+          "h": 15.299999999999999
+        },
+        {
+          "id": "upper-detail-33",
+          "kind": "ellipse",
+          "role": "detail",
+          "width": 1,
+          "x": 108.1625,
+          "y": 362.019,
+          "w": 10.625,
+          "h": 8.262
+        },
+        {
+          "id": "upper-detail-34",
+          "kind": "line",
+          "role": "detail",
+          "width": 1,
+          "x1": 113.475,
+          "y1": 366.15,
+          "x2": 119.85,
+          "y2": 366.15
+        },
+        {
+          "id": "upper-office-chair",
+          "kind": "symbol",
+          "role": "detail",
+          "width": 1,
+          "type": "deskChair",
+          "x": 270.725,
+          "y": 275,
+          "rotation": 0,
+          "scale": 0.55
+        },
+        {
+          "id": "upper-stair-a-bottom",
+          "kind": "line",
+          "role": "secondary",
+          "width": 1,
+          "x1": 130.9,
+          "y1": 315,
+          "x2": 164.9,
+          "y2": 315
+        },
+        {
+          "id": "upper-stair-a-left",
+          "kind": "line",
+          "role": "secondary",
+          "width": 1,
+          "x1": 130.9,
+          "y1": 249.06976744186048,
+          "x2": 130.9,
+          "y2": 315
+        },
+        {
+          "id": "upper-stair-a-right",
+          "kind": "line",
+          "role": "secondary",
+          "width": 1,
+          "x1": 164.9,
+          "y1": 249.06976744186048,
+          "x2": 164.9,
+          "y2": 315
+        },
+        {
+          "id": "upper-stair-a-tread-1",
+          "kind": "line",
+          "role": "detail",
+          "width": 1,
+          "x1": 130.9,
+          "y1": 260.0581395348837,
+          "x2": 164.9,
+          "y2": 260.0581395348837
+        },
+        {
+          "id": "upper-stair-a-tread-2",
+          "kind": "line",
+          "role": "detail",
+          "width": 1,
+          "x1": 130.9,
+          "y1": 271.04651162790697,
+          "x2": 164.9,
+          "y2": 271.04651162790697
+        },
+        {
+          "id": "upper-stair-a-tread-3",
+          "kind": "line",
+          "role": "detail",
+          "width": 1,
+          "x1": 130.9,
+          "y1": 282.0348837209302,
+          "x2": 164.9,
+          "y2": 282.0348837209302
+        },
+        {
+          "id": "upper-stair-a-tread-4",
+          "kind": "line",
+          "role": "detail",
+          "width": 1,
+          "x1": 130.9,
+          "y1": 293.0232558139535,
+          "x2": 164.9,
+          "y2": 293.0232558139535
+        },
+        {
+          "id": "upper-stair-a-tread-5",
+          "kind": "line",
+          "role": "detail",
+          "width": 1,
+          "x1": 130.9,
+          "y1": 304.01162790697674,
+          "x2": 164.9,
+          "y2": 304.01162790697674
+        },
+        {
+          "id": "upper-stair-a-arrow",
+          "kind": "stairArrow",
+          "role": "detail",
+          "width": 1,
+          "x1": 147.9,
+          "y1": 255.06976744186048,
+          "x2": 147.9,
+          "y2": 309
+        },
+        {
+          "id": "upper-stair-d-top",
+          "kind": "line",
+          "role": "secondary",
+          "width": 1,
+          "x1": 34,
+          "y1": 444,
+          "x2": 90,
+          "y2": 444
+        },
+        {
+          "id": "upper-stair-d-bottom",
+          "kind": "line",
+          "role": "secondary",
+          "width": 1,
+          "x1": 34,
+          "y1": 474,
+          "x2": 90,
+          "y2": 474
+        },
+        {
+          "id": "upper-stair-d-left",
+          "kind": "line",
+          "role": "secondary",
+          "width": 1,
+          "x1": 34,
+          "y1": 444,
+          "x2": 34,
+          "y2": 474
+        },
+        {
+          "id": "upper-stair-d-right",
+          "kind": "line",
+          "role": "secondary",
+          "width": 1,
+          "x1": 90,
+          "y1": 444,
+          "x2": 90,
+          "y2": 474
+        },
+        {
+          "id": "upper-stair-d-tread-1",
+          "kind": "line",
+          "role": "detail",
+          "width": 1,
+          "x1": 41,
+          "y1": 444,
+          "x2": 41,
+          "y2": 474
+        },
+        {
+          "id": "upper-stair-d-tread-2",
+          "kind": "line",
+          "role": "detail",
+          "width": 1,
+          "x1": 48,
+          "y1": 444,
+          "x2": 48,
+          "y2": 474
+        },
+        {
+          "id": "upper-stair-d-tread-3",
+          "kind": "line",
+          "role": "detail",
+          "width": 1,
+          "x1": 55,
+          "y1": 444,
+          "x2": 55,
+          "y2": 474
+        },
+        {
+          "id": "upper-stair-d-tread-4",
+          "kind": "line",
+          "role": "detail",
+          "width": 1,
+          "x1": 62,
+          "y1": 444,
+          "x2": 62,
+          "y2": 474
+        },
+        {
+          "id": "upper-stair-d-tread-5",
+          "kind": "line",
+          "role": "detail",
+          "width": 1,
+          "x1": 69,
+          "y1": 444,
+          "x2": 69,
+          "y2": 474
+        },
+        {
+          "id": "upper-stair-d-tread-6",
+          "kind": "line",
+          "role": "detail",
+          "width": 1,
+          "x1": 76,
+          "y1": 444,
+          "x2": 76,
+          "y2": 474
+        },
+        {
+          "id": "upper-stair-d-tread-7",
+          "kind": "line",
+          "role": "detail",
+          "width": 1,
+          "x1": 83,
+          "y1": 444,
+          "x2": 83,
+          "y2": 474
+        },
+        {
+          "id": "upper-stair-d-landing-top",
+          "kind": "line",
+          "role": "secondary",
+          "width": 1,
+          "x1": 0,
+          "y1": 444,
+          "x2": 34,
+          "y2": 444
+        },
+        {
+          "id": "upper-stair-d-walkway-top",
+          "kind": "line",
+          "role": "secondary",
+          "width": 1,
+          "x1": 0,
+          "y1": 410,
+          "x2": 127.5,
+          "y2": 410
+        },
+        {
+          "id": "upper-stair-d-walkway-bottom",
+          "kind": "line",
+          "role": "secondary",
+          "width": 1,
+          "x1": 34,
+          "y1": 444,
+          "x2": 127.5,
+          "y2": 444
+        },
+        {
+          "id": "upper-stair-d-arrow",
+          "kind": "stairArrow",
+          "role": "detail",
+          "width": 1,
+          "x1": 38,
+          "y1": 459,
+          "x2": 86,
+          "y2": 459
+        }
+      ],
+      "doors": [
+        {
+          "id": "upper-near-stair-entry",
+          "x": 100,
+          "y": 249.06976744186048,
+          "u": [
+            24,
+            0
+          ],
+          "v": [
+            0,
+            24
+          ]
+        },
+        {
+          "id": "upper-office-entry",
+          "x": 182.5,
+          "y": 249.06976744186048,
+          "u": [
+            24,
+            0
+          ],
+          "v": [
+            0,
+            24
+          ]
+        },
+        {
+          "id": "upper-utility-entry",
+          "x": 68,
+          "y": 315,
+          "u": [
+            24,
+            0
+          ],
+          "v": [
+            0,
+            24
+          ]
+        },
+        {
+          "id": "upper-desk-weight-entry",
+          "x": 127.5,
+          "y": 403,
+          "u": [
+            0,
+            -24
+          ],
+          "v": [
+            24,
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "08-04-33",
+      "title": "Accommodation sketch",
+      "src": "assets/odyssey102/08-04-33.jpg"
+    },
+    {
+      "id": "08-20-53",
+      "title": "Machinery and fuel sketch",
+      "src": "assets/odyssey102/08-20-53.jpg"
+    },
+    {
+      "id": "08-28-44",
+      "title": "Partial upper-level sketch",
+      "src": "assets/odyssey102/08-28-44.jpg"
+    },
+    {
+      "id": "10-40-50",
+      "title": "Helipad dimensions",
+      "src": "assets/odyssey102/10-40-50.jpg"
+    }
+  ],
+  "reviewFlags": [
+    {
+      "id": "odyssey-v2-side-access",
+      "deckId": "main",
+      "x": 0,
+      "y": 491.3,
+      "title": "Faint side access needs confirmation",
+      "text": "PDF note 37 points to the faint mark beside the accommodation stair landing. It is drawn as an outward-opening side door with clear wall returns; the original sketch does not establish this entrance conclusively."
+    },
+    {
+      "id": "odyssey-v2-height-connections",
+      "deckId": "main",
+      "x": 147.9,
+      "y": 318,
+      "title": "Changes in height remain schematic",
+      "text": "The short workshop/fuel flights now share a landing as reviewed. Their exact elevations and which levels each flight serves are not measured by the sketches."
+    },
+    {
+      "id": "odyssey-v2-room-count",
+      "deckId": "main",
+      "x": 153,
+      "y": 720,
+      "title": "Written accommodation count remains unresolved",
+      "text": "The sketch establishes ten bedrooms. The written specification describes twenty plus additional upper amenities; those unlocated spaces have not been invented."
+    },
+    {
+      "id": "odyssey-v2-service-identities",
+      "deckId": "main",
+      "x": 260,
+      "y": 435,
+      "title": "Service identities and storage access",
+      "text": "Boiler/furnace and tank labels follow the sketch. The storage entrance is conventionally placed from the adjoining passage; exact service partitions and tank identities remain unverified."
+    },
+    {
+      "id": "odyssey-v2-dimensions",
+      "deckId": "upper",
+      "x": 153,
+      "y": 124,
+      "title": "Dimensions remain schematic",
+      "text": "The helipad retains the marked 43:35 proportion. Other room lengths, stair elevations, hull form and physical door/fixture sizes have not been surveyed."
+    }
+  ],
+  "sourceSummary": "The original sketches and November PDF review govern this V2. All 41 written notes are recorded in the change log; the empty pin has no design instruction. Ten bedrooms are shown, and five unresolved source issues remain in Feedback.",
+  "drawingRevision": "v2",
+  "revisionMeta": {
+    "label": "V2 · PDF corrections",
+    "date": "2026-11-13",
+    "summary": "Applied the 41 written PDF review notes as connected layout changes. V1 remains archived; faint side access and unverified vessel details remain flagged.",
+    "changes": [
+      {
+        "id": "cd766673-6c72-bf4b-9b66-43bb50e9d171",
+        "title": "01 · Moved the pad-to-utility entrance beside the stair, with its swing and couch kept clear.",
+        "text": "Moved the pad-to-utility entrance beside the stair, with its swing and couch kept clear.",
+        "status": "done",
+        "sourceComment": "Appears the door entrance is on the other side of this wall, close to the stairs"
+      },
+      {
+        "id": "f9137d62-b8a6-0043-82c9-a9de18925ec7",
+        "title": "02 · Closed the lower stair/utility boundary with a continuous wall, retaining its separate room doorway.",
+        "text": "Closed the lower stair/utility boundary with a continuous wall, retaining its separate room doorway.",
+        "status": "done",
+        "sourceComment": "I think this should be a solid wall"
+      },
+      {
+        "id": "c32267a6-bb42-fa49-a7fc-8cdbb28459c1",
+        "title": "03 · Applied the shared solid stair-arrow geometry with a light paper-colour outline to every stair direction.",
+        "text": "Applied the shared solid stair-arrow geometry with a light paper-colour outline to every stair direction.",
+        "status": "done",
+        "sourceComment": "we usually do a thicker line with a light stroke for these stair arrows"
+      },
+      {
+        "id": "e3f479f5-8f3a-2640-b89a-63059dea9bb0",
+        "title": "04 · Removed the extra pad projecting above the helipad stair",
+        "text": "Removed the extra pad projecting above the helipad stair; the flight begins at the aligned wall.",
+        "status": "done",
+        "sourceComment": "don't think we need the stair pad thing here"
+      },
+      {
+        "id": "de85930b-9947-5345-91e6-d222d749abfe",
+        "title": "05 · Moved the office entrance to the near corner and rebuilt its wall returns.",
+        "text": "Moved the office entrance to the near corner and rebuilt its wall returns.",
+        "status": "done",
+        "sourceComment": "door opening should be in corner"
+      },
+      {
+        "id": "79901d38-fc2e-c946-91be-eac698393959",
+        "title": "06 · Added the approved desk chair using the shared furniture symbol and kept desk/label clearances.",
+        "text": "Added the approved desk chair using the shared furniture symbol and kept desk/label clearances.",
+        "status": "done",
+        "sourceComment": "can you add a desk chair for funziez?"
+      },
+      {
+        "id": "44459352-8620-db45-a569-e23cbb5dfe44",
+        "title": "07 · Aligned both sides of the helipad and upper building",
+        "text": "Aligned both sides of the helipad and upper building; retained the marked 43:35 pad proportion.",
+        "status": "done",
+        "sourceComment": "I feel like the outer walls should line up but double check this"
+      },
+      {
+        "id": "7dcad967-db48-5747-a4d6-bba805db8663",
+        "title": "08 · Shortened the cabinet run and placed the separate sink beyond it, with a clear real backing wall.",
+        "text": "Shortened the cabinet run and placed the separate sink beyond it, with a clear real backing wall.",
+        "status": "done",
+        "sourceComment": "maybe have the cabinets end right before the sink? This matches the sketch but I highly doubt the sink is inside the cabinets"
+      },
+      {
+        "id": "f2e30073-324c-4844-9c54-765b053f5372",
+        "title": "09 · Reversed the internal door handing to match the source bottom hinge, retaining entry into the weight room.",
+        "text": "Reversed the internal door handing to match the source bottom hinge, retaining entry into the weight room.",
+        "status": "done",
+        "sourceComment": "door opens the other way"
+      },
+      {
+        "id": "e7c1ca7b-36c9-c14c-b0b2-9838fe070f16",
+        "title": "10 · Left a seven-unit wall return beyond the internal doorway.",
+        "text": "Left a seven-unit wall return beyond the internal doorway.",
+        "status": "done",
+        "sourceComment": "also add some space so there's a tiny bit of wall before the door"
+      },
+      {
+        "id": "93ee9eaa-2cbe-6744-b208-5c097ebd3cd2",
+        "title": "11 · Shortened the room above the relocated stair and provided a clear path into the longer weight room.",
+        "text": "Shortened the room above the relocated stair and provided a clear path into the longer weight room.",
+        "status": "done",
+        "sourceComment": "It looks like these stars move up, so the room above is shorter than the weight room and the stars lead directly into the weight room"
+      },
+      {
+        "id": "f57645cd-a650-654f-afb9-95faff81cb10",
+        "title": "12 · Removed the unsupported exterior drop-door and closed its wall",
+        "text": "Removed the unsupported exterior drop-door and closed its wall; the stair-top route now enters internally.",
+        "status": "done",
+        "sourceComment": "death door. see other comment regarding the stairs and having them have an extended path at the top that leads to the weight room"
+      },
+      {
+        "id": "ffdffe1a-9659-2543-a96a-93bde0ae2ff8",
+        "title": "13 · Re-read the rear note as chains",
+        "text": "Re-read the rear note as chains; removed the false stair flight and retained a small chain mark.",
+        "status": "done",
+        "sourceComment": "I think the image says chains here not stairs"
+      },
+      {
+        "id": "6332dc6a-b294-f54d-87dd-68be93544bd8",
+        "title": "14 · Expanded the rear walking strip to 36 units, clearing the outward rear doors.",
+        "text": "Expanded the rear walking strip to 36 units, clearing the outward rear doors.",
+        "status": "done",
+        "sourceComment": "make this back area larger"
+      },
+      {
+        "id": "83580892-8d1f-ae46-88dd-a5e7d409d150",
+        "title": "15 · Added the outward rear exit at the reviewed opening, plus the generator access shown on the sketch.",
+        "text": "Added the outward rear exit at the reviewed opening, plus the generator access shown on the sketch.",
+        "status": "done",
+        "sourceComment": "door needed, opening outwards"
+      },
+      {
+        "id": "8caa08a3-b3b3-9141-83c1-ec6b186a6ef5",
+        "title": "16 · Added the missing generator/workshop separation and coordinated the connected side wall.",
+        "text": "Added the missing generator/workshop separation and coordinated the connected side wall.",
+        "status": "done",
+        "sourceComment": "wall missing here"
+      },
+      {
+        "id": "9b0282aa-0de7-4846-8c25-77a04cae8bd4",
+        "title": "17 · Completed the side wall and reduced the shelf to a short wall-backed run.",
+        "text": "Completed the side wall and reduced the shelf to a short wall-backed run.",
+        "status": "done",
+        "sourceComment": "wall missing here, shelf should be much smaller"
+      },
+      {
+        "id": "2a330f3a-7efa-cf40-9079-3f6ad4b7f8ac",
+        "title": "18 · Reduced the gas-tank width while keeping the two diesel tanks and jet tank larger.",
+        "text": "Reduced the gas-tank width while keeping the two diesel tanks and jet tank larger.",
+        "status": "done",
+        "sourceComment": "gas is smaller than the others"
+      },
+      {
+        "id": "cc3b835a-5255-ee46-88d9-7e653c473bed",
+        "title": "19 · Completed the partition, moved its bench/shelving to the left and kept a shorter bench on the right.",
+        "text": "Completed the partition, moved its bench/shelving to the left and kept a shorter bench on the right.",
+        "status": "done",
+        "sourceComment": "this section should be a wall, with bench/shelves on the left and a shorter bench on the right"
+      },
+      {
+        "id": "b2b1c1a5-ba79-eb40-b588-ef10895b62db",
+        "title": "20 · Added the right workshop pair of outward-opening doors with complete jamb returns.",
+        "text": "Added the right workshop pair of outward-opening doors with complete jamb returns.",
+        "status": "done",
+        "sourceComment": "missing double doors opening out"
+      },
+      {
+        "id": "b2153c8e-e778-b845-b390-fa70d0edfb71",
+        "title": "21 · Added the left workshop front wall and outward-opening double doors.",
+        "text": "Added the left workshop front wall and outward-opening double doors.",
+        "status": "done",
+        "sourceComment": "missing wall and double doors opening out"
+      },
+      {
+        "id": "0b6df6a8-5d11-2743-a1c9-0bc603c6e5b9",
+        "title": "22 · Rebuilt the central up flight as a few steps and a clear landing serving an outward-opening door.",
+        "text": "Rebuilt the central up flight as a few steps and a clear landing serving an outward-opening door.",
+        "status": "done",
+        "sourceComment": "Stairsneed another hard pass. should only be a few stairs and a landing, leading to a door opening out"
+      },
+      {
+        "id": "8ea538a1-512c-744d-893c-186ff8933409",
+        "title": "23 · Rebuilt the left short down flight so it meets the central shared landing.",
+        "text": "Rebuilt the left short down flight so it meets the central shared landing.",
+        "status": "done",
+        "sourceComment": "needs another pass, should be going up to a shard landing with the other stairs and only be a few steps large"
+      },
+      {
+        "id": "802585c2-18ac-2445-82e1-a1584d3dc618",
+        "title": "24 · Rebuilt the right short down flight so it meets the same central landing.",
+        "text": "Rebuilt the right short down flight so it meets the same central landing.",
+        "status": "done",
+        "sourceComment": "needs another pass, should be going up to a shard landing with the other stairs and only be a few steps large"
+      },
+      {
+        "id": "aa2f8d9e-ac94-7144-b03d-5c7b815db76f",
+        "title": "25 · Centred MIXED in its explicit tank area using the shared text-placement system.",
+        "text": "Centred MIXED in its explicit tank area using the shared text-placement system.",
+        "status": "done",
+        "sourceComment": "centre label"
+      },
+      {
+        "id": "bbdd1d42-fb7f-694c-a24f-15bcdea12693",
+        "title": "26 · Centred STRAIGHT GAS in its explicit tank area using the same system.",
+        "text": "Centred STRAIGHT GAS in its explicit tank area using the same system.",
+        "status": "done",
+        "sourceComment": "centre label"
+      },
+      {
+        "id": "986b2603-63bb-9c48-8538-ea62f00d25d1",
+        "title": "27 · Completed the fuel-store front wall and joined it to the long separation.",
+        "text": "Completed the fuel-store front wall and joined it to the long separation.",
+        "status": "done",
+        "sourceComment": "missing wall"
+      },
+      {
+        "id": "de0e83ba-839a-1e4b-9f5f-54578d2332fa",
+        "title": "28 · Re-read the source and retained INSTRUMENT BENCH, confirmed by the owner in chat.",
+        "text": "Re-read the source and retained INSTRUMENT BENCH, confirmed by the owner in chat.",
+        "status": "done",
+        "sourceComment": "Looks more like \"experiment bench\" to me, can you double check"
+      },
+      {
+        "id": "76fdec77-e89c-e447-b9ce-a67f2a7b34cf",
+        "title": "29 · Labelled the remaining bench outlines consistently.",
+        "text": "Labelled the remaining bench outlines consistently.",
+        "status": "done",
+        "sourceComment": "if we're labelling benches continue here"
+      },
+      {
+        "id": "2cc15d27-fef4-1f4b-b8c7-be0aa1fb5cb7",
+        "title": "30 · Replaced the two abutting rectangles with one continuous left L-bench outline.",
+        "text": "Replaced the two abutting rectangles with one continuous left L-bench outline.",
+        "status": "done",
+        "sourceComment": "L bench should be on piece"
+      },
+      {
+        "id": "808d63d8-7cd7-154d-b6d8-613ca7cfba4c",
+        "title": "31 · Added the missing wall return at the bench/bathroom transition.",
+        "text": "Added the missing wall return at the bench/bathroom transition.",
+        "status": "done",
+        "sourceComment": "missing wall"
+      },
+      {
+        "id": "41410044-302f-1e4b-9471-46885de1a4af",
+        "title": "32 · Replaced the right bench pieces with one continuous L-shaped outline.",
+        "text": "Replaced the right bench pieces with one continuous L-shaped outline.",
+        "status": "done",
+        "sourceComment": "make bench one piece"
+      },
+      {
+        "id": "27408428-923c-b94c-877e-c5867b5a3ad2",
+        "title": "33 · Closed the missing bathroom rear boundary as part of its enlarged footprint.",
+        "text": "Closed the missing bathroom rear boundary as part of its enlarged footprint.",
+        "status": "done",
+        "sourceComment": "missing wall"
+      },
+      {
+        "id": "d3980bf8-a660-e84c-8a7c-14a15b13d390",
+        "title": "34 · Moved the misplaced storage-facing door to the bathroom side wall, swinging left into the bathroom.",
+        "text": "Moved the misplaced storage-facing door to the bathroom side wall, swinging left into the bathroom.",
+        "status": "done",
+        "sourceComment": "this door doesn't go into the storgage. It should open left into the bathroom"
+      },
+      {
+        "id": "38ff49a9-85dc-b647-81be-2ed91ce604b2",
+        "title": "35 · Enlarged the bathroom into the upper area, with storage and adjacent partitions coordinated around it.",
+        "text": "Enlarged the bathroom into the upper area, with storage and adjacent partitions coordinated around it.",
+        "status": "done",
+        "sourceComment": "see other comment about the storage door, the room is bigger than you've made it"
+      },
+      {
+        "id": "d6721574-0103-7f45-ab22-d54cecc3fb85",
+        "title": "36 · Removed the accommodation flight’s redundant lower-end pad outlines.",
+        "text": "Removed the accommodation flight’s redundant lower-end pad outlines.",
+        "status": "done",
+        "sourceComment": "dont need to have these extra landings at the bottom of the stairs"
+      },
+      {
+        "id": "74f10a4e-8c0b-004f-95d6-c656a73ce7be",
+        "title": "37 · Inspected the faint side-wall mark and interpreted it as outward side access beside the landing",
+        "text": "Inspected the faint side-wall mark and interpreted it as outward side access beside the landing; flagged for confirmation.",
+        "status": "done",
+        "sourceComment": "in the drawing there almost looks to be a door here? There's something here, please check"
+      },
+      {
+        "id": "cc6537b0-c451-8a48-be0f-719e8d11a155",
+        "title": "38 · Aligned the accommodation stair bottom with the adjoining washroom wall.",
+        "text": "Aligned the accommodation stair bottom with the adjoining washroom wall.",
+        "status": "done",
+        "sourceComment": "stairs should be flush with this wall"
+      },
+      {
+        "id": "f67bbef6-175b-8440-bf95-e79d1d958fee",
+        "title": "39 · Widened its clear left landing to 34 units and kept its side access unobstructed.",
+        "text": "Widened its clear left landing to 34 units and kept its side access unobstructed.",
+        "status": "done",
+        "sourceComment": "make this landing bigger"
+      },
+      {
+        "id": "b3a5590d-6aff-dd42-aa88-a4286746d7aa",
+        "title": "40 · Added the laundry/shower enclosure wall with a conventional hallway entry and clear swing.",
+        "text": "Added the laundry/shower enclosure wall with a conventional hallway entry and clear swing.",
+        "status": "done",
+        "sourceComment": "missing wall (which we should add a door to)"
+      },
+      {
+        "id": "32eb6e03-53b2-5440-b689-198e75e1dcc6",
+        "title": "41 · Replaced all ten bedroom ellipse marks with the shared chair symbol, consistently facing each desk.",
+        "text": "Replaced all ten bedroom ellipse marks with the shared chair symbol, consistently facing each desk.",
+        "status": "done",
+        "sourceComment": "can you make these look more like chairs?"
+      },
+      {
+        "id": "b2e13c67-3044-8a41-9506-b4b3e394ab5a",
+        "title": "42 · The final pin has no written content",
+        "text": "The final pin has no written content; no independent design change can be inferred from it.",
+        "status": "carried"
+      }
+    ]
+  }
+}
