@@ -1,3 +1,4 @@
-// Optional furniture uses the same ink and detail-weight system as fixtures.
-// Add it only where source evidence or an owner correction calls for it.
-export const FURNITURE_SYMBOLS={deskChair:{width:18,height:22,body:'<g fill="none" stroke="__INK__" stroke-width="1.5" stroke-linejoin="round"><rect x="4" y="3" width="10" height="9" rx="1.5"/><path d="M2 6V12M16 6V12M3 14H15V17H3ZM9 12V14M9 17V20M4 21L9 19L14 21"/></g>'}};
+// Supplied chair.svg, uniformly normalized into an 18-unit square with two
+// units of vertical padding. Native facing is up; the square proportions are
+// unchanged. No nested scaling: the renderer applies the shared detail weight.
+export const FURNITURE_SYMBOLS={deskChair:{width:18,height:22,body:"<g fill=\"none\" stroke=\"__INK__\" stroke-width=\"1.5729682\" stroke-linejoin=\"round\" transform=\"rotate(180 9 11)\"><path d=\"M2.6635596 2.7864841h12.6781241c1.0329158 0 1.8718322 0.8389164 1.8718322 1.8770754v10.5231576c0 2.2231285 -1.8036703 4.0267987 -4.0267987 4.0267987h-8.3681911c-2.2283717 0 -4.0320419 -1.8036703 -4.0320419 -4.0267987V4.6635596C0.7864841 3.6254005 1.6254005 2.7864841 2.6635596 2.7864841Z\"/><line x1=\"0.7864841\" y1=\"7.7675502\" x2=\"16.4270318\" y2=\"7.7675502\"/></g>"}};

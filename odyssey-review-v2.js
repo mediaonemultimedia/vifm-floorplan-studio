@@ -1,6 +1,6 @@
 // A reviewed revision replaces a connected layout as a whole. Keep unrelated
-// per-boat presentation and deliberate text/annotation edits from the V1 save.
-export function applyOdysseyReviewV2(previous,seed,oldSeed){
+// per-boat presentation and deliberate text/annotation edits from the prior save.
+export function applyOdysseyReviewedRevision(previous,seed,oldSeed){
  const next=structuredClone(seed);
  for(const key of ['name','length','width','ink','header','paper','pageSize','wallWidth','theme','notes'])if(previous[key]!==undefined)next[key]=structuredClone(previous[key]);
  for(const d of next.decks){

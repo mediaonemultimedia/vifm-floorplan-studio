@@ -17,7 +17,7 @@ test('Odyssey V2 accounts for all written PDF comments and preserves the origina
  const p=reviewed();assert.equal(validateEditorProject(p).drawingRevision,'v2');
  assert.equal(p.revisionMeta.changes.filter(c=>c.sourceComment).length,41);
  assert.equal(p.revisionMeta.changes.filter(c=>!c.sourceComment).length,1);
- assert.equal(BOATS.find(b=>b.id==='odyssey102').defaultRevision,'v2');
+ assert.equal(BOATS.find(b=>b.id==='odyssey102').revisions.find(r=>r.id==='v2').readOnly,true);
  assert.equal(BOATS.find(b=>b.id==='odyssey102').revisions.find(r=>r.id==='v1').readOnly,true);
  assert.equal(createHash('sha256').update(JSON.stringify(load('revisions/odyssey102-v1.json').decks)).digest('hex'),createHash('sha256').update(JSON.stringify(old().decks)).digest('hex'));
 });

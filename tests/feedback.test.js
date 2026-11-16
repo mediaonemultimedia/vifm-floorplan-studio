@@ -18,3 +18,9 @@ test('new revisions retire superseded system flags without changing user notes o
  assert.deepEqual(result[1],edited);assert.deepEqual(result[2],user);
  assert.equal(reconcileReviewNotes([{...original,seedFlag:'current'}],{reviewFlags:[current]},[old,current])[0].resolved,false);
 });
+test('updated system questions adopt confirmed wording without overwriting owner edits',()=>{
+ const old={id:'rooms',title:'Count',text:'Ten rooms'},current={...old,text:'Eight confirmed rooms'};
+ const note={seedFlag:'rooms',text:'Flag rooms - Count\nTen rooms',resolved:false};
+ assert.equal(reconcileReviewNotes([note],{reviewFlags:[current]},[current,old])[0].text,'Flag rooms - Count\nEight confirmed rooms');
+ assert.equal(reconcileReviewNotes([{...note,text:note.text+' plus my question'}],{reviewFlags:[current]},[old,current])[0].text,note.text+' plus my question');
+});

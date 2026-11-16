@@ -50,7 +50,7 @@ Structural walls are separate line segments with independent endpoints. Use SVG 
 
 ## Odyssey evidence and unresolved assumptions
 
-The supplied sketches establish Odyssey geometry ahead of the prose. Treat the repeated bench area in the first two photos as their shared join, rather than drawing it twice. Place the shorter upper level by matching stair connections; retain the helipad's 43 × 35 proportion. Draw the ten sketched bedrooms only, with provisional location identifiers. Do not invent an upper accommodation block, first-aid location, extra laundry or additional bedrooms to reconcile the prose. V2 incorporates the subsequent PDF review, replacing the original nine draft flags with five current uncertainties in editor feedback. Subsequent source clarification can revise these assumptions without changing the universal editing controls.
+The supplied sketches establish Odyssey geometry ahead of the prose. Treat the repeated bench area in the first two photos as their shared join, rather than drawing it twice. Place the shorter upper level by matching stair connections; retain the helipad's 43 × 35 proportion. The owner subsequently confirmed eight lower bedrooms, four per side (16 November 2026), superseding the earlier ten-room interpretation. Use provisional location identifiers. Do not invent an upper accommodation block, first-aid location, extra laundry or additional bedrooms to reconcile the prose. V2 incorporates the subsequent PDF review, replacing the original nine draft flags with five current uncertainties in editor feedback. Subsequent source clarification can revise these assumptions without changing the universal editing controls.
 
 ## BARCO cook-house level confirmation · 27 October 2026
 
@@ -97,7 +97,7 @@ The Codex handoff additionally carries original uploads, retained video stills, 
 
 ## Odyssey V2 PDF review · 13 November 2026
 
-[The review record](docs/reviews/2026-11-13-odyssey-v2.md) accounts for all 41 written comments and the empty pin. V2 is the editable default; V1 remains archived with its original geometry and browser state. Whole-assembly replacement preserves colours, hierarchy, deliberate label wording and added annotations, rather than incompatible old walls. Superseded, unedited system questions become resolved in the new revision; owner-written or edited feedback remains open.
+[The review record](docs/reviews/2026-11-13-odyssey-v2.md) accounts for all 41 written comments and the empty pin. V2 was the editable default before the owner’s eight-room correction in V3; V1 remains archived with its original geometry and browser state. Whole-assembly replacement preserves colours, hierarchy, deliberate label wording and added annotations, rather than incompatible old walls. Superseded, unedited system questions become resolved in the new revision; owner-written or edited feedback remains open.
 
 Review a stair as a route between destinations on both floors. Show only the evidenced run, clear landing and connecting path; an unnecessary outlined pad is not a substitute for circulation. Keep swings away from treads. Close an unsupported exterior drop-door and provide the internal route established by the evidence. Door thresholds also clip secondary landing outlines. A short flight may have only a few treads. Direction arrows may use the shared broad solid symbol with a light paper-colour outline; keep this a diagram detail rather than a safety route.
 
@@ -106,3 +106,9 @@ Rebuild complete boundaries before clipping openings. Include jamb returns and t
 Joined L-shaped benches use one outline without a seam through the corner. Keep a separate sink beyond the cabinet run with a real backing wall and a visible gap; do not enclose it in cabinet geometry. Centre labels in their actual object or clear room area. When a chair or counter occupies part of a room, define the remaining label area explicitly. Use the shared desk-chair symbol only where the source or owner calls for furniture; centre it on the desk and face it toward the desk. This does not add furniture to boats whose presentation omits it.
 
 Odyssey-specific decisions remain local: the rear note reads CHAINS, the smaller tank is GAS, the three central short flights share a landing, and the owner confirmed INSTRUMENT BENCH. The faint side door, exact stair elevations, written-versus-sketched room count, service identities/storage access and unmeasured dimensions remain flagged. Do not carry those interpretations into unrelated boats.
+
+## Odyssey V3 · confirmed eight-room module and chair · 16 November 2026
+
+[The owner correction](docs/reviews/2026-11-16-odyssey-eight-rooms.md) establishes four bedrooms on each side of the lower hallway. Count wall enclosures and entrances rather than furniture marks. One repeated module alternates vertically: top door/top bed/bottom desk, then bottom door/bottom bed/top desk. Mirror the opposite hallway side. Keep the closet at the other end of the same hallway wall, opposite the doorway. The eight-room count is Odyssey-specific; the method of checking enclosed modules and mirrored furnishing relationships is reusable. V3 is current; both prior layouts remain archived.
+
+Use the supplied chair.svg as the common desk-chair symbol. Preserve its proportions and backrest geometry, orient its front toward its desk and inherit the selected ink and fixture stroke. Do not embed an extra scale that silently changes its line weight. Shared symbol styling applies across drawings; it does not add furniture to boats that do not show it.

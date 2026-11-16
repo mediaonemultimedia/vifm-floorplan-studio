@@ -107,7 +107,7 @@ Matching bedroom rows share one baseline when any member needs lower placement. 
 
 ## Odyssey working draft and shared editing system
 
-Odyssey uses the reviewed hand-sketch interpretation. The first two photos join at the bench area to form the lower level; the shorter upper level contains the helipad, office and weight room. The 43 × 35 ft pad anchors its proportions. Only the ten bedrooms visible in the sketches are drawn, with provisional L1–L5/R1–R5 identifiers. The written twenty-room count and other uncertain connections remain unresolved. V2 applies the 41 written PDF comments, with five current source flags in Feedback outside exports. All four original sketch photos are available in Source drawings. The [November review record](docs/reviews/2026-11-13-odyssey-v2.md) contains each comment and disposition. Run `node scripts/build-odyssey-review-v2.mjs` to reproduce the versioned assets from the retained V1 and review data.
+Odyssey uses the reviewed hand-sketch interpretation. The first two photos join at the bench area to form the lower level; the shorter upper level contains the helipad, office and weight room. The 43 × 35 ft pad anchors its proportions. The owner confirmed eight lower bedrooms, four per side, in V3; L1–L4/R1–R4 are provisional identifiers. The written twenty-room count and other uncertain connections remain unresolved. V2 applies the 41 written PDF comments, with five current source flags in Feedback outside exports. All four original sketch photos are available in Source drawings. The [November review record](docs/reviews/2026-11-13-odyssey-v2.md) contains each comment and disposition. Run `node scripts/build-odyssey-review-v2.mjs` to reproduce the versioned assets from the retained V1 and review data.
 
 Boat navigation, typography roles, line controls, wall editing, area centring, feedback and export use the same editor for the bundled boats and new generated drafts. Values are saved per boat, so changing one drawing does not silently restyle another. The existing BARCO save is migrated to independent lines while preserving its text, colour and feedback coordinates; the original v1 browser save remains as a backup. Save project downloads the complete editable drawing state. New-floorplan media intake and the separately activated generation service are described above.
 
@@ -117,7 +117,7 @@ The owner subsequently confirmed BARCO's cook house is downstairs only (27 Octob
 
 ## Drawing revisions and BARCO V2
 
-Use Drawing revision beneath the boat picker to switch versions. Both BARCO and Odyssey default to V2, with V1 retained as an archived, read-only drawing. Both versions can export PDF/SVG/project files, with V1/V2 in their filenames. Revision controls are shared across boats. Revision labels and review notes remain outside the printed artwork.
+Use Drawing revision beneath the boat picker to switch versions. BARCO defaults to V2 and Odyssey to V3. Earlier revisions are retained as archived, read-only layouts. Both versions can export PDF/SVG/project files, with their revision in each filename. Revision controls are shared across boats. Revision labels and review notes remain outside the printed artwork.
 
 Before creating a visitor's first V2, the Studio freezes a copy of that browser's existing V1, including local edits. V2 begins from that copy with the review corrections applied. V2 drawings, notes and published bases use separate browser keys. V1 is never replaced by V2 edits or automatic updates. New visitors use the frozen published V1 baseline in assets/revisions/barco99-v1.json. Its rendered SVG is regression-checked against commit ab870fa. The original unversioned browser keys remain available as backups.
 
@@ -129,3 +129,7 @@ Odyssey has its own V2 change log: 41 written comments and one empty pin. The re
 ## Owner-edited V2 evidence review
 
 The owner subsequently supplied a manually revised V2 proof. [The comparison record](docs/reviews/2026-10-27-barco-manual-v2.md) distinguishes the changed layout, unchanged typography and unresolved staff-area details. Its reusable rules are incorporated into DESIGN.md. This evidence review does not replace either published drawing revision.
+
+## Odyssey V3 · eight bedrooms
+
+The [16 November correction](docs/reviews/2026-11-16-odyssey-eight-rooms.md) replaces the earlier ten-room interpretation with four paired rows. Bedrooms use one alternating bed/desk/closet module; the supplied chair.svg is the common desk chair. V1/V2 layouts remain archived. Settings and feedback migrate from the nearest previous revision, preserving owner edits. `scripts/build-odyssey-bedrooms-v3.mjs` rebuilds the current asset; `scripts/build-odyssey-bedroom-sketch.mjs` uses the same geometry for the review sketch.

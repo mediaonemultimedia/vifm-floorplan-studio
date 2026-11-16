@@ -4,10 +4,11 @@ const round=n=>Math.round(n*10)/10;
 // Only retire an unchanged system question whose source flag was replaced.
 // Owner-written or edited feedback stays open; earlier revision storage is untouched.
 export function reconcileReviewNotes(notes,project,previousFlags){
- const active=new Set(project.reviewFlags.map(f=>f.id));
+ const active=new Map(project.reviewFlags.map(f=>[f.id,f])),wording=f=>`Flag ${f.id} - ${f.title}\n${f.text}`;
  return notes.map(n=>{
-  const prior=previousFlags.find(f=>f.id===n.seedFlag);
-  return prior&&!active.has(prior.id)&&n.text===`Flag ${prior.id} - ${prior.title}\n${prior.text}`?{...n,resolved:true}:n;
+  const known=previousFlags.some(f=>f.id===n.seedFlag&&n.text===wording(f));
+  if(!known)return n;
+  return active.has(n.seedFlag)?{...n,text:wording(active.get(n.seedFlag))}:{...n,resolved:true};
  });
 }
 export function createNote(project,deckId,page,release,target=null){
