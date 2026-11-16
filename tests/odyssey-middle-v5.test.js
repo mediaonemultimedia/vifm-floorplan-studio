@@ -6,10 +6,11 @@ import {fixtureBounds} from '../fixtures.js';
 import {validateEditorProject} from '../editor-project.js';
 const boat=()=>BOATS.find(b=>b.id==='odyssey102');
 const load=v=>JSON.parse(readFileSync(new URL(`../assets/revisions/odyssey102-${v}.json`,import.meta.url)));
-const current=()=>JSON.parse(readFileSync(new URL('../'+boat().asset,import.meta.url)));
+// V5 is archived under V6; these tests keep checking its own asset.
+const current=()=>load('v5');
 const near=(a,b)=>assert.ok(Math.abs(a-b)<1e-8,`${a} != ${b}`);
 test('working Odyssey has twenty bedrooms: ten on each floor, with one and two washer/dryer sets',()=>{
- const p=current();validateEditorProject(p);assert.equal(boat().defaultRevision,'v5');
+ const p=current();validateEditorProject(p);assert.equal(boat().revisions.find(r=>r.id==='v5').readOnly,true);
  for(const [i,d] of p.decks.entries()){
   assert.equal(d.labels.filter(a=>a.kind==='room').length,10);
   assert.equal(d.details.filter(a=>a.type==='washer').length,i+1);assert.equal(d.details.filter(a=>a.type==='dryer').length,i+1);

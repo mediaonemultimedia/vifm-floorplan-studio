@@ -1,5 +1,7 @@
 # VIFM floorplan drawing rules
 
+Placement decisions (where walls, doors, stairs and named spaces go when sources are rough or conflict) follow [LAYOUT-LOGIC.md](LAYOUT-LOGIC.md) and its automated checker. This file covers presentation.
+
 The four original plans establish the visual language; style reference.svg supplies editable type and measurements. BARCO source drawings determine topology, fixtures, numbering and connections. These are presentation schematics, not measured construction plans. Regularize rough source lines into aligned, plausible partitions without inventing rooms or equipment.
 
 ## Type and placement

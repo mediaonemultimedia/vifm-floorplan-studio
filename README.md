@@ -143,3 +143,7 @@ The latest 16 November clarification supersedes the earlier eight-room instructi
 ## Odyssey V5 · both floors and middle layout
 
 V5 applies the owner-cleaned middle sketch, aligns the shared washroom/shower room tops, corrects BOILER to a bench across the divider, retains the furnace and gives all three H.W. symbols the same circular shape. The upper source is treated as partial: the confirmed shared-facility and ten-bedroom block is repeated upstairs, with a second washer and dryer across a clear aisle. V1–V4 remain archived; the lower hull retains 46:130. Run `node scripts/build-odyssey-middle-v5.mjs` to reproduce the current asset. Tests cover both floors, common geometry, equipment quantities, door sweeps and preserved V4 browser saves.
+
+## Odyssey V6 · layout logic pass
+
+V6 is the first drawing built with [LAYOUT-LOGIC.md](LAYOUT-LOGIC.md) and its checker (`plan-lint.js`). Run `node scripts/lint-plan.mjs assets/revisions/odyssey102-v6.json briefs/odyssey102.json`. The upper walls stack on the lower walls; the accommodation stair has one footprint; the brief's dry room, lounge and first aid are labelled; and the copied upper exit is closed. Details and open questions are in [the V6 review](docs/reviews/2026-11-16-odyssey-v6.md). **Copy feedback for chat** now lists the nearest wall, door and fixture ids for each pin, plus the current layout checks, so pasted notes map straight onto edits. Agents start from [CLAUDE.md](CLAUDE.md).

@@ -12,9 +12,9 @@ revision = os.environ.get('GITHUB_SHA', 'local-build')
 if destination.exists():
     shutil.rmtree(destination)
 destination.mkdir()
-for folder in ('assets', 'vendor'):
+for folder in ('assets', 'vendor', 'briefs'):
     shutil.copytree(root / folder, destination / folder)
-for name in ('DESIGN.md', 'PRODUCT.md', 'docs/reviews/2026-10-27-barco-manual-v2.md', 'docs/reviews/2026-11-13-odyssey-v2.md', 'docs/reviews/2026-11-16-odyssey-eight-rooms.md'):
+for name in ('LAYOUT-LOGIC.md', 'DESIGN.md', 'PRODUCT.md', 'docs/reviews/2026-10-27-barco-manual-v2.md', 'docs/reviews/2026-11-13-odyssey-v2.md', 'docs/reviews/2026-11-16-odyssey-eight-rooms.md', 'docs/reviews/2026-11-16-odyssey-v6.md'):
     target = destination / name
     target.parent.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(root / name, target)

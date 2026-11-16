@@ -1,5 +1,6 @@
 import {planPoint,sourcePoint,escapeXML as escape} from './model.js';
 import {deckOrigins} from './render.js';
+import {lintProject,lintReport} from './plan-lint.js';
 const round=n=>Math.round(n*10)/10;
 // Only retire an unchanged system question whose source flag was replaced.
 // Owner-written or edited feedback stays open; earlier revision storage is untouched.
@@ -18,9 +19,21 @@ export function createNote(project,deckId,page,release,target=null){
  return {id:crypto.randomUUID(),projectName:project.name,deckId,deckName:deck.name,page:{x:round(page.x),y:round(page.y)},local:{x:round(local.x),y:round(local.y)},source:{x:round(source.x),y:round(source.y)},nearby,target,release,drawingRevision:project.drawingRevision||'v1',createdAt:new Date().toISOString(),text:'',resolved:false};
 }
 export function validateNotes(value){return Array.isArray(value)?value.filter(n=>n&&typeof n.id==='string'&&n.id.length<100&&/^[a-z0-9_-]+$/i.test(n.id)&&['main','upper'].includes(n.deckId)&&typeof n.text==='string'&&n.text.length<=4000&&(n.drawingRevision===undefined||(typeof n.drawingRevision==='string'&&/^v[1-9][0-9]{0,3}$/.test(n.drawingRevision)))&&n.page&&Number.isFinite(n.page.x)&&Number.isFinite(n.page.y)&&n.page.x>=0&&n.page.x<=792&&n.page.y>=0&&n.page.y<=1224&&n.source&&Number.isFinite(n.source.x)&&Number.isFinite(n.source.y)&&n.local&&Number.isFinite(n.local.x)&&Number.isFinite(n.local.y)&&Array.isArray(n.nearby)&&typeof n.deckName==='string'&&typeof n.projectName==='string').slice(0,300):[];}
-export function feedbackReport(notes,url='https://mediaonemultimedia.github.io/vifm-floorplan-studio/'){
+// Nearest editable geometry, so a pasted note names the exact walls, doors and fixtures it means.
+export function nearbyGeometry(project,deckId,point,limit=5){
+ const d=project?.decks.find(a=>a.id===deckId);if(!d||project.coordinates!=='drawing')return [];
+ const seg=(x1,y1,x2,y2)=>{const dx=x2-x1,dy=y2-y1,l=dx*dx+dy*dy,t=l?Math.max(0,Math.min(1,((point.x-x1)*dx+(point.y-y1)*dy)/l)):0;return Math.hypot(point.x-x1-t*dx,point.y-y1-t*dy);};
+ const box=(x,y,w,h)=>Math.hypot(Math.max(x-point.x,0,point.x-x-w),Math.max(y-point.y,0,point.y-y-h));
+ const items=[...(d.walls||[]).map(w=>({id:w.id,kind:'wall',distance:seg(w.x1,w.y1,w.x2,w.y2)})),...(d.doors||[]).map(a=>({id:a.id,kind:'door',distance:seg(a.x,a.y,a.x+a.u[0],a.y+a.u[1])})),
+  ...(d.details||[]).map(a=>({id:a.id,kind:a.type||a.kind,distance:a.kind==='line'||a.kind==='stairArrow'?seg(a.x1,a.y1,a.x2,a.y2):a.w!==undefined?box(a.x,a.y,a.w,a.h):Math.hypot((a.x??a.points?.[0]?.[0])-point.x,(a.y??a.points?.[0]?.[1])-point.y)})),
+  ...(d.labels||[]).map(a=>({id:a.id,kind:`label "${a.text.replace(/\s+/g,' ')}"`,distance:Math.hypot(a.x-point.x,a.y-point.y)}))];
+ return items.filter(a=>Number.isFinite(a.distance)).sort((a,b)=>a.distance-b.distance).slice(0,limit).map(a=>({...a,distance:round(a.distance)}));
+}
+export function feedbackReport(notes,url='https://mediaonemultimedia.github.io/vifm-floorplan-studio/',project=null,brief=null){
  const open=notes.filter(n=>!n.resolved&&n.text.trim());
- return `VIFM Floorplan Studio — requested changes\nStudio: ${url}\nPage: 792 × 1224 drawing units; origin at top left. Coordinates are not feet.\n\n`+open.map((n,i)=>`${i+1}. ${n.projectName} / ${n.deckName}\nNote ID: ${n.id}\nDrawing revision: ${(n.drawingRevision||'v1').toUpperCase()}\nPublished build: ${n.release}\nPage pin: x ${n.page.x}, y ${n.page.y}\nWithin floor: x ${n.local.x}, y ${n.local.y}\nSource drawing: along ${n.source.x}, across ${n.source.y}\nNearby: ${n.nearby.map(a=>a.text).join(' / ')}${n.target?`\nTarget: ${JSON.stringify(n.target)}`:''}\nChange: ${n.text.trim()}`).join('\n\n');
+ const near=n=>{const g=nearbyGeometry(project,n.deckId,n.local);return g.length?`\nNearest geometry: ${g.map(a=>`${a.id} (${a.kind}, ${a.distance})`).join('; ')}`:'';};
+ let checks='';if(project?.coordinates==='drawing'){try{checks=`\n\nLayout checks on this drawing (LAYOUT-LOGIC.md):\n${lintReport(lintProject(project,brief))}`;}catch{}}
+ return `VIFM Floorplan Studio — requested changes\nStudio: ${url}\nFor Claude or Codex: follow CLAUDE.md in the repository. Build the next drawing revision from these notes, keep earlier revisions archived, and rerun the layout checks.\nPage: 792 × 1224 drawing units; origin at top left. Coordinates are not feet.\n\n`+open.map((n,i)=>`${i+1}. ${n.projectName} / ${n.deckName}\nNote ID: ${n.id}\nDrawing revision: ${(n.drawingRevision||'v1').toUpperCase()}\nPublished build: ${n.release}\nPage pin: x ${n.page.x}, y ${n.page.y}\nWithin floor: x ${n.local.x}, y ${n.local.y}\nSource drawing: along ${n.source.x}, across ${n.source.y}\nNearby: ${n.nearby.map(a=>a.text).join(' / ')}${near(n)}${n.target?`\nTarget: ${JSON.stringify(n.target)}`:''}\nChange: ${n.text.trim()}`).join('\n\n')+checks;
 }
 export function feedbackPins(notes,project,visible){return notes.map((n,i)=>{
  if(n.resolved||(visible!=='both'&&visible!==n.deckId))return '';

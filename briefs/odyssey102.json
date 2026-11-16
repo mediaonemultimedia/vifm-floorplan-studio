@@ -1,0 +1,73 @@
+{
+  "id": "odyssey102",
+  "source": "Client write-up, 16 Nov 2026, plus owner corrections. The written spec governs counts and named spaces; sketches govern adjacency only.",
+  "hull": {
+    "lengthFt": 130,
+    "beamFt": 46
+  },
+  "helipad": {
+    "acrossFt": 43,
+    "alongFt": 35,
+    "note": "Sketch dimension marks: 43 ft across the beam, 35 ft along the hull."
+  },
+  "decks": {
+    "main": {
+      "rooms": 10,
+      "symbols": {
+        "washer": 1,
+        "dryer": 1
+      },
+      "spaces": [
+        "DRY ROOM",
+        "LAUNDRY",
+        "SHOWERS",
+        "WASHROOM"
+      ]
+    },
+    "upper": {
+      "rooms": 10,
+      "symbols": {
+        "washer": 2,
+        "dryer": 2
+      },
+      "spaces": [
+        "LOUNGE",
+        "FIRST AID",
+        "LAUNDRY",
+        "SHOWERS",
+        "WASHROOM",
+        "WEIGHT ROOM"
+      ]
+    }
+  },
+  "inventory": [
+    "Two diesel generators (32.5 and 90 kVA): GEN 1 is the larger",
+    "Two electric water heaters; owner confirmed BENCH (not boiler) on the divider",
+    "Fuel storage and dispensing: GAS (smaller), DIESEL, DIESEL, JET tanks; upstairs pump and barrels by the helipad",
+    "Maintenance shop and saw/fire-equipment shop: the two double-door bays",
+    "Compressed-air system: COMP. in the generator room",
+    "No kitchen"
+  ],
+  "exceptions": [
+    {
+      "code": "envelope",
+      "match": "from y36 to y28",
+      "reason": "Helipad is 43 ft on the 46 ft roof (sketch dimension); the pad edge, not a building wall, steps in."
+    },
+    {
+      "code": "stair-stack",
+      "match": "^Stair a ",
+      "reason": "Open question: lower short flight vs upper full flight. Flagged in the drawing until the owner answers."
+    },
+    {
+      "code": "open-end",
+      "match": "main-utility-bench-divider",
+      "reason": "Owner's repaired sketch: bench on one face of a short divider, furnace on the other."
+    },
+    {
+      "code": "open-end",
+      "match": "main-bench-return-0",
+      "reason": "Review note 31: short return wall closes the dry-room bench alcove against the L bench."
+    }
+  ]
+}
