@@ -14,6 +14,8 @@ Open http://127.0.0.1:4173. Use an HTTP server; opening index.html directly as a
 
 ## Edit and export
 
+- Zoom runs from 25% to 400%. Enter a percentage directly or use +/−. Select the magnifying glass (Z), then drag a box to centre and enlarge that area; a click zooms in once. Escape cancels and Fit restores the full page. The tool returns to editing (or Feedback if that was active). These view-only controls work on every boat and archived revision, without changing project data or PDF/SVG output.
+
 - Choose a boat in the sidebar. Each boat has its own saved drawing, colours, shared styles and feedback.
 - Select text to edit its content, position and style role. Text hierarchy changes every matching role on both floors together. Drag to move; arrow keys nudge; Shift increases the nudge.
 - Use Centre in an area for intentionally centred labels. Editable area bounds keep multiline text centred horizontally and vertically as its shared size changes. Edge and corner labels keep their established alignment.

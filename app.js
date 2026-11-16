@@ -1,6 +1,7 @@
 import {setupNewProject} from './new-project-ui.js';
 import {loadLocalProjects,registerLocalProject,localBoatEntry} from './local-projects.js';
 import {referenceStore} from './intake-storage.js';
+import {bindZoomControls,MIN_ZOOM,MAX_ZOOM} from './zoom.js';
 import {BOATS,projectStorageKey,restoreProject,revisionFor,previousRevisionFor,feedbackForRevision} from './projects.js';
 import {prepareEditorProject,validateEditorProject,moveElement} from './editor-project.js';
 import {revisionControls,showRevisionLog} from './revision-controls.js';
@@ -44,7 +45,7 @@ persist();
 function toast(message){$('#toast').textContent=message;$('#toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').hidden=true,5500);}
 function checkpoint(){history.push(JSON.stringify(project));if(history.length>60)history.shift();$('#undo').disabled=false;}
 function persist(){if(readOnly())return;try{localStorage.setItem(KEY,JSON.stringify(project));$('#save-status').textContent='Saved on this device';}catch{$('#save-status').textContent='Save a project file to keep changes';}}
-function render(){$('#sheet').innerHTML=drawing(project,{selected:selected?.id,interactive:!readOnly(),visible:view,grid:$('#grid').checked});if(feedbackOpen)$('#drawing').insertAdjacentHTML('beforeend',feedbackPins(notes,project,view));$('#sheet').classList.toggle('placing',tool!=='select');$('#sheet').style.width=792*zoom+'px';$('#sheet').style.height=1224*zoom+'px';$('#zoom-value').textContent=Math.round(zoom*100)+'%';$('#undo').disabled=readOnly()||!history.length;}
+function render(){$('#sheet').innerHTML=drawing(project,{selected:selected?.id,interactive:!readOnly(),visible:view,grid:$('#grid').checked});if(feedbackOpen)$('#drawing').insertAdjacentHTML('beforeend',feedbackPins(notes,project,view));$('#sheet').classList.toggle('placing',tool!=='select');$('#sheet').classList.toggle('zooming',tool==='zoom');$('#zoom-area').setAttribute('aria-pressed',String(tool==='zoom'));$('#sheet').style.width=792*zoom+'px';$('#sheet').style.height=1224*zoom+'px';$('#zoom-value').value=Math.round(zoom*100);$('#zoom-in').disabled=zoom>=MAX_ZOOM;$('#zoom-out').disabled=zoom<=MIN_ZOOM;$('#undo').disabled=readOnly()||!history.length;}
 function sync(){
  syncPalette();
  for(const [id,key]of [['vessel-name','name'],['length','length'],['width','width'],['page-size','pageSize'],['paper','paper']])$('#'+id).value=project[key];
@@ -88,7 +89,7 @@ $('#source-list').onclick=async ev=>{const upload=ev.target.closest('[data-uploa
  else {const source=project.sources[Number(b.dataset.source)];src=source.src;title=source.title;}
  if(type!=='text'){const el=document.createElement(type==='pdf'?'iframe':type==='video'?'video':'img');el.src=src;if(type==='video')el.controls=true;if(type==='image')el.alt=title;if(type==='pdf'){el.title=title;el.className='source-pdf';}pane.append(el);}$('#source-title').textContent=title;$('#source-dialog').showModal();}catch(err){toast(err.message);}};
 $('#deck-tabs').onclick=ev=>{const b=ev.target.closest('[data-view]');if(!b)return;view=b.dataset.view;document.querySelectorAll('[data-view]').forEach(x=>x.classList.toggle('active',x===b));$('#view-label').textContent=view==='both'?'Complete drawing set':project.decks.find(d=>d.id===view).name;selected=null;render();inspector();};
-function setTool(next){tool=next;document.querySelectorAll('[data-tool]').forEach(b=>b.classList.toggle('active',b.dataset.tool===tool));$('#tool-status').textContent=tool==='select'?'Select an element to edit':tool==='feedback'?'Click a location on either floorplan to leave a note':'Click a deck to place '+tool;render();}
+function setTool(next){tool=next;document.querySelectorAll('[data-tool]').forEach(b=>b.classList.toggle('active',b.dataset.tool===tool));$('#tool-status').textContent=tool==='select'?'Select an element to edit':tool==='zoom'?'Drag a box to zoom · Esc cancels':tool==='feedback'?'Click a location on either floorplan to leave a note':'Click a deck to place '+tool;render();}
 document.querySelectorAll('[data-tool]').forEach(b=>b.onclick=()=>setTool(b.dataset.tool));
 function svgPoint(ev){return new DOMPoint(ev.clientX,ev.clientY).matrixTransform($('#drawing').getScreenCTM().inverse());}
 function locate(q){return project.decks.map((d,i)=>({d,o:deckOrigins(project)[i]})).find(({d,o})=>(view==='both'||view===d.id)&&q.x>=o.x-5&&q.x<=o.x+project.bounds.width+5&&q.y>=o.y&&q.y<=o.y+project.bounds.height);}
@@ -128,7 +129,8 @@ document.addEventListener('keydown',ev=>{
  ev.preventDefault();const step=ev.shiftKey?10:1,dx=ev.key==='ArrowLeft'?-step:ev.key==='ArrowRight'?step:0,dy=ev.key==='ArrowUp'?-step:ev.key==='ArrowDown'?step:0;
  change(()=>{if(selected.wall!==undefined)moveWall(project.decks.find(d=>d.id===selected.deck).walls[selected.wall],dx,dy);else moveElement(element(),project,dx,dy);});inspector();}
 });
-$('#grid').onchange=render;$('#zoom-in').onclick=()=>{zoom=Math.min(1.5,zoom+.1);render();};$('#zoom-out').onclick=()=>{zoom=Math.max(.25,zoom-.1);render();};$('#fit').onclick=()=>{zoom=Math.max(.25,Math.min(1,($('#stage').clientWidth-65)/792,($('#stage').clientHeight-65)/1224));render();};
+$('#grid').onchange=render;
+const canvasZoom=bindZoomControls({stage:$('#stage'),sheet:$('#sheet'),input:$('#zoom-value'),inButton:$('#zoom-in'),outButton:$('#zoom-out'),fitButton:$('#fit'),areaButton:$('#zoom-area'),getZoom:()=>zoom,setZoom:n=>{zoom=n;render();},getTool:()=>tool,setTool});
 $('#save-project').onclick=()=>download(JSON.stringify(project,null,2),filename(project,'json'),'application/json');$('#load-project').onclick=()=>$('#import-file').click();$('#import-file').onchange=async ev=>{const file=ev.target.files[0];if(!file)return;try{if(file.size>2000000)throw Error('Project file is too large (maximum 2 MB).');const next=prepareEditorProject(JSON.parse(await file.text()));const revision=next.drawingRevision||'v1';next.drawingRevision=revision;if(!seeds.has(next.id+':'+revision)){if(!next.id.startsWith('user-')||revision!=='v1')throw Error('This boat or drawing revision is not in the Studio yet.');registerLocalProject(localStorage,next);BOATS.push(localBoatEntry(next));seeds.set(next.id+':v1',structuredClone(next));}if(next.id!==activeId||revision!==activeRevision)activateBoat(next.id,revision);if(readOnly()){project=next;sync();render();}else change(()=>{project=next;selected=null;});saveNotes();inspector();toast('Project opened.');}catch(err){toast('Could not open project: '+err.message);}finally{ev.target.value='';}};
 $('#reset').onclick=()=>{if(confirm('Reset '+project.name+' to its supplied layout? You can undo this.')){change(()=>{project=prepareEditorProject(startingProject);selected=null;});inspector();}};
 $('#close-source').onclick=()=>$('#source-dialog').close();$('#source-dialog').addEventListener('close',()=>{if(sourceBlobURL){URL.revokeObjectURL(sourceBlobURL);sourceBlobURL=null;}});
@@ -162,7 +164,7 @@ function feedbackInspector(){
  $('#check-updates').onclick=()=>checkPublishedUpdate(true);
 }
 $('#close-feedback-copy').onclick=()=>$('#feedback-copy-dialog').close();
-function idleForUpdate(){return !drag&&!['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName)&&!document.querySelector('dialog[open]');}
+function idleForUpdate(){return !drag&&!canvasZoom.isDragging()&&!['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName)&&!document.querySelector('dialog[open]');}
 async function checkPublishedUpdate(manual=false){
  if(checkingUpdate)return;checkingUpdate=true;
  try{const response=await fetch('./release.json',{cache:'no-store'});if(!response.ok)throw Error('Could not reach the published version.');const next=await response.json();if(next.version!==releaseVersion){pendingRelease=next;$('#published-update').hidden=false;if(idleForUpdate()&&!document.hidden)await applyPublishedUpdate();}else if(manual)toast('You are viewing the latest published version.');}catch(err){if(manual)toast(err.message);}finally{checkingUpdate=false;}

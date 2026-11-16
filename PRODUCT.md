@@ -31,3 +31,7 @@ The public editor, intake and brief handoff remain usable without an account. Di
 The Worker was deployed on October 28, 2026 and its application secrets were entered privately. The owner did not retain the Studio access code; it needs replacement if that optional route is used. The default Codex handoff does not need that code. The [backend activation guide](server/README.md#one-time-activation) provides setup and optional GitHub Actions deployment details.
 
 Local verification covers the intake-to-editor contract with a synthetic generation response. It does not demonstrate real model quality or production service readiness. After activation, complete a real generation and evidence/PDF review before treating the service as ready for client work.
+
+## Universal view controls
+
+All boats and drawing revisions, including archives, support 25–400% zoom, direct percentage entry and a toolbar magnifier for marquee zoom. Z selects the tool; dragging fits and centres the chosen area, a click zooms in once, Escape cancels and Fit returns to the page. Drawing geometry, local project state, undo history and print output stay independent of viewport changes.
