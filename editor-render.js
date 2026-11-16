@@ -5,7 +5,19 @@ import {deckDoors} from './reference-style.js';
 import {stairMarkup} from './stairs.js';
 import {fixtureLayout,fixtureMarkup,dockMarkup,dockLayout} from './fixtures.js';
 import {textPresentation,textBounds} from './theme.js';
-export function editorDeckOrigins(p){if(p.generationInfo){const single=p.decks.some(d=>d.omitFromOutput);return p.decks.map((d,i)=>{const b=draftHorizontalExtent(d,p);return {x:(single?396:[206,582][i])-(b.left+b.right)/2,y:222};});}if(p.decks.some(d=>d.omitFromOutput))return p.decks.map(()=>({x:396-p.bounds.width/2,y:222}));const left=p.coordinates==='drawing'?0:dockLayout(p).left;return [206,582].map(center=>({x:center-left/2-p.bounds.width/2,y:222}));}
+const HEADER=124.59,PAGE_HEIGHT=1224;
+function captionOffset(p){
+ const contentBottom=Math.max(p.bounds.height,...p.decks.flatMap(d=>[...d.labels,...d.annotations].map(a=>{const t=textPresentation(a,p),q=t.drawingPosition?{y:t.y}:planPoint(t.x,t.y,p);return q.y+t.size*.25+(t.text.split('\n').length-1)*t.size;})));
+ return Math.max(p.bounds.height+25,contentBottom+20);
+}
+// Drawing-coordinate boats sit midway between the header and the page foot, from the
+// top of their highest label to the floor caption.
+function centredTop(p){
+ const top=Math.min(0,...p.decks.flatMap(d=>[...d.labels,...d.annotations].map(a=>{const t=textPresentation(a,p);return (t.drawingPosition?t.y:planPoint(t.x,t.y,p).y)-t.size;})));
+ const bottom=captionOffset(p)+p.theme.text.caption*.25;
+ return HEADER+(PAGE_HEIGHT-HEADER-(bottom-top))/2-top;
+}
+export function editorDeckOrigins(p){if(p.generationInfo){const single=p.decks.some(d=>d.omitFromOutput);return p.decks.map((d,i)=>{const b=draftHorizontalExtent(d,p);return {x:(single?396:[206,582][i])-(b.left+b.right)/2,y:222};});}const y=p.coordinates==='drawing'?centredTop(p):222;if(p.decks.some(d=>d.omitFromOutput))return p.decks.map(()=>({x:396-p.bounds.width/2,y}));const left=p.coordinates==='drawing'?0:dockLayout(p).left;return [206,582].map(center=>({x:center-left/2-p.bounds.width/2,y}));}
 function fixture(f,p){
  const text=p.generationInfo?{textSize:(f.type==='muster'?p.theme.text.label:p.theme.text.detail)/f.scale}:{};
  const markup=fixtureMarkup(f,p.ink,text).replace(/stroke-width="[^\"]+"/g,`stroke-width="${p.theme.lines.detail/f.scale}"`);
@@ -34,8 +46,7 @@ function element(raw,d,p,selected,interactive){
 }
 export function editorDrawing(p,{selected=null,interactive=false,visible='both',grid=false}={},logo='',logoViewBox='0 0 128.42 74.14'){
  const t=p.theme.text,l=p.theme.lines;
- const contentBottom=Math.max(p.bounds.height,...p.decks.flatMap(d=>[...d.labels,...d.annotations].map(a=>{const t=textPresentation(a,p),q=t.drawingPosition?{y:t.y}:planPoint(t.x,t.y,p);return q.y+t.size*.25+(t.text.split('\n').length-1)*t.size;})));
- const captionY=Math.max(p.bounds.height+25,contentBottom+20);
+ const captionY=captionOffset(p);
  let s=`<svg xmlns="http://www.w3.org/2000/svg" id="drawing" viewBox="0 0 792 1224" width="792" height="1224" aria-label="${e(p.name)} editable floorplans"><defs><style>@font-face{font-family:LibreFranklin;src:url('assets/LibreFranklin-Medium.ttf')}@font-face{font-family:LibreFranklin;src:url('assets/LibreFranklin-Bold.ttf');font-weight:bold}</style><pattern id="grid" width="12" height="12" patternUnits="userSpaceOnUse"><path d="M12 0H0V12" fill="none" stroke="${p.ink}" stroke-opacity=".1" stroke-width=".5"/></pattern></defs><rect width="792" height="1224" fill="${p.paper}"/><rect width="792" height="124.59" fill="${p.header}"/><svg x="31" y="25" width="128.42" height="74.14" viewBox="${logoViewBox}">${logo}</svg><text x="758" y="60" text-anchor="end" font-family="LibreFranklin" font-size="${t.title}" font-weight="bold" fill="${p.paper}">${e(p.name)}</text><text x="758" y="88" text-anchor="end" font-family="LibreFranklin" font-size="${t.subtitle}" fill="${p.paper}">CAMP LAYOUT</text>`;
  if(grid&&interactive)s+=`<rect x="25" y="200" width="742" height="930" fill="url(#grid)"/>`;
  p.decks.forEach((d,i)=>{if(d.omitFromOutput)return;if(visible!=='both'&&visible!==d.id)return;const o=editorDeckOrigins(p)[i];s+=`<g transform="translate(${o.x} ${o.y})" ${interactive?`data-deck="${d.id}"`:''}>`;
