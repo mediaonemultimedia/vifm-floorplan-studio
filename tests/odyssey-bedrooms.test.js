@@ -7,7 +7,7 @@ import {fixtureBounds} from '../fixtures.js';
 const load=v=>JSON.parse(readFileSync(new URL(`../assets/revisions/odyssey102-${v}.json`,import.meta.url)));
 const storage=()=>{const m=new Map();return {getItem:k=>m.get(k)??null,setItem:(k,v)=>m.set(k,v)};};
 test('Odyssey retains the superseded eight-room V3 and both earlier drawings as archives',()=>{
- const boat=BOATS.find(b=>b.id==='odyssey102');assert.equal(boat.defaultRevision,'v4');assert.equal(previousRevisionFor(boat.id,'v3').id,'v2');assert.ok(boat.revisions.filter(r=>r.id!=='v4').every(r=>r.readOnly));
+ const boat=BOATS.find(b=>b.id==='odyssey102');assert.equal(boat.revisions.find(r=>r.id==='v3').readOnly,true);assert.equal(previousRevisionFor(boat.id,'v3').id,'v2');assert.ok(boat.revisions.filter(r=>r.id!==boat.defaultRevision).every(r=>r.readOnly));
  const p=load('v3');validateEditorProject(p);assert.equal(p.decks[0].labels.filter(a=>a.kind==='room').length,8);assert.deepEqual(p.decks[1],load('v2').decks[1]);
  assert.ok(!p.decks[0].labels.some(a=>['L5','R5'].includes(a.text)));
 });

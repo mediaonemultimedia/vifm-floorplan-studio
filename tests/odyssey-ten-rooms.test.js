@@ -6,14 +6,14 @@ import {validateEditorProject} from '../editor-project.js';
 import {fixtureBounds} from '../fixtures.js';
 import {drawing} from '../render.js';
 const boat=()=>BOATS.find(b=>b.id==='odyssey102');
-const current=()=>JSON.parse(readFileSync(new URL('../'+boat().asset,import.meta.url)));
+const current=()=>prior('v4');
 const prior=v=>JSON.parse(readFileSync(new URL(`../assets/revisions/odyssey102-${v}.json`,import.meta.url)));
 const storage=()=>{const m=new Map();return {getItem:k=>m.get(k)??null,setItem:(k,v)=>m.set(k,v)};};
-test('working Odyssey has ten lower bedrooms while V3 remains an eight-room archive',()=>{
+test('archived V4 retains ten lower bedrooms while V3 retains eight',()=>{
  const p=current();validateEditorProject(p);
  assert.equal(p.decks[0].labels.filter(a=>a.kind==='room').length,10);
  assert.deepEqual(p.decks[0].labels.filter(a=>a.kind==='room').map(a=>a.text).sort(),['L1','L2','L3','L4','L5','R1','R2','R3','R4','R5']);
- assert.equal(boat().defaultRevision,'v4');assert.equal(boat().revisions.find(r=>r.id==='v3').readOnly,true);
+ assert.equal(boat().revisions.find(r=>r.id==='v4').readOnly,true);assert.equal(boat().revisions.find(r=>r.id==='v3').readOnly,true);
  assert.equal(prior('v3').decks[0].labels.filter(a=>a.kind==='room').length,8);
  const oldUpper=prior('v3').decks[1],upper=p.decks[1];assert.equal(upper.walls.length,oldUpper.walls.length);assert.equal(upper.details.length,oldUpper.details.length);
  for(let i=0;i<upper.walls.length;i++){const a=upper.walls[i],b=oldUpper.walls[i];assert.ok(Math.abs((a.x2-a.x1)-(b.x2-b.x1))<1e-9);assert.ok(Math.abs((a.y2-a.y1)-(b.y2-b.y1))<1e-9);}
