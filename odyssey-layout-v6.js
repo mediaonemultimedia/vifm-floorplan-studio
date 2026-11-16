@@ -8,9 +8,8 @@ function drop(list,...ids){for(const id of ids){const i=list.findIndex(x=>x.id==
 const shift=(a,dx=0,dy=0)=>{for(const k of ['x','x1','x2'])if(a[k]!==undefined)a[k]+=dx;for(const k of ['y','y1','y2'])if(a[k]!==undefined)a[k]+=dy;if(a.centerArea)a.centerArea={...a.centerArea,x:a.centerArea.x+dx,y:a.centerArea.y+dy};return a;};
 export function applyOdysseyLayoutV6(input){
  const p=structuredClone(input),[lo,up]=p.decks,labelSize=p.theme.text.label;
- // Lower · fuel bay is open to its own low deck; the sketch line was the box tops.
- drop(lo.walls,'main-fuel-front-wall-0');
- edit(lo.walls,'main-fuel-separation-0',{y1:36,y2:278});
+ // Lower · the fuel-store wall (review note 27) now meets the rear wall; the corridor end closes on the stair entry.
+ edit(lo.walls,'main-fuel-separation-0',{y1:36});
  edit(lo.walls,'main-central-upper-entry-wall-0',{x1:135.52307692307693});
  edit(lo.walls,'main-central-upper-entry-wall-1',{x2:180.42307692307693});
  // Review note 22: the short centre flight ends at a door that opens out, away from its landing.
@@ -26,11 +25,12 @@ export function applyOdysseyLayoutV6(input){
  edit(lo.labels,'main-label-26',a=>({y:a.y+11.5}));
  lo.labels.push(label('main-dry-room-label','DRY ROOM',{x:128.57307692307694,y:407.5,w:67.15,h:40},'label',labelSize));
  for(const d of [lo,up]){const prefix=d===lo?'main':'upper-accommodation';d.labels.push(label(`${prefix}-washroom-label`,'WASHROOM',{x:88,y:567,w:42.27,h:28}));}
- // Upper · walls stack on the 46 ft lower walls; the 43 ft pad stays inset on the roof.
- edit(up.walls,'upper-port-perimeter-0',{y2:285.06976744186045});
- edit(up.walls,'upper-starboard-perimeter-0',{y2:285.06976744186045});
+ // Upper · walls stack on the 46 ft lower walls and the pad edge stays flush with them (review note 7).
+ edit(up.walls,'upper-port-perimeter-0',{x1:0,x2:0,y2:542.6});
+ edit(up.walls,'upper-starboard-perimeter-0',{x1:W,x2:W,y2:542.6});
+ edit(up.walls,'upper-rear-perimeter-0',{x1:0,x2:W});
+ edit(up.labels,'upper-label-0',a=>({x:W/2,centerArea:{...a.centerArea,x:0,w:W}}));
  drop(up.walls,'upper-foyer-port-step','upper-foyer-port-link','upper-foyer-starboard-step','upper-foyer-starboard-link');
- up.walls.push(wall('upper-port-wall',0,285.06976744186045,0,542.6),wall('upper-starboard-wall',W,285.06976744186045,W,542.6));
  edit(up.walls,'upper-pad-left-front-0',{x1:0});
  edit(up.walls,'upper-pad-right-front-1',{x2:W});
  edit(up.walls,'upper-office-bottom-0',{x2:W});
@@ -43,20 +43,20 @@ export function applyOdysseyLayoutV6(input){
  // Pump sits against the outer wall it serves; its label moves inside the building.
  shift(edit(up.details,'upper-detail-28',{}),-PAD_L);
  edit(up.labels,'upper-label-6',{x:15.6+4.675*.35,y:296.15,centerArea:{x:11.6,y:288.5,w:8,h:15.3}});
- // First aid: the desk, cabinet and sink room. Lounge: a new room off the stair hall.
+ // First aid: the desk, cabinet and sink room.
  shift(edit(up.details,'upper-detail-30',{}),-PAD_L);shift(edit(up.labels,'upper-label-8',{}),-PAD_L);
  up.labels.push(label('upper-first-aid-label','FIRST AID',{x:22.1,y:375,w:89.5,h:71},'label',labelSize));
  drop(up.walls,'upper-stair-side-return-0','upper-stair-platform-bottom-0','upper-stair-platform-bottom-0-1','upper-weight-room-bottom-0','upper-weight-room-bottom-0-1');
  drop(up.doors,'upper-corridor-connection');
- // Hinged on the lounge side so it clears the first-aid door's swing.
- up.walls.push(wall('upper-weight-room-bottom-0',138.77307692307693,446,164.07307692307694,446),wall('upper-weight-room-bottom-1',188.07307692307694,446,W,446));
- up.doors.push({id:'upper-weight-room-entry',x:188.07307692307694,y:446,u:[-24,0],v:[0,-24]});
- edit(up.labels,'upper-label-10',{centerArea:{x:138.77307692307693,y:351,w:W-138.77307692307693,h:95},x:(138.77307692307693+W)/2,y:398.5+labelSize*.35});
- up.walls.push(wall('upper-lounge-side-0',188.07307692307694,446,188.07307692307694,470),wall('upper-lounge-side-1',188.07307692307694,494,188.07307692307694,542.6));
- up.doors.push({id:'upper-lounge-entry',x:188.07307692307694,y:494,u:[0,-24],v:[24,0]});
- up.details.push({id:'upper-lounge-couch',kind:'rect',role:'secondary',width:1,x:W-6.8-17,y:479.55,w:17,h:29.5});
- up.labels.push(label('upper-lounge-couch-label','COUCH',{x:W-6.8-17,y:479.55,w:17,h:29.5},'detail',4.675,-90));
- up.labels.push(label('upper-lounge-label','LOUNGE',{x:188.07307692307694,y:446,w:W-6.8-17-188.07307692307694,h:96.6},'label',labelSize));
+ // Review note 11: the weight room runs deeper than first aid, and the stair top leads straight into it.
+ up.walls.push(wall('upper-weight-room-side-0',138.77307692307693,446,138.77307692307693,470),wall('upper-weight-room-side-1',138.77307692307693,494,138.77307692307693,510),
+  wall('upper-weight-room-bottom-0',138.77307692307693,510,188.07307692307694,510),wall('upper-weight-room-step-0',188.07307692307694,510,188.07307692307694,542.6));
+ up.doors.push({id:'upper-weight-room-entry',x:138.77307692307693,y:494,u:[0,-24],v:[24,0]});
+ edit(up.labels,'upper-label-10',{centerArea:{x:138.77307692307693,y:351,w:W-138.77307692307693,h:191.6},x:(138.77307692307693+W)/2,y:446.8+labelSize*.35});
+ // Lounge: open seating at the top of the stair, between first aid and the washrooms.
+ up.details.push({id:'upper-lounge-couch',kind:'rect',role:'secondary',width:1,x:54.6,y:449.5,w:29.5,h:15});
+ up.labels.push(label('upper-lounge-couch-label','COUCH',{x:54.6,y:449.5,w:29.5,h:15}));
+ up.labels.push(label('upper-lounge-label','LOUNGE',{x:0,y:464.5,w:138.77307692307693,h:35},'label',labelSize));
  // Stair d keeps the lower footprint; its top lands in the open stair hall.
  for(const a of up.details.filter(a=>a.id.startsWith('upper-stair-d-'))){
   if(/landing-top|walkway/.test(a.id))continue;
@@ -68,8 +68,9 @@ export function applyOdysseyLayoutV6(input){
  drop(up.doors,'upper-accommodation-forward-exit');drop(up.labels,'upper-accommodation-label-42');
  up.walls.push(wall('upper-forward-wall-closure',152.27307692307693,928.5,176.27307692307693,928.5));
  p.reviewFlags=p.reviewFlags.filter(f=>f.id!=='odyssey-v5-upper-connection').concat([
-  {id:'odyssey-v6-lounge-first-aid',deckId:'upper',x:258,y:494,title:'Lounge and first aid placed by logic',text:'The brief puts a lounge and first aid upstairs; the sketch shows neither. First aid is the desk/cabinet/sink room. The lounge is a new room between the weight room and the laundry, off the stair hall. Confirm or say where they really are.'},
-  {id:'odyssey-v6-envelope',deckId:'upper',x:6,y:300,title:'Upper walls stack on the lower walls',text:'Upper exterior walls now sit on the 46 ft lower walls. The 43 ft helipad stays inset 1.5 ft each side as the pad on the roof. If the upper building is really 43 ft wide, say so and the walls step in instead.'},
+  {id:'odyssey-v6-lounge-first-aid',deckId:'upper',x:258,y:494,title:'Lounge and first aid placed by logic',text:'The brief puts a lounge and first aid upstairs; the sketch shows neither. First aid is the desk/cabinet/sink room. The lounge is open seating at the top of the accommodation stair, which keeps the weight room deeper than first aid (review note 11). Confirm or say where they really are.'},
+  {id:'odyssey-v6-envelope',deckId:'upper',x:6,y:300,title:'Helipad drawn 46 ft wide',text:'Upper walls now sit on the 46 ft lower walls, and the pad edge lines up with them (review note 7). The sketch marks the pad 43 ft across. If the upper floor is really 43 ft wide, the whole upper level steps in 1.5 ft each side instead.'},
+  {id:'odyssey-v6-fuel-access',deckId:'main',x:254,y:170,title:'Fuel tank bay has no door',text:'The tank bay is closed on all sides (review note 27 added its front wall). How is it reached: from the rear platform, from the MIXED/STRAIGHT GAS area, or is it open-top?'},
   {id:'odyssey-v6-upper-exit',deckId:'upper',x:164.3,y:920,title:'Upper forward exit removed',text:'The repeated block copied the lower forward exit, which opened onto a drop upstairs. It is closed until an external stair or deck is confirmed.'},
   {id:'odyssey-v6-central-stair',deckId:'upper',x:159.2,y:318,title:'Centre stair: one stair or two?',text:'Lower plan: a short flight up to a landing and an outward door (review note 22). Upper plan: a full flight down from the pad. One footprint cannot be both. Is the upper flight a separate stair, and where does it land?'}
  ]);

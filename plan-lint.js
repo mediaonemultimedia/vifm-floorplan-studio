@@ -80,9 +80,12 @@ export function lintProject(p,brief=null){
    if(!s.box)continue;
   }
   // 7 · Labels sit inside the building, not on or outside its walls.
+  // Test the label's centre against the outer walls at its own height, not the whole-deck box.
+  const sides=[...walls,...doors.map(d=>({x1:d.x,y1:d.y,x2:d.x+d.u[0],y2:d.y+d.u[1]}))],span=y=>{const xs=sides.filter(w=>vertical(w)&&y>=Math.min(w.y1,w.y2)-.01&&y<=Math.max(w.y1,w.y2)+.01).map(w=>w.x1);return xs.length?[Math.min(...xs),Math.max(...xs)]:null;};
   for(const a of deck.labels||[]){
    if(a.kind==='room'||/RAILING|CHAINS|EXIT|DOWN|UP/.test(a.text))continue;
-   if(a.x<env.left||a.x>env.right||a.y<env.top||a.y>env.bottom)add('label-outside','check',D,a,`"${a.text}" sits outside the building outline.`,[a.id]);
+   const c=a.centerArea?{x:a.centerArea.x+a.centerArea.w/2,y:a.centerArea.y+a.centerArea.h/2}:a,lr=span(c.y);
+   if(c.x<env.left||c.x>env.right||c.y<env.top||c.y>env.bottom||(lr&&(c.x<lr[0]||c.x>lr[1])))add('label-outside','check',D,a,`"${a.text}" sits outside the building outline.`,[a.id]);
   }
  }
  // 8 · Floors stack: matching stairs share a footprint, and outer walls line up floor to floor.

@@ -8,7 +8,7 @@
   "helipad": {
     "acrossFt": 43,
     "alongFt": 35,
-    "note": "Sketch dimension marks: 43 ft across the beam, 35 ft along the hull."
+    "note": "Sketch marks 43 ft across and 35 ft along. Drawn flush with the 46 ft walls per review note 7; pending owner answer."
   },
   "decks": {
     "main": {
@@ -49,11 +49,6 @@
     "No kitchen"
   ],
   "exceptions": [
-    {
-      "code": "envelope",
-      "match": "from y36 to y28",
-      "reason": "Helipad is 43 ft on the 46 ft roof (sketch dimension); the pad edge, not a building wall, steps in."
-    },
     {
       "code": "stair-stack",
       "match": "^Stair a ",

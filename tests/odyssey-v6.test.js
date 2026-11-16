@@ -37,8 +37,8 @@ test('V6 keeps owner colours and label edits from a saved V5',()=>{
  assert.equal(p.ink,old.ink);assert.ok(p.decks[0].labels.some(a=>a.text==='OWNER ROOM'));assert.ok(p.decks[1].labels.some(a=>a.text==='LOUNGE'));
 });
 test('pasted feedback names the nearest geometry and includes the layout checks',()=>{
- const p=load('v6'),near=nearbyGeometry(p,'upper',{x:188,y:482});assert.ok(near.some(a=>a.id==='upper-lounge-entry'));
- const note={id:'n1',projectName:p.name,deckId:'upper',deckName:'UPPER LEVEL',page:{x:1,y:1},local:{x:188,y:482},source:{x:188,y:482},nearby:[],release:'x',drawingRevision:'v6',text:'Swap the lounge door side'};
+ const p=load('v6'),near=nearbyGeometry(p,'upper',{x:140,y:482});assert.ok(near.some(a=>a.id==='upper-weight-room-entry'));
+ const note={id:'n1',projectName:p.name,deckId:'upper',deckName:'UPPER LEVEL',page:{x:1,y:1},local:{x:140,y:482},source:{x:140,y:482},nearby:[],release:'x',drawingRevision:'v6',text:'Swap the weight room door side'};
  const text=feedbackReport([note],undefined,p,brief);
- assert.ok(text.includes('upper-lounge-entry'));assert.ok(text.includes('Layout checks'));assert.ok(text.includes('CLAUDE.md'));
+ assert.ok(text.includes('upper-weight-room-entry'));assert.ok(text.includes('Layout checks'));assert.ok(text.includes('CLAUDE.md'));
 });

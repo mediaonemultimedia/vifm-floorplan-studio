@@ -168,7 +168,15 @@
           "x1": 180.42307692307693,
           "y1": 36,
           "x2": 180.42307692307693,
-          "y2": 278
+          "y2": 297.95
+        },
+        {
+          "id": "main-fuel-front-wall-0",
+          "role": "wall",
+          "x1": 180.42307692307693,
+          "y1": 297.95,
+          "x2": 328.54615384615386,
+          "y2": 297.95
         },
         {
           "id": "main-central-upper-entry-wall-0",
@@ -3256,25 +3264,25 @@
         {
           "id": "upper-port-perimeter-0",
           "role": "wall",
-          "x1": 11.273076923076928,
+          "x1": 0,
           "y1": 36,
-          "x2": 11.273076923076928,
-          "y2": 285.06976744186045
+          "x2": 0,
+          "y2": 542.6
         },
         {
           "id": "upper-starboard-perimeter-0",
           "role": "wall",
-          "x1": 317.2730769230769,
+          "x1": 328.54615384615386,
           "y1": 36,
-          "x2": 317.2730769230769,
-          "y2": 285.06976744186045
+          "x2": 328.54615384615386,
+          "y2": 542.6
         },
         {
           "id": "upper-rear-perimeter-0",
           "role": "wall",
-          "x1": 11.273076923076928,
+          "x1": 0,
           "y1": 36,
-          "x2": 317.2730769230769,
+          "x2": 328.54615384615386,
           "y2": 36
         },
         {
@@ -3710,50 +3718,34 @@
           "y2": 865.6
         },
         {
-          "id": "upper-port-wall",
+          "id": "upper-weight-room-side-0",
           "role": "wall",
-          "x1": 0,
-          "y1": 285.06976744186045,
-          "x2": 0,
-          "y2": 542.6
+          "x1": 138.77307692307693,
+          "y1": 446,
+          "x2": 138.77307692307693,
+          "y2": 470
         },
         {
-          "id": "upper-starboard-wall",
+          "id": "upper-weight-room-side-1",
           "role": "wall",
-          "x1": 328.54615384615386,
-          "y1": 285.06976744186045,
-          "x2": 328.54615384615386,
-          "y2": 542.6
+          "x1": 138.77307692307693,
+          "y1": 494,
+          "x2": 138.77307692307693,
+          "y2": 510
         },
         {
           "id": "upper-weight-room-bottom-0",
           "role": "wall",
           "x1": 138.77307692307693,
-          "y1": 446,
-          "x2": 164.07307692307694,
-          "y2": 446
-        },
-        {
-          "id": "upper-weight-room-bottom-1",
-          "role": "wall",
-          "x1": 188.07307692307694,
-          "y1": 446,
-          "x2": 328.54615384615386,
-          "y2": 446
-        },
-        {
-          "id": "upper-lounge-side-0",
-          "role": "wall",
-          "x1": 188.07307692307694,
-          "y1": 446,
+          "y1": 510,
           "x2": 188.07307692307694,
-          "y2": 470
+          "y2": 510
         },
         {
-          "id": "upper-lounge-side-1",
+          "id": "upper-weight-room-step-0",
           "role": "wall",
           "x1": 188.07307692307694,
-          "y1": 494,
+          "y1": 510,
           "x2": 188.07307692307694,
           "y2": 542.6
         },
@@ -3778,9 +3770,9 @@
           "rotation": 0,
           "textStyle": "marker",
           "centerArea": {
-            "x": 11.273076923076928,
+            "x": 0,
             "y": 36,
-            "w": 306,
+            "w": 328.54615384615386,
             "h": 249.06976744186048
           }
         },
@@ -3936,7 +3928,7 @@
           "kind": "label",
           "text": "WEIGHT ROOM",
           "x": 233.6596153846154,
-          "y": 401.16,
+          "y": 449.46000000000004,
           "size": 10.2,
           "align": "middle",
           "rotation": 0,
@@ -3945,7 +3937,7 @@
             "x": 138.77307692307693,
             "y": 351,
             "w": 189.77307692307693,
-            "h": 95
+            "h": 191.6
           }
         },
         {
@@ -4201,34 +4193,34 @@
           "id": "upper-lounge-couch-label",
           "kind": "label",
           "text": "COUCH",
-          "x": 313.24615384615385,
-          "y": 495.93625000000003,
+          "x": 69.35,
+          "y": 458.63625,
           "size": 4.675,
           "align": "middle",
-          "rotation": -90,
+          "rotation": 0,
           "textStyle": "detail",
           "centerArea": {
-            "x": 304.74615384615385,
-            "y": 479.55,
-            "w": 17,
-            "h": 29.5
+            "x": 54.6,
+            "y": 449.5,
+            "w": 29.5,
+            "h": 15
           }
         },
         {
           "id": "upper-lounge-label",
           "kind": "label",
           "text": "LOUNGE",
-          "x": 246.4096153846154,
-          "y": 496.96000000000004,
+          "x": 69.38653846153846,
+          "y": 484.66,
           "size": 7.6,
           "align": "middle",
           "rotation": 0,
           "textStyle": "label",
           "centerArea": {
-            "x": 188.07307692307694,
-            "y": 446,
-            "w": 116.6730769230769,
-            "h": 96.6
+            "x": 0,
+            "y": 464.5,
+            "w": 138.77307692307693,
+            "h": 35
           }
         }
       ],
@@ -5287,10 +5279,10 @@
           "kind": "rect",
           "role": "secondary",
           "width": 1,
-          "x": 304.74615384615385,
-          "y": 479.55,
-          "w": 17,
-          "h": 29.5
+          "x": 54.6,
+          "y": 449.5,
+          "w": 29.5,
+          "h": 15
         }
       ],
       "doors": [
@@ -5556,20 +5548,7 @@
         },
         {
           "id": "upper-weight-room-entry",
-          "x": 188.07307692307694,
-          "y": 446,
-          "u": [
-            -24,
-            0
-          ],
-          "v": [
-            0,
-            -24
-          ]
-        },
-        {
-          "id": "upper-lounge-entry",
-          "x": 188.07307692307694,
+          "x": 138.77307692307693,
           "y": 494,
           "u": [
             0,
@@ -5657,15 +5636,23 @@
       "x": 258,
       "y": 494,
       "title": "Lounge and first aid placed by logic",
-      "text": "The brief puts a lounge and first aid upstairs; the sketch shows neither. First aid is the desk/cabinet/sink room. The lounge is a new room between the weight room and the laundry, off the stair hall. Confirm or say where they really are."
+      "text": "The brief puts a lounge and first aid upstairs; the sketch shows neither. First aid is the desk/cabinet/sink room. The lounge is open seating at the top of the accommodation stair, which keeps the weight room deeper than first aid (review note 11). Confirm or say where they really are."
     },
     {
       "id": "odyssey-v6-envelope",
       "deckId": "upper",
       "x": 6,
       "y": 300,
-      "title": "Upper walls stack on the lower walls",
-      "text": "Upper exterior walls now sit on the 46 ft lower walls. The 43 ft helipad stays inset 1.5 ft each side as the pad on the roof. If the upper building is really 43 ft wide, say so and the walls step in instead."
+      "title": "Helipad drawn 46 ft wide",
+      "text": "Upper walls now sit on the 46 ft lower walls, and the pad edge lines up with them (review note 7). The sketch marks the pad 43 ft across. If the upper floor is really 43 ft wide, the whole upper level steps in 1.5 ft each side instead."
+    },
+    {
+      "id": "odyssey-v6-fuel-access",
+      "deckId": "main",
+      "x": 254,
+      "y": 170,
+      "title": "Fuel tank bay has no door",
+      "text": "The tank bay is closed on all sides (review note 27 added its front wall). How is it reached: from the rear platform, from the MIXED/STRAIGHT GAS area, or is it open-top?"
     },
     {
       "id": "odyssey-v6-upper-exit",
@@ -5684,7 +5671,7 @@
       "text": "Lower plan: a short flight up to a landing and an outward door (review note 22). Upper plan: a full flight down from the pad. One footprint cannot be both. Is the upper flight a separate stair, and where does it land?"
     }
   ],
-  "sourceSummary": "Twenty single rooms: ten on each floor. Upper walls stack on the lower 46 ft walls with the 43 ft helipad inset on the roof. The client brief places the dry room downstairs and the lounge and first aid upstairs; their exact positions are inferred and flagged.",
+  "sourceSummary": "Twenty single rooms: ten on each floor. Upper walls stack on the lower 46 ft walls. The pad edge lines up with them. The client brief places the dry room downstairs and the lounge and first aid upstairs; their exact positions are inferred and flagged.",
   "drawingRevision": "v6",
   "revisionMeta": {
     "label": "V6 · Layout logic pass",
@@ -5694,25 +5681,25 @@
       {
         "id": "stacked-walls",
         "title": "Upper exterior walls stack on the lower walls",
-        "text": "The upper building now uses the 46 ft lower walls from the pad to the bow. The 43 ft helipad stays inset on the roof. The office, pump room and first-aid room widen to the new walls, with their contents recentred.",
+        "text": "The upper level now uses the 46 ft lower walls from the rear to the bow, and the pad edge lines up with them (review note 7, which V5 had undone). The office, pump room and first-aid room widen to the new walls, with their contents recentred.",
         "status": "done"
       },
       {
         "id": "stair-d",
         "title": "Accommodation stair has one footprint",
-        "text": "The upper flight now sits directly over the lower flight. Its top lands in an open stair hall with a clear path to the weight room, lounge and upper hallway, replacing the walled walkway and the extra hallway door.",
+        "text": "The upper flight now sits directly over the lower flight. Its top lands in open lounge seating, with a door straight into the deeper weight room (review note 11) and an open path to the upper hallway. This replaces the walled walkway and the extra hallway door.",
         "status": "done"
       },
       {
         "id": "brief-spaces",
         "title": "Spaces from the client brief",
-        "text": "Labelled DRY ROOM (lower entry with benches), FIRST AID (desk, cabinets and sink), a new LOUNGE with couch, and WASHROOM on both floors. The lounge position is inferred and flagged.",
+        "text": "Labelled DRY ROOM (the lower entry with benches), FIRST AID (desk, cabinets and sink), LOUNGE (seating at the top of the stair) and WASHROOM on both floors. The lounge and first-aid positions are inferred and flagged.",
         "status": "done"
       },
       {
-        "id": "fuel-bay",
-        "title": "Fuel bay opens onto its low deck",
-        "text": "The line under the JET tank was the top edge of the MIXED and STRAIGHT GAS boxes, not a wall. The bay now opens to the area reached by the short flight down. The corridor wall meets the rear wall and the stair entry.",
+        "id": "corridor",
+        "title": "Rear corridor closes cleanly",
+        "text": "The fuel-store wall now meets the rear wall, and the corridor end walls meet the stair entry, with no slivers. Tank-bay access is flagged.",
         "status": "done"
       },
       {
